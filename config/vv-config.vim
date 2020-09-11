@@ -23,7 +23,8 @@ let g:choosewin_overlay_enable = 1
 let g:choosewin_label = "aoeuidhtns"
 
 "vv-hconfig
-execute ':source expand("%:p:h")."/vv-hconfig.vim"'
+let g:vvHome=expand("%:p:h")."/.."
+execute ':source' g:vvHome."/config/vv-hconfig.vim"
 
 "airline
 let g:airline#extensions#tabline#enabled = 1
