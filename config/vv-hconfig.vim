@@ -83,6 +83,7 @@ function! Load_vvimrc(path)
         let l:current_vvimrc = p.'/'.g:vvimrc_name
 	if p == '/'
         	let l:current_vvimrc = p.g:vvimrc_name
+	endif
         if filereadable(l:current_vvimrc) 
             execute 'source' l:current_vvimrc
             echo l:current_vvimrc." add"
