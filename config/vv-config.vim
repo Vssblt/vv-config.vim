@@ -214,6 +214,8 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'brooth/far.vim'
 
+    Plug 'Vssblt/vv-config.vim'
+
 
 call plug#end()
 

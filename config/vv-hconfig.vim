@@ -13,7 +13,8 @@ set viminfo='20,\"50000
 set timeoutlen=1000
 set ttimeoutlen=10
 set updatetime=0
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
+set clipboard=unnamed
 set mouse=i
 set t_Co=256
 
