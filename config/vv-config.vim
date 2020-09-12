@@ -6,6 +6,8 @@ let mapleader=","
 let g:tagsPath = $HOME."/.vim/tags"
 let g:undoDirPath=$HOME."/.vim/undodir"
 let g:vvimrc_name=".vvimrc"
+let s:plugindir = expand('<sfile>:p:h:h');
+execute ':source' g:plugindir."/config/vv-hconfig.vim"
 
 "Tlist
 let Tlist_WinWidth = 40
@@ -21,10 +23,6 @@ let g:EasyMotion_smartcase = 1
 "choosewin
 let g:choosewin_overlay_enable = 1
 let g:choosewin_label = "aoeuidhtns"
-
-"vv-hconfig
-let g:vvHome=expand("%:p:h")."/.."
-execute ':source' g:vvHome."/config/vv-hconfig.vim"
 
 "airline
 let g:airline#extensions#tabline#enabled = 1

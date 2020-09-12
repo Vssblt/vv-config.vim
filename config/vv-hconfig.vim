@@ -117,7 +117,7 @@ endfunction
 call Load_vvimrc(expand("%:p:h"))
 
 
-execute ":command! ConfigV :tabnew" g:vvHome.'/config/vv-config.vim'
-execute ":command! HConfigV :tabnew" g:vvHome.'/config/vv-hconfig.vim'
-execute ":command! DvorakSettingsV :tabnew" g:vvHome.'/plugin/dvorak-layout-dvorak.vim'
-execute ":command! QwertySettingsV :tabnew" g:vvHome.'/plugin/dvorak-layout-qwerty.vim'
+execute ":command! ConfigV :tabnew" g:plugindir.'/config/vv-config.vim'
+execute ":command! HConfigV :tabnew" g:plugindir.'/config/vv-hconfig.vim'
+execute ":command! DvorakSettingsV :tabnew" g:plugindir.'/plugin/dvorak-layout-dvorak.vim'
+execute ":command! QwertySettingsV :tabnew" g:plugindir.'/plugin/dvorak-layout-qwerty.vim'
