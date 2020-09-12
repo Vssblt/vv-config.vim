@@ -6,7 +6,7 @@ let mapleader=","
 let g:tagsPath = $HOME."/.vim/tags"
 let g:undoDirPath=$HOME."/.vim/undodir"
 let g:vvimrc_name=".vvimrc"
-let s:plugindir = expand('<sfile>:p:h:h')
+let g:plugindir = expand('<sfile>:p:h:h')
 execute ':source' g:plugindir."/config/vv-hconfig.vim"
 
 "Tlist
