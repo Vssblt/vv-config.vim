@@ -124,3 +124,10 @@ execute ":command! HConfigV :tabnew" g:plugindir.'/config/vv-hconfig.vim'
 execute ":command! DvorakSettingsV :tabnew" g:plugindir.'/plugin/vv-layout-dvorak.vim'
 execute ":command! QwertySettingsV :tabnew" g:plugindir.'/plugin/vv-layout-qwerty.vim'
 execute ":command! FHide :FloatermHide"
+
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
