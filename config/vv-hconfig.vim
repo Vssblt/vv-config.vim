@@ -1,4 +1,6 @@
+""""""""""""""""""""""""""""""
 "This file is hiden config file. 
+""""""""""""""""""""""""""""""
 set wildmenu
 set laststatus=2
 set showtabline=2
@@ -34,7 +36,7 @@ set completeopt=longest,menu
 
 
 """"""""""""""""""""""""""""""
-"NERDTree
+" NERDTree settings
 """"""""""""""""""""""""""""""
 let NERDTreeMapOpenInTab=',t'
 let NERDTreeMapOpenInTabSilent=',T'
@@ -60,17 +62,17 @@ let NERDTreeMinimalUI = 1
 
 
 """"""""""""""""""""""""""""""
-"ranger
+" ranger settings
 """"""""""""""""""""""""""""""
 let g:ranger_map_keys = 0
-let g:ranger_replace_netrw = 1
+"let g:ranger_replace_netrw = 1
 
 
 """"""""""""""""""""""""""""""
-"vim-nerdtree-syntax-highlight settings
+" vim-nerdtree-syntax-highlight settings
 """"""""""""""""""""""""""""""
 "Highlight full name (not only icons). You need to add this if you don't have vim-devicons and want highlight.
-let g:NERDTreeHijackNetrw = 0
+"let g:NERDTreeHijackNetrw = 0
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
@@ -134,7 +136,7 @@ hi cCustomComment3 gui=NONE cterm=bold ctermfg=73 "154
 
 
 """"""""""""""""""""""""""""""
-"vim-devicons settings
+" vim-devicons settings
 """"""""""""""""""""""""""""""`
 "Can be enabled or disabled
 let g:webdevicons_enable_nerdtree = 1
@@ -150,7 +152,7 @@ let g:webdevicons_enable_airline_statusline = 1
 
 
 """"""""""""""""""""""""""""""
-"airline
+" airline settings
 """"""""""""""""""""""""""""""
 let g:airline#extensions#tabline#buffer_idx_format = {
        \ '0': '0 ',
@@ -175,9 +177,14 @@ let g:airline_symbols.readonly = "RO"
 let g:airline_symbols.dirty = "DT"
 let g:airline_symbols.crypt = "CR"
 
+""""""""""""""""""""""""""""""
+" coc settings
+""""""""""""""""""""""""""""""
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 
 """"""""""""""""""""""""""""""
-"other
+" other settings
 """"""""""""""""""""""""""""""
 function! Load_vvimrc(path)
     let l:all_path = SplitPath(a:path)
@@ -233,3 +240,4 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+

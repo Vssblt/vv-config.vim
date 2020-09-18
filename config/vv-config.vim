@@ -1,7 +1,9 @@
 "You can change important config here. If you want to edit other config you
 "can use :HConfig to open and change it.
 
-"common
+""""""""""""""""""""""""""""""
+" common settings
+""""""""""""""""""""""""""""""
 let mapleader="," 
 let g:tagsPath = $HOME."/.vim/tags"
 let g:undoDirPath=$HOME."/.vim/undodir"
@@ -9,22 +11,30 @@ let g:vvimrc_name=".vvimrc"
 let g:plugindir = expand('<sfile>:p:h:h')
 execute ':source' g:plugindir."/config/vv-hconfig.vim"
 
-"Tlist
+""""""""""""""""""""""""""""""
+" Tlist settings
+""""""""""""""""""""""""""""""
 let Tlist_WinWidth = 40
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Use_Right_Window = 0
 let Tlist_Show_Menu = 1
 let Tlist_Auto_Open = 0
 
-"EasyMotion
+""""""""""""""""""""""""""""""
+" EasyMotion settings
+""""""""""""""""""""""""""""""
 let g:EasyMotion_keys = "aoeuidhtnscr" "This is used for dvorak keyboard layout, you can change this option if you'r using qwerty layout.
 let g:EasyMotion_smartcase = 1
 
-"choosewin
+""""""""""""""""""""""""""""""
+" choosewin settings
+""""""""""""""""""""""""""""""
 let g:choosewin_overlay_enable = 1
 let g:choosewin_label = "aoeuidhtns"
 
-"airline
+""""""""""""""""""""""""""""""
+" airline settings
+""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 0
@@ -33,18 +43,24 @@ let g:airline_theme = 'desertink'
 let g:airline#extensions#keymap#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
-"gcmt/wildfire.vim
+""""""""""""""""""""""""""""""
+" gcmt/wildfire.vim settings
+""""""""""""""""""""""""""""""
 let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "i>", "ip"]
 
-"vim-floaterm
+""""""""""""""""""""""""""""""
+" vim-floaterm settings
+""""""""""""""""""""""""""""""
 let g:floaterm_autoclose = 1
 let g:floaterm_height = 0.9
 let g:floaterm_widget = 0.9
 
 
-"需要安装环境python, npm, node-js, instant-markdown-d
 
-"vim-plug
+""""""""""""""""""""""""""""""
+" vim-plug settings
+" 需要安装环境 python, npm, node-js, instant-markdown-d
+""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
     Plug 'mzlogin/vim-markdown-toc'  
@@ -233,4 +249,18 @@ call plug#begin('~/.vim/plugged')
 
 call plug#end()
 
+""""""""""""""""""""""""""""""
+" coc plugin settings
+" 依赖 clangd
+""""""""""""""""""""""""""""""
+let g:coc_global_extensions = [
+    \ 'coc-clangd',
+    \ 'coc-html',
+    \ 'coc-cmake',
+    \ 'coc-vimlsp',
+  \ ]
+
+""""""""""""""""""""""""""""""
+" other settings
+""""""""""""""""""""""""""""""
 execute ":colorscheme darkblue2"
