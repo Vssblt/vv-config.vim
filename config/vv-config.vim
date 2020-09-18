@@ -47,10 +47,21 @@ let g:floaterm_widget = 0.9
 "vim-plug
 call plug#begin('~/.vim/plugged')
 
+    Plug 'mzlogin/vim-markdown-toc'  
+    "dont need do anything.
+    "this plugin open your browser when you open a markdown file
+
+    Plug 'dhruvasagar/vim-table-mode'
+    "use <leader>tm open table mode
+    "use | <text> | to create table unit.
+    "use || to create |+++++++++|
+
     Plug 'vim-scripts/taglist.vim'
     "type <leader>; to open taglist window.
 
     Plug 'scrooloose/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     ":NERDTreeToggle
 
     Plug 'easymotion/vim-easymotion'
@@ -182,8 +193,15 @@ call plug#begin('~/.vim/plugged')
     "<leader><leader>h
     "<leader><leader>d
     
+    Plug 'ryanoasis/vim-devicons'
+    "dont need do anything.
+    
     Plug 'flazz/vim-colorschemes'
     ":colorscheme [color theme]
+
+    Plug 'francoiscabrol/ranger.vim'
+    "<leader>o
+    "open a file in new tab.
 
     Plug 'airblade/vim-gitgutter'
 
@@ -193,22 +211,16 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'srstevenson/vim-picker'
 
-    Plug 'SirVer/ultisnips'
+    "Plug 'SirVer/ultisnips'
 
     Plug 'chiel92/vim-autoformat'
 
     Plug 'honza/vim-snippets'
 
     "20200909
-    Plug 'mzlogin/vim-markdown-toc'  
-
-    Plug 'dhruvasagar/vim-table-mode'
-
     Plug 'junegunn/vim-easy-align'   
 
     Plug 'brooth/far.vim'            
-
-    Plug 'junegunn/vim-easy-align'    
 
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 

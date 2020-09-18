@@ -2,6 +2,10 @@
 "输入时需要大范围移动手指（f, x），要么频繁使用小指（l, /, =, 三个按键全是一个小指），
 "映射时应尽量避免使这些按键
 
+"
+nmap \ <leader>
+vmap \ <leader>
+
 noremap t k
 noremap n j
 noremap s l
@@ -38,7 +42,7 @@ inoremap <C-c> <ESC>:q<CR>
 
 noremap R :source $MYVIMRC<CR>
 
-nnoremap <leader><CR> <C-]>
+noremap <leader><CR> <C-]>
 
 noremap <leader>- $
 noremap <leader>d ^
@@ -61,7 +65,7 @@ noremap <leader>k :GundoToggle<CR>
 
 nmap . <Plug>(choosewin)
 
-map <leader><SPACE> <Plug>(wildfire-fuel)
+nmap <leader><SPACE> <Plug>(wildfire-fuel)
 vmap <SPACE> <Plug>(wildfire-fuel)
 vmap <leader><SPACE> <Plug>(wildfire-water)
 
@@ -73,4 +77,27 @@ noremap <leader><leader>L :FloatermPrev<CR>
 noremap <leader><leader>i :FloatermNew
 
 "make 
-noremap <F5> :make<CR>
+nnoremap <F5> :make<CR>
+
+"ranger
+nmap <leader>o :RangerNewTab<CR>
+nmap <leader>a :Ranger<CR>
+
+"coc
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <NUL> coc#refresh()
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+

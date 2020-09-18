@@ -32,7 +32,88 @@ imap <Tab> <C-P>
 filetype plugin indent on
 set completeopt=longest,menu
 
+
+""""""""""""""""""""""""""""""
+"NERDTree
+""""""""""""""""""""""""""""""
+let NERDTreeMapOpenInTab=',t'
+let NERDTreeMapOpenInTabSilent=',T'
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeShowLineNumbers=1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.swp']
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+let NERDTreeMinimalUI = 1
+
+
+""""""""""""""""""""""""""""""
+"ranger
+""""""""""""""""""""""""""""""
+let g:ranger_map_keys = 0
+let g:ranger_replace_netrw = 1
+
+
+""""""""""""""""""""""""""""""
+"vim-nerdtree-syntax-highlight settings
+""""""""""""""""""""""""""""""
+"Highlight full name (not only icons). You need to add this if you don't have vim-devicons and want highlight.
+let g:NERDTreeHijackNetrw = 0
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+
+"Highlight full name (not only icons). You need to add this if you don't have vim-devicons and want highlight.
+let g:NERDTreeHighlightFolders = 1
+
+"highlights the folder name
+let g:NERDTreeHighlightFoldersFullName = 1
+
+"you can add these colors to your .vimrc to help customizing
+let s:brown = "905532"
+let s:aqua =  "3AFFDB"
+let s:blue = "689FB6"
+let s:darkBlue = "44788E"
+let s:purple = "834F79"
+let s:lightPurple = "834F79"
+let s:red = "AE403F"
+let s:beige = "F5C06F"
+let s:yellow = "F09F17"
+let s:orange = "D4843E"
+let s:darkOrange = "F16529"
+let s:pink = "CB6F6F"
+let s:salmon = "EE6E73"
+let s:green = "8FAA54"
+let s:Turquoise = "40E0D0"
+let s:lightGreen = "31B53E"
+let s:white = "FFFFFF"
+let s:rspec_red = "FE405F"
+let s:git_orange = "F54D27"
+let s:gray = "808A87"
+
+let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor['o'] = s:gray " sets the color of o files to blue
+let g:NERDTreeExtensionHighlightColor['h'] = s:blue " sets the color of h files to blue
+let g:NERDTreeExtensionHighlightColor['c'] = s:green " sets the color of c files to blue
+let g:NERDTreeExtensionHighlightColor['cpp'] = s:green " sets the color of cpp files to blue
+let g:NERDTreeExtensionHighlightColor['c++'] = s:green " sets the color of c++ files to blue
+
+
+""""""""""""""""""""""""""""""
 " Highlight Class and Function names
+""""""""""""""""""""""""""""""
 syn match cCustomParen "(" contains=cParen,cCppParen
 syn match cCustomScope "::"
 syn match cCustomClass "\w\+\s*::" contains=cCustomScope
@@ -51,7 +132,26 @@ hi cCustomComment gui=NONE cterm=bold ctermfg=73 "154
 hi cCustomComment2 gui=NONE cterm=bold ctermfg=73 "154
 hi cCustomComment3 gui=NONE cterm=bold ctermfg=73 "154
 
+
+""""""""""""""""""""""""""""""
+"vim-devicons settings
+""""""""""""""""""""""""""""""`
+"Can be enabled or disabled
+let g:webdevicons_enable_nerdtree = 1
+
+"whether or not to show the nerdtree brackets around flags
+let g:webdevicons_conceal_nerdtree_brackets = 1
+
+"adding to vim-airline's tabline
+let g:webdevicons_enable_airline_tabline = 1
+
+"adding to vim-airline's statusline
+let g:webdevicons_enable_airline_statusline = 1
+
+
+""""""""""""""""""""""""""""""
 "airline
+""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#buffer_idx_format = {
        \ '0': '0 ',
        \ '1': '1 ',
@@ -76,7 +176,9 @@ let g:airline_symbols.dirty = "DT"
 let g:airline_symbols.crypt = "CR"
 
 
+""""""""""""""""""""""""""""""
 "other
+""""""""""""""""""""""""""""""
 function! Load_vvimrc(path)
     let l:all_path = SplitPath(a:path)
     
