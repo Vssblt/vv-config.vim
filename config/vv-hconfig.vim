@@ -28,7 +28,7 @@ endif
 
 let &undodir=g:undoDirPath
 
-imap <Tab> <C-P>
+"imap <Tab> <C-P>
 
 "You can use [Ctrl + x] to complate the code. 
 filetype plugin indent on
@@ -38,8 +38,8 @@ set completeopt=longest,menu
 """"""""""""""""""""""""""""""
 " NERDTree settings
 """"""""""""""""""""""""""""""
-let NERDTreeMapOpenInTab=',t'
-let NERDTreeMapOpenInTabSilent=',T'
+let NERDTreeMapOpenInTab='<leader>t'
+let NERDTreeMapOpenInTabSilent='<leader>T'
 let g:NERDTreeDirArrowExpandable = '►'
 let g:NERDTreeDirArrowCollapsible = '▼'
 let NERDTreeShowLineNumbers=1

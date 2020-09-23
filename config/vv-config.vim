@@ -99,7 +99,7 @@ call plug#begin('~/.vim/plugged')
     Plug 't9md/vim-choosewin'
     "type . to switch window
 
-    Plug 'vim-scripts/a.vim'
+    Plug 'Vssblt/a.vim'
     ":A
     "go .h or .cpp
     "
