@@ -76,8 +76,11 @@ noremap <leader><leader>l :FloatermNext<CR>
 noremap <leader><leader>L :FloatermPrev<CR>
 noremap <leader><leader>i :FloatermNew
 
+inoremap <C-BS> <C-W>
+
 "make 
-nnoremap <F5> :make<CR>
+nnoremap <F5> :Make<CR>
+nnoremap <F6> :Copen<CR>
 
 "ranger
 nmap <leader>o :RangerNewTab<CR>

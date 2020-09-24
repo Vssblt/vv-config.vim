@@ -5,10 +5,10 @@
 " common settings
 """"""""""""""""""""""""""""""
 let mapleader="," 
-let g:tagsPath = $HOME."/.vim/tags"
-let g:undoDirPath=$HOME."/.vim/undodir"
-let g:vvimrc_name=".vvimrc"
 let g:plugindir = expand('<sfile>:p:h:h')
+let g:tagsPath = g:plugindir."/tags"
+let g:undoDirPath= g:plugindir."/undodir"
+let g:vvimrc_name=".vvimrc"
 execute ':source' g:plugindir."/config/vv-hconfig.vim"
 
 """"""""""""""""""""""""""""""
@@ -62,6 +62,13 @@ let g:floaterm_widget = 0.9
 " 需要安装环境 python, npm, node-js, instant-markdown-d
 """"""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+
+    Plug 'gogoprog/vim-makefile-manager'
+    ":MakefileManagerSelect           or              :MakeSelect
+    "select the makefile using fzf
+    "
+    ":MakefileManagerMake             or              :Make
+    "Execute :Make for the selected Makefile
 
     Plug 'mzlogin/vim-markdown-toc'  
     "dont need do anything.
@@ -141,9 +148,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-scripts/fcitx.vim'
     "dont need do anything.
     
-    Plug 'godlygeek/tabular'
-    "highlight
-
     Plug 'plasticboy/vim-markdown'
     "markdown highlight
     
@@ -232,6 +236,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'chiel92/vim-autoformat'
 
     Plug 'honza/vim-snippets'
+    "custom auto complete.
 
     "20200909
     Plug 'junegunn/vim-easy-align'   
@@ -246,6 +251,10 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'Vssblt/vv-config.vim'
 
+    Plug 'godlygeek/tabular'
+    "highlight
+ 
+    Plug 'tpope/vim-dispatch'
 
 call plug#end()
 

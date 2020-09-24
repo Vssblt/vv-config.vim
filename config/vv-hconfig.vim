@@ -38,8 +38,8 @@ set completeopt=longest,menu
 """"""""""""""""""""""""""""""
 " NERDTree settings
 """"""""""""""""""""""""""""""
-let NERDTreeMapOpenInTab=',t'
-let NERDTreeMapOpenInTabSilent=',T'
+let NERDTreeMapOpenInTab='<leader>s'
+let NERDTreeMapOpenInTabSilent='<leader>S'
 let g:NERDTreeDirArrowExpandable = '►'
 let g:NERDTreeDirArrowCollapsible = '▼'
 let NERDTreeShowLineNumbers=1
@@ -233,6 +233,12 @@ execute ":command! HConfigV :tabnew" g:plugindir.'/config/vv-hconfig.vim'
 execute ":command! DvorakSettingsV :tabnew" g:plugindir.'/plugin/vv-layout-dvorak.vim'
 execute ":command! QwertySettingsV :tabnew" g:plugindir.'/plugin/vv-layout-qwerty.vim'
 execute ":command! FHide :FloatermHide"
+execute ":command! FNext :FloatermNext"
+execute ":command! FFirst :FloatermFirst"
+execute ":command! FKill :FloatermKill"
+execute ":command! FLast :FloatermLast"
+execute ":command! FPrev :FloatermPrev"
+execute ":command! FShow :FloatermShow"
 
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
