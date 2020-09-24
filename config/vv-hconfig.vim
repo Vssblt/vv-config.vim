@@ -28,7 +28,7 @@ endif
 
 let &undodir=g:undoDirPath
 
-imap <Tab> <C-P>
+"imap <Tab> <C-P>
 
 "You can use [Ctrl + x] to complate the code. 
 filetype plugin indent on

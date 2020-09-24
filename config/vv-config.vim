@@ -91,10 +91,10 @@ call plug#begin('~/.vim/plugged')
     "<leader>.
     "search one chara
     "
-    "<leader><leader>. 
+    "<leader><leader>.
     "search a string
     "
-    "<leader>d 
+    "<leader>d
     "go start in current line
     "
     "<leader>-
@@ -105,8 +105,8 @@ call plug#begin('~/.vim/plugged')
 
     Plug 't9md/vim-choosewin'
     "type . to switch window
-    
-    Plug 'vim-scripts/a.vim'
+
+    Plug 'Vssblt/a.vim'
     ":A
     "go .h or .cpp
     "
@@ -136,27 +136,27 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'kshenoy/vim-signature'
     "dont need do anything.
-    
+
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     "dont need do anything.
-    
+
     Plug 'yianwillis/vimcdoc'
     "vim chinese doc
     "dont need do anything.
-    
+
     Plug 'vim-scripts/fcitx.vim'
     "dont need do anything.
     
     Plug 'plasticboy/vim-markdown'
     "markdown highlight
-    
+
     Plug 'suan/vim-instant-markdown'
     "dont need do anything.
     "this plugin will automatically open web browser when you editing markdown files.
-    
+
     Plug 'mg979/vim-visual-multi'
-    "ctrl + n 
+    "ctrl + n
     "select current word and create a cursor
     "
     "ctrl + v and ctrl + n
@@ -166,7 +166,7 @@ call plug#begin('~/.vim/plugged')
     "select next/prev text and create a cursor
     "
     "[  和  ]
-    "select next/prev 
+    "select next/prev
     "
     "q
     "skip current text and select next text
@@ -175,7 +175,7 @@ call plug#begin('~/.vim/plugged')
     "delete current cursor
 
     Plug 'gcmt/wildfire.vim'
-    "<leader><space> 
+    "<leader><space>
     "select a block
     "
     "<space>
@@ -186,10 +186,10 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'sjl/gundo.vim'
     "<leader>c
-    "open undolist 
+    "open undolist
 
     Plug 'yssl/QFEnter'
-    "if in quickfix window: 
+    "if in quickfix window:
     "<Enter>, <2-LeftMouse>
     "open
     "
@@ -212,10 +212,10 @@ call plug#begin('~/.vim/plugged')
     "FloatermShow
     "<leader><leader>h
     "<leader><leader>d
-    
+
     Plug 'ryanoasis/vim-devicons'
     "dont need do anything.
-    
+
     Plug 'flazz/vim-colorschemes'
     ":colorscheme [color theme]
 
@@ -223,25 +223,39 @@ call plug#begin('~/.vim/plugged')
     "<leader>o
     "open a file in new tab.
 
-    Plug 'airblade/vim-gitgutter'
-
     Plug 'neoclide/coc.nvim', {'branch' : 'release'}
+    ":CocInstall
+    "install coc plugin
+    "
+    ":CocConfig
+    "config coc plugin
+    "
+    ":CocCommand
+    "run coc command
+    "
+    ":CocDisable/CocEnable
+    "disable or enable coc plugin
+    "
+    ":CocUpdate
+    "update coc plugin
+    "
+
+    "Plug 'SirVer/ultisnips'
 
     Plug 'vim-scripts/lookupfile'
 
-    Plug 'srstevenson/vim-picker'
+    Plug 'airblade/vim-gitgutter'
 
-    "Plug 'SirVer/ultisnips'
+    Plug 'srstevenson/vim-picker'
 
     Plug 'chiel92/vim-autoformat'
 
     Plug 'honza/vim-snippets'
     "custom auto complete.
 
-    "20200909
-    Plug 'junegunn/vim-easy-align'   
+    Plug 'junegunn/vim-easy-align'
 
-    Plug 'brooth/far.vim'            
+    Plug 'brooth/far.vim'
 
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
@@ -249,12 +263,14 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'brooth/far.vim'
 
-    Plug 'Vssblt/vv-config.vim'
+    Plug 'vim-scripts/genutils'
 
     Plug 'godlygeek/tabular'
     "highlight
  
     Plug 'tpope/vim-dispatch'
+
+    Plug 'Vssblt/vv-config.vim'
 
 call plug#end()
 

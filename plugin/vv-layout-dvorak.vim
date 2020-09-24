@@ -2,9 +2,10 @@
 "输入时需要大范围移动手指（f, x），要么频繁使用小指（l, /, =, 三个按键全是一个小指），
 "映射时应尽量避免使这些按键
 
-"
-nmap \ <leader>
-vmap \ <leader>
+""""""""""""""""""""""""""""""
+"normal
+""""""""""""""""""""""""""""""
+noremap \ <leader>
 
 noremap t k
 noremap n j
@@ -32,8 +33,7 @@ inoremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
 noremap [ [[
 noremap ] ]]
 
-noremap <C-t> :tabnew .<CR>:e 
-"noremap <C-l> :e 
+noremap <C-t> :tabnew .<CR>
 noremap <C-c> :q<CR>
 noremap <C-e> <C-i>
 inoremap <C-t> <ESC>:tabnew .<CR>:e 
@@ -42,22 +42,36 @@ inoremap <C-c> <ESC>:q<CR>
 
 noremap R :source $MYVIMRC<CR>
 
-noremap <leader><CR> <C-]>
+nnoremap <leader><CR> <C-]>
+vnoremap <leader><CR> <C-]>
 
 noremap <leader>- $
 noremap <leader>d ^
 noremap <leader>2 [[
 noremap <leader>3 ]]
 
-map <leader>h <Plug>(easymotion-linebackward)
-map <leader>t <Plug>(easymotion-k)
-map <leader>n <Plug>(easymotion-j)
-map <leader>s <Plug>(easymotion-lineforward)
+nmap <leader>eh <Plug>(easymotion-linebackward)
+nmap <leader>et <Plug>(easymotion-k)
+nmap <leader>en <Plug>(easymotion-j)
+nmap <leader>es <Plug>(easymotion-lineforward)
+nmap <leader>. <Plug>(easymotion-s)
+nmap <leader><leader>. <Plug>(easymotion-sn)
+vmap <leader>eh <Plug>(easymotion-linebackward)
+vmap <leader>et <Plug>(easymotion-k)
+vmap <leader>en <Plug>(easymotion-j)
+vmap <leader>es <Plug>(easymotion-lineforward)
+vmap <leader>. <Plug>(easymotion-s)
+vmap <leader><leader>. <Plug>(easymotion-sn)
+omap <leader>eh <Plug>(easymotion-linebackward)
+omap <leader>et <Plug>(easymotion-k)
+omap <leader>en <Plug>(easymotion-j)
+omap <leader>es <Plug>(easymotion-lineforward)
+omap <leader>. <Plug>(easymotion-s)
+omap <leader><leader>. <Plug>(easymotion-sn)
 
-map <leader>. <Plug>(easymotion-s)
-map <leader><leader>. <Plug>(easymotion-sn)
-
-map <leader>g <Plug>(easymotion-sl)
+nmap <leader>g <Plug>(easymotion-sl)
+vmap <leader>g <Plug>(easymotion-sl)
+omap <leader>g <Plug>(easymotion-sl)
 
 noremap <leader>; :TlistToggle<CR>
 noremap <leader>q :NERDTreeToggle<CR>
@@ -68,7 +82,13 @@ nmap . <Plug>(choosewin)
 nmap <leader><SPACE> <Plug>(wildfire-fuel)
 vmap <SPACE> <Plug>(wildfire-fuel)
 vmap <leader><SPACE> <Plug>(wildfire-water)
+vmap <s-SPACE> <Plug>(wildfire-water)
 
+noremap <leader>y :let @*=@*.getline('.')."\n"<CR>
+
+""""""""""""""""""""""""""""""
+"Floaterm
+""""""""""""""""""""""""""""""
 noremap <leader><leader>n :FloatermNew<CR>
 noremap <leader><leader>h :FloatermHide<CR>
 noremap <leader><leader>s :FloatermShow<CR>
@@ -78,15 +98,25 @@ noremap <leader><leader>i :FloatermNew
 
 inoremap <C-BS> <C-W>
 
+""""""""""""""""""""""""""""""
 "make 
+""""""""""""""""""""""""""""""
 nnoremap <F5> :Make<CR>
 nnoremap <F6> :Copen<CR>
 
+""""""""""""""""""""""""""""""
 "ranger
+""""""""""""""""""""""""""""""
 nmap <leader>o :RangerNewTab<CR>
 nmap <leader>a :Ranger<CR>
+omap <leader>o :RangerNewTab<CR>
+omap <leader>a :Ranger<CR>
+vmap <leader>o :RangerNewTab<CR>
+vmap <leader>a :Ranger<CR>
 
+""""""""""""""""""""""""""""""
 "coc
+""""""""""""""""""""""""""""""
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! s:check_back_space() abort
