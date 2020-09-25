@@ -35,6 +35,11 @@ let &undodir=g:undoDirPath
 filetype plugin indent on
 set completeopt=longest,menu
 
+""""""""""""""""""""""""""""""
+" yueyoum/vim-linemovement settings
+""""""""""""""""""""""""""""""
+let g:linemovement_up="<c-s-t>"
+let g:linemovement_down="<c-s-n>"
 
 """"""""""""""""""""""""""""""
 " NERDTree settings

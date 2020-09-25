@@ -79,7 +79,7 @@ call plug#begin('~/.vim/plugged')
     "use | <text> | to create table unit.
     "use || to create |+++++++++|
 
-    Plug 'vim-scripts/taglist.vim'
+    Plug 'Vssblt/taglist.vim'
     "type <leader>; to open taglist window.
 
     Plug 'scrooloose/nerdtree'
@@ -269,6 +269,8 @@ call plug#begin('~/.vim/plugged')
     "highlight
  
     Plug 'tpope/vim-dispatch'
+
+    Plug 'yueyoum/vim-linemovement'
 
     Plug 'Vssblt/vv-config.vim'
 
