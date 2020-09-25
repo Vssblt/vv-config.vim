@@ -84,7 +84,12 @@ vmap <SPACE> <Plug>(wildfire-fuel)
 vmap <leader><SPACE> <Plug>(wildfire-water)
 vmap <s-SPACE> <Plug>(wildfire-water)
 
-noremap <leader>y :let @*=@*.getline('.')."\n"<CR>
+function! CopyAppend()
+    let @*=@*.getline('.')."\n"
+endfunction
+
+vnoremap <leader>y :call CopyAppend()<CR>
+nnoremap <leader>y :call CopyAppend()<CR>
 
 """"""""""""""""""""""""""""""
 "Floaterm

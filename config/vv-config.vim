@@ -270,7 +270,7 @@ call plug#begin('~/.vim/plugged')
  
     Plug 'tpope/vim-dispatch'
 
-    Plug 'yueyoum/vim-linemovement'
+    Plug 'Vssblt/vim-linemovement'
 
     Plug 'Vssblt/vv-config.vim'
 
