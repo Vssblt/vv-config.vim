@@ -2,6 +2,7 @@
 <!-- vim-markdown-toc GFM -->
 
 * [vv-config.vim](#vv-configvim)
+			* [一个适用于 Dvorak 用户的 vim 插件集合。](#一个适用于-dvorak-用户的-vim-插件集合)
 	* [依赖：](#依赖)
 	* [关于键盘布局：](#关于键盘布局)
 	* [安装方法：](#安装方法)
@@ -10,12 +11,12 @@
 
 <!-- vim-markdown-toc -->
 
-# vv-config.vim
-我的 dvorak 键盘布局的 vim 配置文件
+# vv-config.vim 
+#### 一个适用于 Dvorak 用户的 vim 插件集合。
 
 ## 依赖：
 
-插件依赖 nodejs python instant-markdown-d npm vim-plug fzf[可选] ranger[可选]
+插件依赖 nodejs, python, instant-markdown-d, npm, vim-plug, fzf[可选], ranger[可选]
 
 ## 关于键盘布局：
 
@@ -50,3 +51,5 @@ $ wget http://49.235.80.28/vim-script/auto-download.sh
 $ chmod 755 ./auto-download.sh
 $ ./auto-download.sh
 ```
+
+

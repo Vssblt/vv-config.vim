@@ -19,6 +19,7 @@ set updatetime=0
 set clipboard=unnamed
 set mouse=i
 set t_Co=256
+set fillchars=stl:\ 
 
 set undofile
 
