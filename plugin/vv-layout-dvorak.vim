@@ -5,7 +5,7 @@
 """"""""""""""""""""""""""""""
 "normal
 """"""""""""""""""""""""""""""
-noremap \ <leader>
+map \ <leader>
 
 noremap t k
 noremap n j
