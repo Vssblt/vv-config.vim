@@ -182,6 +182,7 @@ let g:airline_symbols.branch = 'BR'
 let g:airline_symbols.readonly = "RO"
 let g:airline_symbols.dirty = "DT"
 let g:airline_symbols.crypt = "CR"
+"let g:airline_extensions = []
 
 """"""""""""""""""""""""""""""
 " coc settings
