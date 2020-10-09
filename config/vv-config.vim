@@ -12,6 +12,11 @@ let g:vvimrc_name=".vvimrc"
 execute ':source' g:plugindir."/config/vv-hconfig.vim"
 
 """"""""""""""""""""""""""""""
+" vim inspector settings
+""""""""""""""""""""""""""""""
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
+""""""""""""""""""""""""""""""
 " Tlist settings
 """"""""""""""""""""""""""""""
 let Tlist_WinWidth = 40
@@ -273,6 +278,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'Vssblt/vim-linemovement'
 
     Plug 'Vssblt/vv-config.vim'
+
+    Plug 'puremourning/vimspector'
 
 call plug#end()
 

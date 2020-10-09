@@ -111,8 +111,8 @@ inoremap <C-BS> <C-W>
 """"""""""""""""""""""""""""""
 "make 
 """"""""""""""""""""""""""""""
-nnoremap <F5> :Make<CR>
-nnoremap <F6> :Copen<CR>
+nnoremap <F4> :Make<CR>
+nnoremap <F2> :Copen<CR>
 
 """"""""""""""""""""""""""""""
 "ranger
