@@ -20,6 +20,7 @@ set clipboard=unnamed
 set mouse=i
 set t_Co=256
 set fillchars=stl:\ 
+set backspace=indent,eol,start
 
 set undofile
 

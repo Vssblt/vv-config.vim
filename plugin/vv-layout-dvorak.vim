@@ -123,6 +123,9 @@ omap <leader>o :RangerNewTab<CR>
 omap <leader>a :Ranger<CR>
 vmap <leader>o :RangerNewTab<CR>
 vmap <leader>a :Ranger<CR>
+nmap <leader>e :tabnew<CR>:Files<CR>
+omap <leader>e :tabnew<CR>:Files<CR>
+vmap <leader>e :tabnew<CR>:Files<CR>
 
 """"""""""""""""""""""""""""""
 "coc

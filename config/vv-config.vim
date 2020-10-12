@@ -210,15 +210,31 @@ call plug#begin('~/.vim/plugged')
     "open in new tab
 
     Plug 'voldikss/vim-floaterm'
-    "FloatermNew
-    "FloatermHide
-    "FloatermNext
-    "FloatermPrev
-    "FloatermFirst
-    "FloatermLast
-    "FloatermShow
+    ":FloatermNew
+    "<leader><leader>n
+    "open a new floaterm popup window
+    "
+    ":FloatermHide        rename: FHide
     "<leader><leader>h
-    "<leader><leader>d
+    "hide floaterm popup windows
+    "
+    ":FloatermNext        rename: FNext
+    "show next floaterm window
+    "
+    ":FloatermPrev        rename: FPrev
+    "show prev floaterm window
+    "
+    ":FloatermFirst       rename: FFirst
+    "show first floaterm window
+    "
+    ":FloatermLast        rename: FLast
+    "show last floaterm window
+    "
+    ":FloatermShow        rename: FShow
+    "show current floaterm window
+    "
+    "<C-D>
+    "close current floaterm window
 
     Plug 'ryanoasis/vim-devicons'
     "dont need do anything.
@@ -248,6 +264,9 @@ call plug#begin('~/.vim/plugged')
     "
 
     "Plug 'SirVer/ultisnips'
+
+    Plug 'voldikss/vim-translator'
+    ":Translate/TranslateX/TranslateW/TranslateH/TranslateL/TranslateR
 
     Plug 'vim-scripts/lookupfile'
 
