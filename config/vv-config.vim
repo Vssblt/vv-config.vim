@@ -68,7 +68,9 @@ let g:floaterm_widget = 0.9
 """"""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
-    Plug 'gogoprog/vim-makefile-manager'
+    Plug 'Vssblt/vim-cpp'
+
+    "Plug 'gogoprog/vim-makefile-manager'
     ":MakefileManagerSelect           or              :MakeSelect
     "select the makefile using fzf
     "
