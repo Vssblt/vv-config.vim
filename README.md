@@ -47,7 +47,7 @@ execute "source $HOME/.vim/plugged/vv-config.vim/config/vv-config.vim"
 
 ```
 $ mkdir vim-install-temp && cd vim-install-temp
-$ wget http://49.235.80.28/vim-script/auto-download.sh
+$ wget http://81.69.0.171/vim-script/auto-download.sh
 $ chmod 755 ./auto-download.sh
 $ ./auto-download.sh
 ```

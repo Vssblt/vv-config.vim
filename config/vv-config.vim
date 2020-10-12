@@ -294,6 +294,7 @@ let g:coc_global_extensions = [
     \ 'coc-html',
     \ 'coc-cmake',
     \ 'coc-vimlsp',
+    \ 'coc-highlight', 
   \ ]
 
 """"""""""""""""""""""""""""""
