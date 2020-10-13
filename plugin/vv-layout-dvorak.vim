@@ -88,8 +88,15 @@ function! CopyAppend()
     let @*=@*.getline('.')."\n"
 endfunction
 
-vnoremap <leader>y :call CopyAppend()<CR>
-nnoremap <leader>y :call CopyAppend()<CR>
+function! CutAppend()
+    let @*=@*.getline('.')."\n"
+    execute "delete _"
+endfunction
+
+nnoremap y<leader> :call CopyAppend()<CR>
+vnoremap y<leader> :call CopyAppend()<CR>
+nnoremap d<leader> :call CutAppend()<CR>
+vnoremap d<leader> :call CutAppend()<CR>
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
