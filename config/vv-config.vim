@@ -21,6 +21,7 @@ let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 """"""""""""""""""""""""""""""
 let Tlist_WinWidth = 40
 let Tlist_Exit_OnlyWindow = 1
+let Tlist_Show_One_File = 1
 let Tlist_Use_Right_Window = 0
 let Tlist_Show_Menu = 1
 let Tlist_Auto_Open = 0
@@ -68,14 +69,13 @@ let g:floaterm_widget = 0.9
 """"""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
-    Plug 'Vssblt/vim-cpp'
+    Plug 'Vssblt/vv-config.vim'
 
-    "Plug 'gogoprog/vim-makefile-manager'
-    ":MakefileManagerSelect           or              :MakeSelect
-    "select the makefile using fzf
+    Plug 'tpope/vim-surround'
     "
-    ":MakefileManagerMake             or              :Make
-    "Execute :Make for the selected Makefile
+
+    Plug 'Vssblt/vim-cpp'
+    "cpp syntax
 
     Plug 'mzlogin/vim-markdown-toc'  
     "dont need do anything.
@@ -298,9 +298,14 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'Vssblt/vim-linemovement'
 
-    Plug 'Vssblt/vv-config.vim'
-
     Plug 'puremourning/vimspector'
+
+    "Plug 'gogoprog/vim-makefile-manager'
+    ":MakefileManagerSelect           or              :MakeSelect
+    "select the makefile using fzf
+    "
+    ":MakefileManagerMake             or              :Make
+    "Execute :Make for the selected Makefile
 
 call plug#end()
 

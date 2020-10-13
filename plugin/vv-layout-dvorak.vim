@@ -3,7 +3,7 @@
 "映射时应尽量避免使这些按键
 
 """"""""""""""""""""""""""""""
-"normal
+" normal
 """"""""""""""""""""""""""""""
 map \ <leader>
 
@@ -97,7 +97,7 @@ hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=whi
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
 """"""""""""""""""""""""""""""
-"Floaterm
+" Floaterm
 """"""""""""""""""""""""""""""
 noremap <leader><leader>n :FloatermNew<CR>
 noremap <leader><leader>h :FloatermHide<CR>
@@ -109,13 +109,13 @@ noremap <leader><leader>i :FloatermNew
 inoremap <C-BS> <C-W>
 
 """"""""""""""""""""""""""""""
-"make 
+" make 
 """"""""""""""""""""""""""""""
 nnoremap <F4> :Make<CR>
 nnoremap <F2> :Copen<CR>
 
 """"""""""""""""""""""""""""""
-"ranger
+" ranger
 """"""""""""""""""""""""""""""
 nmap <leader>o :RangerNewTab<CR>
 nmap <leader>a :Ranger<CR>
@@ -128,7 +128,7 @@ omap <leader>e :tabnew<CR>:Files<CR>
 vmap <leader>e :tabnew<CR>:Files<CR>
 
 """"""""""""""""""""""""""""""
-"coc
+" coc
 """"""""""""""""""""""""""""""
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
@@ -147,3 +147,22 @@ inoremap <silent><expr> <NUL> coc#refresh()
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+""""""""""""""""""""""""""""""
+" vim-linemovement
+""""""""""""""""""""""""""""""
+let g:linemovement_up="<c-s-t>"
+let g:linemovement_down="<c-s-n>"
+
+""""""""""""""""""""""""""""""
+" vim-surround
+""""""""""""""""""""""""""""""
+nmap ds  <Plug>Dsurround
+nmap bs  <Plug>Csurround
+nmap bS  <Plug>CSurround
+nmap ys  <Plug>Ysurround
+nmap yS  <Plug>YSurround
+nmap yss <Plug>Yssurround
+nmap ySs <Plug>YSsurround
+nmap ySS <Plug>YSsurround
+xmap S   <Plug>VSurround
+xmap gS  <Plug>VgSurround

@@ -30,17 +30,9 @@ endif
 
 let &undodir=g:undoDirPath
 
-"imap <Tab> <C-P>
-
 "You can use [Ctrl + x] to complate the code. 
 filetype plugin indent on
 set completeopt=longest,menu
-
-""""""""""""""""""""""""""""""
-" yueyoum/vim-linemovement settings
-""""""""""""""""""""""""""""""
-let g:linemovement_up="<c-s-t>"
-let g:linemovement_down="<c-s-n>"
 
 """"""""""""""""""""""""""""""
 " NERDTree settings
@@ -255,3 +247,7 @@ else
   set signcolumn=yes
 endif
 
+""""""""""""""""""""""""""""""
+" vim-surround
+""""""""""""""""""""""""""""""
+let g:surround_no_mappings = 1
