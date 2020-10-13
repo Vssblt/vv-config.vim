@@ -71,6 +71,13 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'Vssblt/vv-config.vim'
 
+    Plug 'gogoprog/vim-makefile-manager'
+    ":MakefileManagerSelect           or              :MakeSelect
+    "select the makefile using fzf
+    "
+    ":MakefileManagerMake             or              :Make
+    "Execute :Make to make the selected Makefile
+
     Plug 'tpope/vim-surround'
     "
 
@@ -299,13 +306,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'Vssblt/vim-linemovement'
 
     Plug 'puremourning/vimspector'
-
-    "Plug 'gogoprog/vim-makefile-manager'
-    ":MakefileManagerSelect           or              :MakeSelect
-    "select the makefile using fzf
-    "
-    ":MakefileManagerMake             or              :Make
-    "Execute :Make for the selected Makefile
 
 call plug#end()
 

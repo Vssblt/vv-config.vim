@@ -4,6 +4,7 @@
 set wildmenu
 set laststatus=2
 set showtabline=2
+set rnu
 set nu
 set encoding=utf8
 set fileencodings=ucs-bom,utf8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
