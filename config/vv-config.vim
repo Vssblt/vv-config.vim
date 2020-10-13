@@ -9,6 +9,7 @@ let g:plugindir = expand('<sfile>:p:h:h')
 let g:tagsPath = g:plugindir."/tags"
 let g:undoDirPath= g:plugindir."/undodir"
 let g:vvimrc_name=".vvimrc"
+let g:with_x11 = 0
 execute ':source' g:plugindir."/config/vv-hconfig.vim"
 
 """"""""""""""""""""""""""""""

@@ -85,11 +85,19 @@ vmap <leader><SPACE> <Plug>(wildfire-water)
 vmap <s-SPACE> <Plug>(wildfire-water)
 
 function! CopyAppend()
-    let @*=@*.getline('.')."\n"
+    if g:with_x11 == 1
+        let @*=@*.getline('.')."\n"
+    else
+        let @" .= getline('.')."\n"
+    endif
 endfunction
 
 function! CutAppend()
-    let @*=@*.getline('.')."\n"
+    if g:with_x11 == 1
+        let @*=@*.getline('.')."\n"
+    else
+        let @" .= getline('.')."\n"
+    endif
     execute "delete _"
 endfunction
 
