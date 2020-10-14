@@ -101,10 +101,10 @@ function! CutAppend()
     execute "delete _"
 endfunction
 
-nnoremap y<leader> :call CopyAppend()<CR>
-vnoremap y<leader> :call CopyAppend()<CR>
-nnoremap d<leader> :call CutAppend()<CR>
-vnoremap d<leader> :call CutAppend()<CR>
+nnoremap <leader>yy :call CopyAppend()<CR>
+vnoremap <leader>yy :call CopyAppend()<CR>
+nnoremap <leader>yd :call CutAppend()<CR>
+vnoremap <leader>yd :call CutAppend()<CR>
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
