@@ -112,7 +112,7 @@ hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=whi
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
 nnoremap <leader>/ VHoL<Esc>``/\%V
-nnoremap <leader>* VHoL<Esc>``/\%V<C-r><C-w>
+nnoremap <leader>* VHoL<Esc>``/\%V<C-r><C-w><CR>
 
 """"""""""""""""""""""""""""""
 " Floaterm
