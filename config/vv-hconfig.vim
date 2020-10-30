@@ -18,7 +18,7 @@ set timeoutlen=1000
 set ttimeoutlen=10
 set updatetime=0
 set clipboard^=unnamed,unnamedplus
-set mouse=i
+set mouse=v
 set t_Co=256
 set fillchars=stl:\ 
 set backspace=indent,eol,start
@@ -252,3 +252,9 @@ endif
 " vim-surround
 """"""""""""""""""""""""""""""
 let g:surround_no_mappings = 1
+
+""""""""""""""""""""""""""""""
+" vim-dispatch
+""""""""""""""""""""""""""""""
+let g:dispatch_quickfix_height=20
+let g:dispatch_tmux_height=20

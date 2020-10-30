@@ -72,22 +72,47 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'Vssblt/vv-config.vim'
 
+    Plug 'ryanoasis/vim-devicons'
+    "dont need do anything.
+
+    Plug 'auxiliary/vim-layout'
+    "dont need do anything.
+
+    Plug 'kshenoy/vim-signature'
+    "dont need do anything.
+
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    "dont need do anything.
+
+    Plug 'yianwillis/vimcdoc'
+    "vim chinese doc
+    "dont need do anything.
+
+    Plug 'vim-scripts/fcitx.vim'
+    "dont need do anything.
+    
+    Plug 'plasticboy/vim-markdown'
+    "markdown highlight
+
+    Plug 'suan/vim-instant-markdown'
+    "dont need do anything.
+    "this plugin will automatically open web browser when you editing markdown files.
+
+    Plug 'Vssblt/vim-cpp'
+    "dont need do anything.
+    "cpp syntax
+
+    Plug 'mzlogin/vim-markdown-toc'  
+    "dont need do anything.
+    "this plugin open your browser when you open a markdown file
+
     Plug 'gogoprog/vim-makefile-manager'
     ":MakefileManagerSelect           or              :MakeSelect
     "select the makefile using fzf
     "
     ":MakefileManagerMake             or              :Make
     "Execute :Make to make the selected Makefile
-
-    Plug 'tpope/vim-surround'
-    "
-
-    Plug 'Vssblt/vim-cpp'
-    "cpp syntax
-
-    Plug 'mzlogin/vim-markdown-toc'  
-    "dont need do anything.
-    "this plugin open your browser when you open a markdown file
 
     Plug 'dhruvasagar/vim-table-mode'
     "use <leader>tm open table mode
@@ -145,30 +170,6 @@ call plug#begin('~/.vim/plugged')
     "
     ":IHT
     "current cursor header and open in new tab
-
-    Plug 'auxiliary/vim-layout'
-    "dont need do anything.
-
-    Plug 'kshenoy/vim-signature'
-    "dont need do anything.
-
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    "dont need do anything.
-
-    Plug 'yianwillis/vimcdoc'
-    "vim chinese doc
-    "dont need do anything.
-
-    Plug 'vim-scripts/fcitx.vim'
-    "dont need do anything.
-    
-    Plug 'plasticboy/vim-markdown'
-    "markdown highlight
-
-    Plug 'suan/vim-instant-markdown'
-    "dont need do anything.
-    "this plugin will automatically open web browser when you editing markdown files.
 
     Plug 'mg979/vim-visual-multi'
     "ctrl + n
@@ -244,9 +245,6 @@ call plug#begin('~/.vim/plugged')
     "<C-D>
     "close current floaterm window
 
-    Plug 'ryanoasis/vim-devicons'
-    "dont need do anything.
-
     Plug 'flazz/vim-colorschemes'
     ":colorscheme [color theme]
 
@@ -275,6 +273,8 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'voldikss/vim-translator'
     ":Translate/TranslateX/TranslateW/TranslateH/TranslateL/TranslateR
+    
+    Plug 'wellle/targets.vim'
 
     Plug 'vim-scripts/lookupfile'
 
@@ -307,6 +307,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'Vssblt/vim-linemovement'
 
     Plug 'puremourning/vimspector'
+
+    Plug 'tpope/vim-surround'
+    "
 
 call plug#end()
 
