@@ -7,6 +7,9 @@
 """"""""""""""""""""""""""""""
 map \ <leader>
 
+noremap <c-h> b
+noremap <c-s> w
+
 noremap t k
 noremap n j
 noremap s l
