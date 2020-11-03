@@ -36,6 +36,12 @@ filetype plugin indent on
 set completeopt=longest,menu
 
 """"""""""""""""""""""""""""""
+" vim-visual-multi settings
+""""""""""""""""""""""""""""""
+let g:VM_default_mappings = 0
+let g:VM_maps = {}
+
+""""""""""""""""""""""""""""""
 " NERDTree settings
 """"""""""""""""""""""""""""""
 let NERDTreeMapOpenInTab='<leader>s'
@@ -46,18 +52,18 @@ let NERDTreeShowLineNumbers=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.swp']
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
+"let g:NERDTreeGitStatusIndicatorMapCustom = {
+"    \ "Modified"  : "✹",
+"    \ "Staged"    : "✚",
+"    \ "Untracked" : "✭",
+"    \ "Renamed"   : "➜",
+"    \ "Unmerged"  : "═",
+"    \ "Deleted"   : "✖",
+"    \ "Dirty"     : "✗",
+"    \ "Clean"     : "✔︎",
+"    \ 'Ignored'   : '☒',
+"    \ "Unknown"   : "?"
+"    \ }
 let NERDTreeMinimalUI = 1
 
 

@@ -4,8 +4,8 @@
 """"""""""""""""""""""""""""""
 " common settings
 """"""""""""""""""""""""""""""
-let mapleader="," 
-let g:VM_leader=','
+let mapleader=',' 
+let g:VM_leader='.'
 let g:plugindir = expand('<sfile>:p:h:h')
 let g:tagsPath = g:plugindir."/tags"
 let g:undoDirPath= g:plugindir."/undodir"
@@ -321,11 +321,11 @@ call plug#end()
 let g:coc_global_extensions = [
     \ 'coc-clangd',
     \ 'coc-cmake',
-    \ 'coc-html',
     \ 'coc-vimlsp',
     \ 'coc-highlight', 
   \ ]
 
+    "\ 'coc-html',
 """"""""""""""""""""""""""""""
 " other settings
 """"""""""""""""""""""""""""""
