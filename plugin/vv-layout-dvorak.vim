@@ -190,6 +190,16 @@ xmap gS  <Plug>VgSurround
 """"""""""""""""""""""""""""""
 " vim-visual-multi
 """"""""""""""""""""""""""""""
+let g:VM_maps['j'] = 'n'
+let g:VM_maps['J'] = 'N'
+let g:VM_maps['k'] = 't'
+let g:VM_maps['K'] = 'T'
+let g:VM_maps['l'] = 's'
+let g:VM_maps['L'] = 'S'
+let g:VM_maps['c'] = 'b'
+let g:VM_maps['C'] = 'B'
+
+let g:VM_maps["Select Operator"] = 'gs'
 let g:VM_maps['Find Under']                  = '<C-n>'
 let g:VM_maps['Find Subword Under']          = '<C-n>'
 let g:VM_maps["Select All"]                  = '.A' 
