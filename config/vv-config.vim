@@ -5,6 +5,7 @@
 " common settings
 """"""""""""""""""""""""""""""
 let mapleader="," 
+let g:VM_leader=','
 let g:plugindir = expand('<sfile>:p:h:h')
 let g:tagsPath = g:plugindir."/tags"
 let g:undoDirPath= g:plugindir."/undodir"
@@ -269,8 +270,6 @@ call plug#begin('~/.vim/plugged')
     "update coc plugin
     "
 
-    "Plug 'SirVer/ultisnips'
-
     Plug 'voldikss/vim-translator'
     ":Translate/TranslateX/TranslateW/TranslateH/TranslateL/TranslateR
     
@@ -311,6 +310,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround'
     "
 
+    "Plug 'SirVer/ultisnips'
+
 call plug#end()
 
 """"""""""""""""""""""""""""""
@@ -319,8 +320,8 @@ call plug#end()
 """"""""""""""""""""""""""""""
 let g:coc_global_extensions = [
     \ 'coc-clangd',
-    \ 'coc-html',
     \ 'coc-cmake',
+    \ 'coc-html',
     \ 'coc-vimlsp',
     \ 'coc-highlight', 
   \ ]

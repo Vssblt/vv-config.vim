@@ -36,12 +36,7 @@ inoremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
 noremap [ [[
 noremap ] ]]
 
-noremap <C-t> :tabnew .<CR>
-noremap <C-c> :q<CR>
 noremap <C-e> <C-i>
-inoremap <C-t> <ESC>:tabnew .<CR>:e 
-inoremap <C-l> <ESC>:e 
-inoremap <C-c> <ESC>:q<CR>
 
 noremap R :source $MYVIMRC<CR>
 
@@ -128,6 +123,8 @@ noremap <leader><leader>L :FloatermPrev<CR>
 noremap <leader><leader>i :FloatermNew
 
 inoremap <C-BS> <C-W>
+inoremap  <C-W>
+
 
 """"""""""""""""""""""""""""""
 " make 
@@ -171,8 +168,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 """"""""""""""""""""""""""""""
 " vim-linemovement
 """"""""""""""""""""""""""""""
-let g:linemovement_up="<c-s-t>"
-let g:linemovement_down="<c-s-n>"
+let g:linemovement_up="<c-j>"
+let g:linemovement_down="<c-k>"
 
 """"""""""""""""""""""""""""""
 " vim-surround
