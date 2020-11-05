@@ -76,6 +76,7 @@ noremap <leader>q :NERDTreeToggle<CR>
 noremap <leader>k :GundoToggle<CR>
 
 nmap .. <Plug>(choosewin)
+nmap . <Nop>
 noremap > .
 
 nmap <leader><SPACE> <Plug>(wildfire-fuel)

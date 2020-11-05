@@ -273,6 +273,22 @@ call plug#begin('~/.vim/plugged')
     Plug 'voldikss/vim-translator'
     ":Translate/TranslateX/TranslateW/TranslateH/TranslateL/TranslateR
     
+    Plug 'ianding1/leetcode.vim'
+    ":LeetCodeList
+    "Browse the problems. 
+    "
+    ":LeetCodeReset
+    "Reset
+    "
+    ":LeetCodeSignIn
+    "Sign in
+    "
+    ":LeetCodeSubmit
+    "Submit the code
+    "
+    ":LeetCodeTest
+    "test
+    
     Plug 'wellle/targets.vim'
 
     Plug 'vim-scripts/lookupfile'
