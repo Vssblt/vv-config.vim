@@ -73,6 +73,8 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'Vssblt/vv-config.vim'
 
+    Plug 'ianding1/leetcode.vim'
+
     Plug 'ryanoasis/vim-devicons'
     "dont need do anything.
 
