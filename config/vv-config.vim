@@ -73,42 +73,91 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'Vssblt/vv-config.vim'
 
-    Plug 'ianding1/leetcode.vim'
-
+		"****************************************************************************************************************************************************************************************************
+		"Those plugins take effect automatically.
+		"
     Plug 'ryanoasis/vim-devicons'
-    "dont need do anything.
 
     Plug 'auxiliary/vim-layout'
-    "dont need do anything.
 
     Plug 'kshenoy/vim-signature'
-    "dont need do anything.
 
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    "dont need do anything.
 
     Plug 'yianwillis/vimcdoc'
     "vim chinese doc
-    "dont need do anything.
 
     Plug 'vim-scripts/fcitx.vim'
-    "dont need do anything.
     
     Plug 'plasticboy/vim-markdown'
     "markdown highlight
 
     Plug 'suan/vim-instant-markdown'
-    "dont need do anything.
     "this plugin will automatically open web browser when you editing markdown files.
 
     Plug 'Vssblt/vim-cpp'
-    "dont need do anything.
     "cpp syntax
 
     Plug 'mzlogin/vim-markdown-toc'  
-    "dont need do anything.
     "this plugin open your browser when you open a markdown file
+
+		"****************************************************************************************************************************************************************************************************
+    Plug 'ianding1/leetcode.vim'
+		":LeetCodeList
+		"Open Leetcode index
+		"
+		":LeetCodeTest
+		"Test the code
+		"
+		":LeetCodeReset
+		"Reset code
+		"
+		":LeetCodeSignIn
+		"Sign in leetcode
+		"
+		":LeetCodeSubmit
+		"Submit the code
+
+		Plug 'preservim/nerdcommenter'
+		"[count]<leader>cc |NERDCommenterComment|
+		"Comment out the current line or text selected in visual mode.
+		"
+		"[count]<leader>cn |NERDCommenterNested|
+		"Same as cc but forces nesting.
+		"
+		"[count]<leader>c<space> |NERDCommenterToggle|
+		"Toggles the comment state of the selected line(s). If the topmost selected line is commented, all selected lines are uncommented and vice versa.
+		"
+		"[count]<leader>cm |NERDCommenterMinimal|
+		"Comments the given lines using only one set of multipart delimiters.
+		"
+		"[count]<leader>ci |NERDCommenterInvert|
+		"Toggles the comment state of the selected line(s) individually.
+		"
+		"[count]<leader>cs |NERDCommenterSexy|
+		"Comments out the selected lines with a pretty block formatted layout.
+		"
+		"[count]<leader>cy |NERDCommenterYank|
+		"Same as cc except that the commented line(s) are yanked first.
+		"
+		"<leader>c$ |NERDCommenterToEOL|
+		"Comments the current line from the cursor to the end of line.
+		"
+		"<leader>cA |NERDCommenterAppend|
+		"Adds comment delimiters to the end of line and goes into insert mode between them.
+		"
+		"|NERDCommenterInsert|
+		"Adds comment delimiters at the current cursor position and inserts between. Disabled by default.
+		"
+		"<leader>ca |NERDCommenterAltDelims|
+		"Switches to the alternative set of delimiters.
+		"
+		"[count]<leader>cl |NERDCommenterAlignLeft [count]<leader>cb |NERDCommenterAlignBoth
+		"Same as |NERDCommenterComment| except that the delimiters are aligned down the left side (<leader>cl) or both sides (<leader>cb).
+		"
+		"[count]<leader>cu |NERDCommenterUncomment|
+		"Uncomments the selected line(s).
 
     Plug 'gogoprog/vim-makefile-manager'
     ":MakefileManagerSelect           or              :MakeSelect
@@ -291,6 +340,8 @@ call plug#begin('~/.vim/plugged')
     ":LeetCodeTest
     "test
     
+		"****************************************************************************************************************************************************************************************************
+		"Other pluins.
     Plug 'wellle/targets.vim'
 
     Plug 'vim-scripts/lookupfile'

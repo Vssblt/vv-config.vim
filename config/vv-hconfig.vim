@@ -29,10 +29,6 @@ if !isdirectory(g:undoDirPath)
     call mkdir(g:undoDirPath, "p")
 endif
 
-if filereadable(g:plugindir."/config/temp_config.vim")
-    execute ':source' g:plugindir."/config/temp_config.vim"
-endif
-
 let &undodir=g:undoDirPath
 
 "You can use [Ctrl + x] to complate the code. 
@@ -241,6 +237,7 @@ call Load_vvimrc(expand("%:p:h"))
 
 execute ":command! ConfigV :tabnew" g:plugindir.'/config/vv-config.vim'
 execute ":command! HConfigV :tabnew" g:plugindir.'/config/vv-hconfig.vim'
+execute ":command! TConfigV :tabnew" g:plugindir.'/config/temp_config.vim'
 execute ":command! DvorakSettingsV :tabnew" g:plugindir.'/plugin/vv-layout-dvorak.vim'
 execute ":command! QwertySettingsV :tabnew" g:plugindir.'/plugin/vv-layout-qwerty.vim'
 execute ":command! FHide :FloatermHide"
@@ -268,3 +265,12 @@ let g:surround_no_mappings = 1
 """"""""""""""""""""""""""""""
 let g:dispatch_quickfix_height=20
 let g:dispatch_tmux_height=20
+
+
+""""""""""""""""""""""""""""""
+" orther
+""""""""""""""""""""""""""""""
+if filereadable(g:plugindir."/config/temp_config.vim")
+    execute ':source' g:plugindir."/config/temp_config.vim"
+endif
+

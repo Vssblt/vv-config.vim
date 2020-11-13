@@ -109,7 +109,7 @@ vnoremap <leader>yd :call CutAppend()<CR>
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 
-nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+nnoremap <Leader>C :set cursorline! cursorcolumn!<CR>
 
 nnoremap <leader>/ VHoL<Esc>``/\%V
 nnoremap <leader>* VHoL<Esc>``/\%V<C-r><C-w><CR>
