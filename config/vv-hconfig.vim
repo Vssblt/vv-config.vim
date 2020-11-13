@@ -29,6 +29,10 @@ if !isdirectory(g:undoDirPath)
     call mkdir(g:undoDirPath, "p")
 endif
 
+if filereadable(g:plugindir."/config/temp_config.vim")
+    execute ':source' g:plugindir."/config/temp_config.vim"
+endif
+
 let &undodir=g:undoDirPath
 
 "You can use [Ctrl + x] to complate the code. 
@@ -46,24 +50,24 @@ let g:VM_maps = {}
 """"""""""""""""""""""""""""""
 let NERDTreeMapOpenInTab='<leader>s'
 let NERDTreeMapOpenInTabSilent='<leader>S'
-let g:NERDTreeDirArrowExpandable = '►'
-let g:NERDTreeDirArrowCollapsible = '▼'
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
 let NERDTreeShowLineNumbers=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.swp']
-"let g:NERDTreeGitStatusIndicatorMapCustom = {
-"    \ "Modified"  : "✹",
-"    \ "Staged"    : "✚",
-"    \ "Untracked" : "✭",
-"    \ "Renamed"   : "➜",
-"    \ "Unmerged"  : "═",
-"    \ "Deleted"   : "✖",
-"    \ "Dirty"     : "✗",
-"    \ "Clean"     : "✔︎",
-"    \ 'Ignored'   : '☒',
-"    \ "Unknown"   : "?"
-"    \ }
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "*",
+    \ "Staged"    : "+",
+    \ "Untracked" : "-",
+    \ "Renamed"   : "~",
+    \ "Unmerged"  : "=",
+    \ "Deleted"   : "x",
+    \ "Dirty"     : "&",
+    \ "Clean"     : "%",
+    \ 'Ignored'   : "!",
+    \ "Unknown"   : "?"
+    \ }
 let NERDTreeMinimalUI = 1
 
 
