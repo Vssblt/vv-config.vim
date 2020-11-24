@@ -78,6 +78,7 @@ noremap <leader>k :GundoToggle<CR>
 nmap .. <Plug>(choosewin)
 nmap . <Nop>
 noremap > .
+noremap < ,
 
 nmap <leader><SPACE> <Plug>(wildfire-fuel)
 vmap <SPACE> <Plug>(wildfire-fuel)
