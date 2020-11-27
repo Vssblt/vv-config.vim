@@ -40,9 +40,6 @@ noremap <C-e> <C-i>
 
 noremap R :source $MYVIMRC<CR>
 
-nnoremap <leader><CR> <C-]>
-vnoremap <leader><CR> <C-]>
-
 noremap <leader>- $
 noremap <leader>d ^
 noremap <leader>2 [[
@@ -167,6 +164,21 @@ inoremap <silent><expr> <NUL> coc#refresh()
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+nnoremap <leader><CR> :call CocAction('jumpDefinition', 'drop')<CR>
+vnoremap <leader><CR> :call CocAction('jumpDefinition', 'drop')<CR>
+
+nmap bn <Plug>(coc-diagnostic-next-error)
+nmap bp <Plug>(coc-diagnostic-prev-error)
+
+nmap bna <Plug>(coc-diagnostic-next)
+nmap bpa <Plug>(coc-diagnostic-prev)
+
+nmap bi <Plug>(coc-diagnostic-info)
+nmap b== <Plug>(coc-format-selected)
+vmap b== <Plug>(coc-format-selected)
+
+nmap b=a <Plug>(coc-format)
+
 """"""""""""""""""""""""""""""
 " vim-linemovement
 """"""""""""""""""""""""""""""
@@ -227,6 +239,7 @@ let g:VM_maps["Switch Mode"]                 = '<Tab>'
 let g:VM_maps["Find Next"]                   = ']'
 let g:VM_maps["Find Prev"]                   = '['
 let g:VM_maps["Goto Next"]                   = '}'
+
 let g:VM_maps["Goto Prev"]                   = '{'
 let g:VM_maps["Seek Next"]                   = '<C-f>'
 let g:VM_maps["Seek Prev"]                   = '<C-b>'
