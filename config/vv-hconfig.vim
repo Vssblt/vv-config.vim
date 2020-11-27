@@ -22,6 +22,8 @@ set mouse=v
 set t_Co=256
 set fillchars=stl:\ 
 set backspace=indent,eol,start
+set foldcolumn=1
+set signcolumn=yes
 
 set undofile
 
@@ -250,9 +252,9 @@ execute ":command! FShow :FloatermShow"
 
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
+"  set signcolumn=number
 else
-  set signcolumn=yes
+"  set signcolumn=yes
 endif
 
 """"""""""""""""""""""""""""""
