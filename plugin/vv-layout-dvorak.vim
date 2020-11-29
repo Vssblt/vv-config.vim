@@ -174,7 +174,7 @@ nmap bp <Plug>(coc-diagnostic-prev-error)
 nmap bna <Plug>(coc-diagnostic-next)
 nmap bpa <Plug>(coc-diagnostic-prev)
 
-nmap bi <Plug>(coc-diagnostic-info)
+nmap bii <Plug>(coc-diagnostic-info)
 nmap b== <Plug>(coc-format-selected)
 vmap b== <Plug>(coc-format-selected)
 
