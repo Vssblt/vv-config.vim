@@ -159,13 +159,6 @@ call plug#begin('~/.vim/plugged')
     "[count]<leader>cu |NERDCommenterUncomment|
     "Uncomments the selected line(s).
 
-    Plug 'gogoprog/vim-makefile-manager'
-    ":MakefileManagerSelect           or              :MakeSelect
-    "select the makefile using fzf
-    "
-    ":MakefileManagerMake             or              :Make
-    "Execute :Make to make the selected Makefile
-
     Plug 'dhruvasagar/vim-table-mode'
     "use <leader>tm open table mode
     "use | <text> | to create table unit.
@@ -242,16 +235,6 @@ call plug#begin('~/.vim/plugged')
     "Q
     "delete current cursor
 
-    Plug 'gcmt/wildfire.vim'
-    "<leader><space>
-    "select a block
-    "
-    "<space>
-    "select a block in visual mode
-    "
-    "<leader><space>
-    "unselect a block in visual mode
-
     Plug 'sjl/gundo.vim'
     "<leader>c
     "open undolist
@@ -323,22 +306,6 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'voldikss/vim-translator'
     ":Translate/TranslateX/TranslateW/TranslateH/TranslateL/TranslateR
-    
-    Plug 'ianding1/leetcode.vim'
-    ":LeetCodeList
-    "Browse the problems. 
-    "
-    ":LeetCodeReset
-    "Reset
-    "
-    ":LeetCodeSignIn
-    "Sign in
-    "
-    ":LeetCodeSubmit
-    "Submit the code
-    "
-    ":LeetCodeTest
-    "test
     
     "****************************************************************************************************************************************************************************************************
     "Other pluins.

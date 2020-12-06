@@ -42,8 +42,8 @@ noremap R :source $MYVIMRC<CR>
 
 noremap <leader>- $
 noremap <leader>d ^
-noremap <leader>2 [[
-noremap <leader>3 ]]
+noremap <leader>c [[
+noremap <leader>r ]]
 
 nmap <leader>uh <Plug>(easymotion-linebackward)
 nmap <leader>ut <Plug>(easymotion-k)
@@ -64,16 +64,12 @@ omap <leader>us <Plug>(easymotion-lineforward)
 omap <leader>. <Plug>(easymotion-s)
 omap <leader><leader>. <Plug>(easymotion-sn)
 
-nmap <leader>g <Plug>(easymotion-sl)
-vmap <leader>g <Plug>(easymotion-sl)
-omap <leader>g <Plug>(easymotion-sl)
-
 noremap <leader>; :TlistToggle<CR>
 noremap <leader>q :NERDTreeToggle<CR>
 noremap <leader>k :GundoToggle<CR>
 
-nmap .. <Plug>(choosewin)
-nmap . <Nop>
+nmap . <Plug>(choosewin)
+
 noremap > .
 noremap < ,
 
@@ -131,19 +127,6 @@ inoremap  <C-W>
 """"""""""""""""""""""""""""""
 nnoremap <F4> :Make<CR>
 nnoremap <F2> :Copen<CR>
-
-""""""""""""""""""""""""""""""
-" ranger
-""""""""""""""""""""""""""""""
-nmap <leader>o :RangerNewTab<CR>
-nmap <leader>a :Ranger<CR>
-omap <leader>o :RangerNewTab<CR>
-omap <leader>a :Ranger<CR>
-vmap <leader>o :RangerNewTab<CR>
-vmap <leader>a :Ranger<CR>
-nmap <leader>e :tabnew<CR>:Files<CR>
-omap <leader>e :tabnew<CR>:Files<CR>
-vmap <leader>e :tabnew<CR>:Files<CR>
 
 """"""""""""""""""""""""""""""
 " coc
@@ -285,4 +268,17 @@ let g:VM_maps["Enlarge"]                     = ".+"
 let g:VM_maps["Toggle Block"]                = '.<BS>'
 let g:VM_maps["Toggle Single Region"]        = '.<CR>'
 let g:VM_maps["Toggle Multiline"]            = '.M'
+
+""""""""""""""""""""""""""""""
+" ranger
+""""""""""""""""""""""""""""""
+nmap <leader>o :RangerNewTab<CR>
+nmap <leader>a :Ranger<CR>
+omap <leader>o :RangerNewTab<CR>
+omap <leader>a :Ranger<CR>
+vmap <leader>o :RangerNewTab<CR>
+vmap <leader>a :Ranger<CR>
+nmap <leader>e :tabnew<CR>:Files<CR>
+omap <leader>e :tabnew<CR>:Files<CR>
+vmap <leader>e :tabnew<CR>:Files<CR>
 
