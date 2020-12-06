@@ -25,8 +25,8 @@ noremap j 12<c-y>
 noremap k 12<c-e>
 
 noremap b c
-noremap c gT
-noremap r gt
+noremap r :bnext<CR>
+noremap c :bprev<CR>
 
 noremap <ScrollWheelUp> <C-Y><C-Y><C-Y><C-Y>
 noremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
@@ -72,8 +72,7 @@ noremap <leader>; :TlistToggle<CR>
 noremap <leader>q :NERDTreeToggle<CR>
 noremap <leader>k :GundoToggle<CR>
 
-nmap .. <Plug>(choosewin)
-nmap . <Nop>
+nmap . <Plug>(choosewin)
 noremap > .
 noremap < ,
 
@@ -135,15 +134,22 @@ nnoremap <F2> :Copen<CR>
 """"""""""""""""""""""""""""""
 " ranger
 """"""""""""""""""""""""""""""
-nmap <leader>o :RangerNewTab<CR>
+"nmap <leader>o :RangerNewTab<CR>
+"nmap <leader>a :Ranger<CR>
+"omap <leader>o :RangerNewTab<CR>
+"omap <leader>a :Ranger<CR>
+"vmap <leader>o :RangerNewTab<CR>
+"vmap <leader>a :Ranger<CR>
+"nmap <leader>e :tabnew<CR>:Files<CR>
+"omap <leader>e :tabnew<CR>:Files<CR>
+"vmap <leader>e :tabnew<CR>:Files<CR>
+
 nmap <leader>a :Ranger<CR>
-omap <leader>o :RangerNewTab<CR>
 omap <leader>a :Ranger<CR>
-vmap <leader>o :RangerNewTab<CR>
 vmap <leader>a :Ranger<CR>
-nmap <leader>e :tabnew<CR>:Files<CR>
-omap <leader>e :tabnew<CR>:Files<CR>
-vmap <leader>e :tabnew<CR>:Files<CR>
+nmap <leader>e :Files<CR>
+omap <leader>e :Files<CR>
+vmap <leader>e :Files<CR>
 
 """"""""""""""""""""""""""""""
 " coc
@@ -216,21 +222,21 @@ let g:VM_maps['C'] = 'B'
 let g:VM_maps["Select Operator"] = 'gs'
 let g:VM_maps['Find Under']                  = '<C-n>'
 let g:VM_maps['Find Subword Under']          = '<C-n>'
-let g:VM_maps["Select All"]                  = '.A' 
-let g:VM_maps["Start Regex Search"]          = './'
+let g:VM_maps["Select All"]                  = '\A' 
+let g:VM_maps["Start Regex Search"]          = '\/'
 let g:VM_maps["Add Cursor Down"]             = '<C-Down>'
 let g:VM_maps["Add Cursor Up"]               = '<C-Up>'
-let g:VM_maps["Add Cursor At Pos"]           = '.\'
+let g:VM_maps["Add Cursor At Pos"]           = '\\'
 
-let g:VM_maps["Visual Regex"]                = './'
-let g:VM_maps["Visual All"]                  = '.A' 
-let g:VM_maps["Visual Add"]                  = '.a'
-let g:VM_maps["Visual Find"]                 = '.f'
-let g:VM_maps["Visual Cursors"]              = '.c'
+let g:VM_maps["Visual Regex"]                = '\/'
+let g:VM_maps["Visual All"]                  = '\A' 
+let g:VM_maps["Visual Add"]                  = '\a'
+let g:VM_maps["Visual Find"]                 = '\f'
+let g:VM_maps["Visual Cursors"]              = '\c'
 let g:VM_maps["Select Cursor Down"]          = '<M-C-Down>'
 let g:VM_maps["Select Cursor Up"]            = '<M-C-Up>'
 
-let g:VM_maps["Erase Regions"]               = '.gr'
+let g:VM_maps["Erase Regions"]               = '\gr'
 
 let g:VM_maps["Mouse Cursor"]                = '<C-LeftMouse>'
 let g:VM_maps["Mouse Word"]                  = '<C-RightMouse>'
@@ -251,38 +257,38 @@ let g:VM_maps["Find Operator"]               = "m"
 let g:VM_maps["Surround"]                    = 'S'
 let g:VM_maps["Replace Pattern"]             = 'R'
 
-let g:VM_maps["Tools Menu"]                  = '.`'
-let g:VM_maps["Show Registers"]              = '."'
-let g:VM_maps["Case Setting"]                = '.c'
-let g:VM_maps["Toggle Whole Word"]           = '.w'
-let g:VM_maps["Transpose"]                   = '.t'
-let g:VM_maps["Align"]                       = '.a'
-let g:VM_maps["Duplicate"]                   = '.d'
-let g:VM_maps["Rewrite Last Search"]         = '.r'
-let g:VM_maps["Merge Regions"]               = '.m'
-let g:VM_maps["Split Regions"]               = '.s'
-let g:VM_maps["Remove Last Region"]          = '.q'
-let g:VM_maps["Visual Subtract"]             = '.s'
-let g:VM_maps["Case Conversion Menu"]        = '.C'
-let g:VM_maps["Search Menu"]                 = '.S'
+let g:VM_maps["Tools Menu"]                  = '\`'
+let g:VM_maps["Show Registers"]              = '\"'
+let g:VM_maps["Case Setting"]                = '\c'
+let g:VM_maps["Toggle Whole Word"]           = '\w'
+let g:VM_maps["Transpose"]                   = '\t'
+let g:VM_maps["Align"]                       = '\a'
+let g:VM_maps["Duplicate"]                   = '\d'
+let g:VM_maps["Rewrite Last Search"]         = '\r'
+let g:VM_maps["Merge Regions"]               = '\m'
+let g:VM_maps["Split Regions"]               = '\s'
+let g:VM_maps["Remove Last Region"]          = '\q'
+let g:VM_maps["Visual Subtract"]             = '\s'
+let g:VM_maps["Case Conversion Menu"]        = '\C'
+let g:VM_maps["Search Menu"]                 = '\S'
 
-let g:VM_maps["Run Normal"]                  = '.z'
-let g:VM_maps["Run Last Normal"]             = '.Z'
-let g:VM_maps["Run Visual"]                  = '.v'
-let g:VM_maps["Run Last Visual"]             = '.V'
-let g:VM_maps["Run Ex"]                      = '.x'
-let g:VM_maps["Run Last Ex"]                 = '.X'
-let g:VM_maps["Run Macro"]                   = '.@'
-let g:VM_maps["Align Char"]                  = '.<'
-let g:VM_maps["Align Regex"]                 = '.>'
-let g:VM_maps["Numbers"]                     = '.n'
-let g:VM_maps["Numbers Append"]              = '.N'
-let g:VM_maps["Zero Numbers"]                = '.0n'
-let g:VM_maps["Zero Numbers Append"]         = '.0N'
-let g:VM_maps["Shrink"]                      = ".-"
-let g:VM_maps["Enlarge"]                     = ".+"
+let g:VM_maps["Run Normal"]                  = '\z'
+let g:VM_maps["Run Last Normal"]             = '\Z'
+let g:VM_maps["Run Visual"]                  = '\v'
+let g:VM_maps["Run Last Visual"]             = '\V'
+let g:VM_maps["Run Ex"]                      = '\x'
+let g:VM_maps["Run Last Ex"]                 = '\X'
+let g:VM_maps["Run Macro"]                   = '\@'
+let g:VM_maps["Align Char"]                  = '\<'
+let g:VM_maps["Align Regex"]                 = '\>'
+let g:VM_maps["Numbers"]                     = '\n'
+let g:VM_maps["Numbers Append"]              = '\N'
+let g:VM_maps["Zero Numbers"]                = '\0n'
+let g:VM_maps["Zero Numbers Append"]         = '\0N'
+let g:VM_maps["Shrink"]                      = "\-"
+let g:VM_maps["Enlarge"]                     = "\+"
 
-let g:VM_maps["Toggle Block"]                = '.<BS>'
-let g:VM_maps["Toggle Single Region"]        = '.<CR>'
-let g:VM_maps["Toggle Multiline"]            = '.M'
+let g:VM_maps["Toggle Block"]                = '\<BS>'
+let g:VM_maps["Toggle Single Region"]        = '\<CR>'
+let g:VM_maps["Toggle Multiline"]            = '\M'
 

@@ -237,11 +237,11 @@ endfunction
 call Load_vvimrc(expand("%:p:h"))
 
 
-execute ":command! ConfigV :tabnew" g:plugindir.'/config/vv-config.vim'
-execute ":command! HConfigV :tabnew" g:plugindir.'/config/vv-hconfig.vim'
-execute ":command! TConfigV :tabnew" g:plugindir.'/config/temp_config.vim'
-execute ":command! DvorakSettingsV :tabnew" g:plugindir.'/plugin/vv-layout-dvorak.vim'
-execute ":command! QwertySettingsV :tabnew" g:plugindir.'/plugin/vv-layout-qwerty.vim'
+execute ":command! ConfigV :e " g:plugindir.'/config/vv-config.vim'
+execute ":command! HConfigV :e " g:plugindir.'/config/vv-hconfig.vim'
+execute ":command! TConfigV :e " g:plugindir.'/config/temp_config.vim'
+execute ":command! DvorakSettingsV :e " g:plugindir.'/plugin/vv-layout-dvorak.vim'
+execute ":command! QwertySettingsV :e " g:plugindir.'/plugin/vv-layout-qwerty.vim'
 execute ":command! FHide :FloatermHide"
 execute ":command! FNext :FloatermNext"
 execute ":command! FFirst :FloatermFirst"

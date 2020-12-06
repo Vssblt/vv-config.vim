@@ -103,7 +103,7 @@ call plug#begin('~/.vim/plugged')
     "this plugin open your browser when you open a markdown file
 
     "****************************************************************************************************************************************************************************************************
-    Plug 'ianding1/leetcode.vim'
+    Plug 'Vssblt/leetcode.vim'
     ":LeetCodeList
     "Open Leetcode index
     "
