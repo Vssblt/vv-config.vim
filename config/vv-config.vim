@@ -307,11 +307,43 @@ call plug#begin('~/.vim/plugged')
     Plug 'voldikss/vim-translator'
     ":Translate/TranslateX/TranslateW/TranslateH/TranslateL/TranslateR
     
+    Plug 'wellle/targets.vim'
+    "Targets.vim is a Vim plugin that adds various text objects to give 
+    "you more targets to operate on. It expands on the idea of simple 
+    "commands like di' (delete inside the single quotes around the cursor) 
+    "to give you more opportunities to craft powerful commands that can 
+    "be repeated reliably. One major goal is to handle all corner cases 
+    "correctly.
+    "
+    "[ydc]i[",[]{}().<>']
+    "copy, delete or change text between the characters.
+    
+    Plug 'vim-scripts/lookupfile'
+    "   :LookupFile      Lookup files from tag files. This is a like a fast GNU
+    "                    find on name. It can lookup files from any Vim
+    "                    compatible tag file (which includes those from ctags),
+    "                    but at the moment it is advisable to generate
+    "                    specialized tag files using :find command (see
+    "                    |lookupfile-tags|).
+    "   :LUPath          Lookup files from 'path' using |globpath()|. The :find
+    "                    command while being able to lookup files from 'path', it
+    "                    doesn't provide any completion mechanism, and it is
+    "                    clumsy when there are multiple files with the same name.
+    "                    The :find command doesn't even accept a pattern.
+    "   :LUBufs          Lookup loaded files (buffers) using |bufname()|. This is
+    "                    a great addition to whatever buffer-explorer you are
+    "                    using. When there are too many buffers open, this
+    "                    sometimes makes it easy to find the right buffer, by
+    "                    typing part of its name.
+    "   :LUWalk          Lookup files using |glob()|. This works like the Emacs
+    "                    ido.el, allowing you to walk up and down a path looking
+    "                    for files. If you use the filename completion with :edit
+    "                    command, then you will find this a lot more convenient
+    "                    and faster to use.
+    "   :LUArgs          Lookup files from |:args| list.
+
     "****************************************************************************************************************************************************************************************************
     "Other pluins.
-    Plug 'wellle/targets.vim'
-
-    Plug 'vim-scripts/lookupfile'
 
     Plug 'airblade/vim-gitgutter'
 

@@ -42,8 +42,8 @@ noremap R :source $MYVIMRC<CR>
 
 noremap <leader>- $
 noremap <leader>d ^
-noremap <leader>c [[
-noremap <leader>r ]]
+noremap <leader>b [[
+noremap <leader>m ]]
 
 nmap <leader>uh <Plug>(easymotion-linebackward)
 nmap <leader>ut <Plug>(easymotion-k)
@@ -66,16 +66,11 @@ omap <leader><leader>. <Plug>(easymotion-sn)
 
 noremap <leader>; :TlistToggle<CR>
 noremap <leader>q :NERDTreeToggle<CR>
-noremap <leader>k :GundoToggle<CR>
+noremap <leader>j :GundoToggle<CR>
 
 nmap . <Plug>(choosewin)
 noremap > .
 noremap < ,
-
-nmap <leader><SPACE> <Plug>(wildfire-fuel)
-vmap <SPACE> <Plug>(wildfire-fuel)
-vmap <leader><SPACE> <Plug>(wildfire-water)
-vmap <s-SPACE> <Plug>(wildfire-water)
 
 function! CopyAppend()
     if g:with_x11 == 1
