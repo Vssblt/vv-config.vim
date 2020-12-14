@@ -7,6 +7,8 @@
 """"""""""""""""""""""""""""""
 map \ <leader>
 
+tnoremap <C-h> <C-\><C-n>
+
 noremap <c-h> b
 noremap <c-s> w
 
@@ -73,20 +75,20 @@ noremap > .
 noremap < ,
 
 function! CopyAppend()
-    if g:with_x11 == 1
-        let @*=@*.getline('.')."\n"
-    else
-        let @" .= getline('.')."\n"
-    endif
+	if g:with_x11 == 1
+		let @*=@*.getline('.')."\n"
+	else
+		let @" .= getline('.')."\n"
+	endif
 endfunction
 
 function! CutAppend()
-    if g:with_x11 == 1
-        let @*=@*.getline('.')."\n"
-    else
-        let @" .= getline('.')."\n"
-    endif
-    execute "delete _"
+	if g:with_x11 == 1
+		let @*=@*.getline('.')."\n"
+	else
+		let @" .= getline('.')."\n"
+	endif
+	execute "delete _"
 endfunction
 
 nnoremap <leader>yy :call CopyAppend()<CR>
@@ -119,7 +121,7 @@ inoremap  <C-W>
 """"""""""""""""""""""""""""""
 " make 
 """"""""""""""""""""""""""""""
-nnoremap <F4> :Make<CR>
+nnoremap <F4> :Make -j `nproc`<CR>
 nnoremap <F2> :Copen<CR>
 
 """"""""""""""""""""""""""""""
@@ -162,11 +164,14 @@ inoremap <silent><expr> <NUL> coc#refresh()
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-nnoremap <leader><CR> :call CocAction('jumpDefinition', 'drop')<CR>
-vnoremap <leader><CR> :call CocAction('jumpDefinition', 'drop')<CR>
+nnoremap <leader><Tab> :call CocAction('jumpDefinition', 'drop')<CR>
+vnoremap <leader><Tab> :call CocAction('jumpDefinition', 'drop')<CR>
 
-nmap bn <Plug>(coc-diagnostic-next-error)
-nmap bp <Plug>(coc-diagnostic-prev-error)
+nnoremap <leader><CR> :call CocAction('jumpDefinition', 'split')<CR>
+vnoremap <leader><CR> :call CocAction('jumpDefinition', 'split')<CR>
+
+nmap bnn <Plug>(coc-diagnostic-next-error)
+nmap bpp <Plug>(coc-diagnostic-prev-error)
 
 nmap bna <Plug>(coc-diagnostic-next)
 nmap bpa <Plug>(coc-diagnostic-prev)
@@ -282,3 +287,7 @@ let g:VM_maps["Enlarge"]                     = "\+"
 let g:VM_maps["Toggle Block"]                = '\<BS>'
 let g:VM_maps["Toggle Single Region"]        = '\<CR>'
 let g:VM_maps["Toggle Multiline"]            = '\M'
+
+""" Customize pmenu colors
+hi Pmenu ctermfg=white ctermbg=black guibg=DarkGrey
+

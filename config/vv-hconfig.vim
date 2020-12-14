@@ -67,6 +67,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 let NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize = 50
 
 
 """"""""""""""""""""""""""""""
@@ -242,13 +243,14 @@ execute ":command! HConfigV :e " g:plugindir.'/config/vv-hconfig.vim'
 execute ":command! TConfigV :e " g:plugindir.'/config/temp_config.vim'
 execute ":command! DvorakSettingsV :e " g:plugindir.'/plugin/vv-layout-dvorak.vim'
 execute ":command! QwertySettingsV :e " g:plugindir.'/plugin/vv-layout-qwerty.vim'
-execute ":command! FHide :FloatermHide"
-execute ":command! FNext :FloatermNext"
-execute ":command! FFirst :FloatermFirst"
-execute ":command! FKill :FloatermKill"
-execute ":command! FLast :FloatermLast"
-execute ":command! FPrev :FloatermPrev"
-execute ":command! FShow :FloatermShow"
+
+command! -nargs=0 FHide FloatermHide
+command! -nargs=0 FNext FloatermNext
+command! -nargs=0 FFirst FloatermFirst
+command! -nargs=0 FKill FloatermKill
+command! -nargs=0 FLast FloatermLast
+command! -nargs=0 FPrev FloatermPrev
+command! -nargs=0 FShow FloatermShow
 
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
@@ -267,6 +269,15 @@ let g:surround_no_mappings = 1
 """"""""""""""""""""""""""""""
 let g:dispatch_quickfix_height=20
 let g:dispatch_tmux_height=20
+
+
+""""""""""""""""""""""""""""""
+" LookupFile
+""""""""""""""""""""""""""""""
+let g:LookupFile_MinPatLength = 2
+let g:LookupFile_PreservePatternHistory = 1
+let g:LookupFile_AlwaysAcceptFirst = 1
+let g:LookupFile_PreserveLastPattern = 0
 
 
 """"""""""""""""""""""""""""""
