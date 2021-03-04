@@ -27,12 +27,12 @@ set signcolumn=yes
 
 set undofile
 
-if !isdirectory(g:undoDirPath)
-    call mkdir(g:undoDirPath, "p")
-endif
-
-let &undodir=g:undoDirPath
-
+"if !isdirectory(g:undoDirPath)
+"    call mkdir(g:undoDirPath, "p")
+"endif
+"
+"let &undodir=g:undoDirPath
+"
 "You can use [Ctrl + x] to complate the code. 
 filetype plugin indent on
 set completeopt=longest,menu
@@ -287,3 +287,9 @@ if filereadable(g:plugindir."/config/temp_config.vim")
     execute ':source' g:plugindir."/config/temp_config.vim"
 endif
 
+""""""""""""""""""""""""""""""
+" vim-glaive settings
+""""""""""""""""""""""""""""""
+let g:myplugin_enablefeature = 1
+let g:myplugin_defaultdir = $HOME
+let g:myplugin_weirdmode = 'm'

@@ -8,7 +8,7 @@ let mapleader=','
 let g:VM_leader='.'
 let g:plugindir = expand('<sfile>:p:h:h')
 let g:tagsPath = g:plugindir."/tags"
-let g:undoDirPath= g:plugindir."/undodir"
+"let g:undoDirPath= g:plugindir."/undodir"
 let g:vvimrc_name=".vvimrc"
 let g:with_x11 = 0
 execute ':source' g:plugindir."/config/vv-hconfig.vim"
@@ -63,8 +63,6 @@ let g:floaterm_autoclose = 1
 let g:floaterm_height = 0.9
 let g:floaterm_widget = 0.9
 
-
-
 """"""""""""""""""""""""""""""
 " vim-plug settings
 " 需要安装环境 python, npm, node-js, instant-markdown-d
@@ -78,7 +76,7 @@ call plug#begin('~/.vim/plugged')
     "
     Plug 'ryanoasis/vim-devicons'
 
-    Plug 'auxiliary/vim-layout'
+    "Plug 'auxiliary/vim-layout'
 
     Plug 'kshenoy/vim-signature'
 
@@ -235,7 +233,7 @@ call plug#begin('~/.vim/plugged')
     "Q
     "delete current cursor
 
-    Plug 'sjl/gundo.vim'
+    "Plug 'sjl/gundo.vim'
     "<leader>c
     "open undolist
 
@@ -349,7 +347,13 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'srstevenson/vim-picker'
 
-    Plug 'chiel92/vim-autoformat'
+    Plug 'google/vim-maktaba'
+
+    Plug 'google/vim-codefmt'
+
+    Plug 'artoj/qmake-syntax-vim'
+
+    Plug 'google/vim-glaive'
 
     Plug 'honza/vim-snippets'
     "custom auto complete.
@@ -391,6 +395,7 @@ let g:coc_global_extensions = [
     \ 'coc-cmake',
     \ 'coc-vimlsp',
     \ 'coc-highlight', 
+    \ 'coc-html'
   \ ]
 
     "\ 'coc-html',
@@ -398,3 +403,27 @@ let g:coc_global_extensions = [
 " other settings
 """"""""""""""""""""""""""""""
 execute ":colorscheme darkblue2"
+
+""""""""""""""""""""""""""""""
+" vim-glaive settings
+""""""""""""""""""""""""""""""
+call glaive#Install()
+Glaive codefmt clang_format_executable='clang-format-11'
+
+""""""""""""""""""""""""""""""
+" vim-codefmt settings
+""""""""""""""""""""""""""""""
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  autocmd FileType rust AutoFormatBuffer rustfmt
+  autocmd FileType vue AutoFormatBuffer prettier
+augroup END
+
