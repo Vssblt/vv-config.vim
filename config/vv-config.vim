@@ -101,6 +101,8 @@ call plug#begin('~/.vim/plugged')
     "this plugin open your browser when you open a markdown file
 
     "****************************************************************************************************************************************************************************************************
+    Plug 'lfv89/vim-interestingwords'
+
     Plug 'Vssblt/leetcode.vim'
     ":LeetCodeList
     "Open Leetcode index
@@ -301,6 +303,8 @@ call plug#begin('~/.vim/plugged')
    ":CocUpdate
    "update coc plugin
    "
+   
+   Plug 'jackguo380/vim-lsp-cxx-highlight'
 
     Plug 'voldikss/vim-translator'
     ":Translate/TranslateX/TranslateW/TranslateH/TranslateL/TranslateR

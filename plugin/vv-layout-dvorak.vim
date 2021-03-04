@@ -44,8 +44,6 @@ noremap R :source $MYVIMRC<CR>
 
 noremap <leader>- $
 noremap <leader>d ^
-noremap <leader>b [[
-noremap <leader>m ]]
 
 nmap <leader>uh <Plug>(easymotion-linebackward)
 nmap <leader>ut <Plug>(easymotion-k)

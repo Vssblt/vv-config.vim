@@ -38,6 +38,19 @@ filetype plugin indent on
 set completeopt=longest,menu
 
 """"""""""""""""""""""""""""""
+" vim-interestingwords settings
+""""""""""""""""""""""""""""""
+let g:interestingWordsDefaultMappings = 0
+nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
+nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+let g:interestingWordsRandomiseColors = 1
+let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222', '1', '2', '3', '4', '5']
+
+"nnoremap <silent> n :call WordNavigation(1)<cr>
+"nnoremap <silent> N :call WordNavigation(0)<cr>
+
+""""""""""""""""""""""""""""""
 " vim-visual-multi settings
 """"""""""""""""""""""""""""""
 let g:VM_default_mappings = 0
@@ -120,29 +133,6 @@ let g:NERDTreeExtensionHighlightColor['h'] = s:blue " sets the color of h files 
 let g:NERDTreeExtensionHighlightColor['c'] = s:green " sets the color of c files to blue
 let g:NERDTreeExtensionHighlightColor['cpp'] = s:green " sets the color of cpp files to blue
 let g:NERDTreeExtensionHighlightColor['c++'] = s:green " sets the color of c++ files to blue
-
-
-""""""""""""""""""""""""""""""
-" Highlight Class and Function names
-""""""""""""""""""""""""""""""
-syn match cCustomParen "(" contains=cParen,cCppParen
-syn match cCustomScope "::"
-syn match cCustomClass "\w\+\s*::" contains=cCustomScope
-syn match cCustomFunc "\w\+\s*(" contains=cCustomParen
-syn match cCustomSymbol "[\{\}\(\)\[\]]"
-syn match cCustomCalcu "[&+\-*/=<>]"
-syn match cCustomComment "//[[:print:][:tab:]]*$" "contains=ctesttest
-syn match cCustomComment2 "/*[[:print:][:tab:]]{-}*/" "contains=ctesttest
-syn match cCustomComment3 "/*_[[:print:][:tab:]]{-}*/" "contains=ctesttest
-
-hi cCustomSymbol gui=NONE cterm=bold ctermfg=yellow
-hi cCustomCalcu gui=NONE cterm=bold ctermfg=yellow
-hi cCustomClass gui=NONE cterm=bold ctermfg=78
-hi cCustomFunc gui=NONE cterm=bold ctermfg=196 "9
-hi cCustomComment gui=NONE cterm=bold ctermfg=73 "154
-hi cCustomComment2 gui=NONE cterm=bold ctermfg=73 "154
-hi cCustomComment3 gui=NONE cterm=bold ctermfg=73 "154
-
 
 """"""""""""""""""""""""""""""
 " vim-devicons settings
