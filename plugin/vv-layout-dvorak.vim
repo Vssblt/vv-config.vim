@@ -20,8 +20,13 @@ noremap T K
 noremap S L
 noremap N J
 
-noremap l n
-noremap L N
+nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
+nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+nnoremap <silent> l :call WordNavigation(1)<cr>
+nnoremap <silent> L :call WordNavigation(0)<cr>
+"noremap l n
+"noremap L N
 
 noremap j 12<c-y>
 noremap k 12<c-e>

@@ -22,8 +22,8 @@ set mouse=v
 set t_Co=256
 set fillchars=stl:\ 
 set backspace=indent,eol,start
-set foldcolumn=1
-set signcolumn=yes
+set foldcolumn=0
+set signcolumn=no
 
 set undofile
 
@@ -41,14 +41,8 @@ set completeopt=longest,menu
 " vim-interestingwords settings
 """"""""""""""""""""""""""""""
 let g:interestingWordsDefaultMappings = 0
-nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
-vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
-nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 let g:interestingWordsRandomiseColors = 1
-let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222', '1', '2', '3', '4', '5']
-
-"nnoremap <silent> n :call WordNavigation(1)<cr>
-"nnoremap <silent> N :call WordNavigation(0)<cr>
+let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222', '1', '2', '3', '4', '6', '64', '99']
 
 """"""""""""""""""""""""""""""
 " vim-visual-multi settings

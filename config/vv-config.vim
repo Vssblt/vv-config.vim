@@ -11,6 +11,8 @@ let g:tagsPath = g:plugindir."/tags"
 "let g:undoDirPath= g:plugindir."/undodir"
 let g:vvimrc_name=".vvimrc"
 let g:with_x11 = 0
+set tabstop=2
+set sw=2
 execute ':source' g:plugindir."/config/vv-hconfig.vim"
 
 """"""""""""""""""""""""""""""
@@ -100,8 +102,21 @@ call plug#begin('~/.vim/plugged')
     Plug 'mzlogin/vim-markdown-toc'  
     "this plugin open your browser when you open a markdown file
 
+    Plug 'jackguo380/vim-lsp-cxx-highlight'
+
     "****************************************************************************************************************************************************************************************************
     Plug 'lfv89/vim-interestingwords'
+    "<leader>k
+    "highlight current word
+    "
+    "<leader>K
+    "clear highlight
+    "
+    "l
+    "Navigate highlighted words
+    "
+    "L
+    "Navigate highlighted words
 
     Plug 'Vssblt/leetcode.vim'
     ":LeetCodeList
@@ -171,6 +186,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     ":NERDTreeToggle
+    "Open dir tree
+    "
+    "<leader>q
+    "Opendir tree
 
     Plug 'easymotion/vim-easymotion'
     "<leader>.
@@ -185,7 +204,7 @@ call plug#begin('~/.vim/plugged')
     "<leader>-
     "go end in current line
     "
-    "<leader>h/t/n/s
+    "<leader>uh/<leader>ut/<leader>un/<leader>us
     "go somewhere
 
     Plug 't9md/vim-choosewin'
@@ -235,7 +254,7 @@ call plug#begin('~/.vim/plugged')
     "Q
     "delete current cursor
 
-    "Plug 'sjl/gundo.vim'
+    Plug 'sjl/gundo.vim'
     "<leader>c
     "open undolist
 
@@ -275,6 +294,7 @@ call plug#begin('~/.vim/plugged')
     "show last floaterm window
     "
     ":FloatermShow        rename: FShow
+    "<leader><leader>s
     "show current floaterm window
     "
     "<C-D>
@@ -283,28 +303,26 @@ call plug#begin('~/.vim/plugged')
     Plug 'flazz/vim-colorschemes'
     ":colorscheme [color theme]
 
-    Plug 'francoiscabrol/ranger.vim'
+    "Plug 'francoiscabrol/ranger.vim'
     "<leader>o
     "open a file in new tab.
 
-   Plug 'neoclide/coc.nvim', {'branch' : 'release'}
-   ":CocInstall
-   "install coc plugin
-   "
-   ":CocConfig
-   "config coc plugin
-   "
-   ":CocCommand
-   "run coc command
-   "
-   ":CocDisable/CocEnable
-   "disable or enable coc plugin
-   "
-   ":CocUpdate
-   "update coc plugin
-   "
-   
-   Plug 'jackguo380/vim-lsp-cxx-highlight'
+    Plug 'neoclide/coc.nvim', {'branch' : 'release'}
+    ":CocInstall
+    "install coc plugin
+    "
+    ":CocConfig
+    "config coc plugin
+    "
+    ":CocCommand
+    "run coc command
+    "
+    ":CocDisable/CocEnable
+    "disable or enable coc plugin
+    "
+    ":CocUpdate
+    "update coc plugin
+    "
 
     Plug 'voldikss/vim-translator'
     ":Translate/TranslateX/TranslateW/TranslateH/TranslateL/TranslateR
@@ -347,7 +365,7 @@ call plug#begin('~/.vim/plugged')
     "****************************************************************************************************************************************************************************************************
     "Other pluins.
 
-    Plug 'airblade/vim-gitgutter'
+    "Plug 'airblade/vim-gitgutter'
 
     Plug 'srstevenson/vim-picker'
 
