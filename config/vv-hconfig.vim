@@ -22,10 +22,15 @@ set mouse=v
 set t_Co=256
 set fillchars=stl:\ 
 set backspace=indent,eol,start
-set foldcolumn=0
-set signcolumn=no
+set foldcolumn=1
+set signcolumn=yes
 
 set undofile
+
+aug QFClose
+  au!
+  au WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
+aug END
 
 "if !isdirectory(g:undoDirPath)
 "    call mkdir(g:undoDirPath, "p")
@@ -227,6 +232,7 @@ execute ":command! HConfigV :e " g:plugindir.'/config/vv-hconfig.vim'
 execute ":command! TConfigV :e " g:plugindir.'/config/temp_config.vim'
 execute ":command! DvorakSettingsV :e " g:plugindir.'/plugin/vv-layout-dvorak.vim'
 execute ":command! QwertySettingsV :e " g:plugindir.'/plugin/vv-layout-qwerty.vim'
+execute "command! Bda :bufdo bwipeout"
 
 command! -nargs=0 FHide FloatermHide
 command! -nargs=0 FNext FloatermNext

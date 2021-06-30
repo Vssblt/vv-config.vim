@@ -12,6 +12,11 @@ tnoremap <C-h> <C-\><C-n>
 noremap <c-h> b
 noremap <c-s> w
 
+noremap h h
+noremap t k
+noremap n j
+noremap s l
+
 noremap t k
 noremap n j
 noremap s l
@@ -33,7 +38,8 @@ noremap k 12<c-e>
 
 noremap b c
 noremap r :bnext<CR>
-noremap c :bprev<CR>
+nmap r <Plug>AirlineSelectNextTab
+nmap c <Plug>AirlineSelectPrevTab
 
 noremap <ScrollWheelUp> <C-Y><C-Y><C-Y><C-Y>
 noremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>

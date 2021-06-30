@@ -207,7 +207,7 @@ call plug#begin('~/.vim/plugged')
     "<leader>uh/<leader>ut/<leader>un/<leader>us
     "go somewhere
 
-    Plug 't9md/vim-choosewin'
+    "Plug 't9md/vim-choosewin'
     "type . to switch window
 
     Plug 'Vssblt/a.vim'
@@ -365,7 +365,7 @@ call plug#begin('~/.vim/plugged')
     "****************************************************************************************************************************************************************************************************
     "Other pluins.
 
-    "Plug 'airblade/vim-gitgutter'
+    Plug 'airblade/vim-gitgutter'
 
     Plug 'srstevenson/vim-picker'
 
@@ -399,7 +399,7 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'Vssblt/vim-linemovement'
 
-    Plug 'puremourning/vimspector'
+    "Plug 'puremourning/vimspector'
 
     Plug 'tpope/vim-surround'
     "
@@ -431,6 +431,7 @@ execute ":colorscheme darkblue2"
 """"""""""""""""""""""""""""""
 call glaive#Install()
 Glaive codefmt clang_format_executable='clang-format-11'
+Glaive codefmt google_java_executable="java -jar /opt/google-java-format/google-java-format-1.10.0-all-deps.jar"
 
 """"""""""""""""""""""""""""""
 " vim-codefmt settings
