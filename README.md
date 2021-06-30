@@ -16,7 +16,7 @@
 
 ## 依赖：
 
-插件依赖 vim[版本: 8.2.191+], nodejs, python, instant-markdown-d, npm, vim-plug, fzf[可选], ranger[可选]
+插件依赖 vim[版本: 8.2.191+], nodejs, python, instant-markdown-d, npm, vim-plug, google-java-format, fzf[可选], ranger[可选]
 
 ## 关于键盘布局：
 
