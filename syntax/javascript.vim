@@ -403,7 +403,7 @@ syn match cCustomCalcu "[\{\}\(\)\!\&+\-*/\=\<\>\:\,\;\.\?]"
 syn match cCustomComment "//[[:print:][:tab:]]*$" 
 syn match cCustomComment2 "\/\*\_.[[:print:][:tab:]]\_.\{-}\*\/" 
 syn match cCustomComment3 "\/\*\*\/" 
-syn keyword cCustomKeyword const static dynamic case try catch switch class default enum bool delete instanceof typeof void new in of
+syn keyword cCustomKeyword const static dynamic case try catch switch class default enum bool delete instanceof typeof void new in of var let function for if return
 syn match cCustomCompileCommand "#[a-zA-Z_][0-9A-Za-z_]\+"
 
 hi def link cCustomKeyword Type

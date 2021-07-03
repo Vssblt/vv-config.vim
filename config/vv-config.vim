@@ -338,7 +338,7 @@ call plug#begin('~/.vim/plugged')
     "[ydc]i[",[]{}().<>']
     "copy, delete or change text between the characters.
     
-    Plug 'vim-scripts/lookupfile'
+    "Plug 'vim-scripts/lookupfile'
     "   :LookupFile      Lookup files from tag files. This is a like a fast GNU
     "                    find on name. It can lookup files from any Vim
     "                    compatible tag file (which includes those from ctags),

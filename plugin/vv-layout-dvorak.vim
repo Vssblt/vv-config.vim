@@ -30,8 +30,6 @@ vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
 nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 nnoremap <silent> l :call WordNavigation(1)<cr>
 nnoremap <silent> L :call WordNavigation(0)<cr>
-"noremap l n
-"noremap L N
 
 noremap j 12<c-y>
 noremap k 12<c-e>
@@ -178,6 +176,7 @@ vnoremap <leader><Tab> :call CocAction('jumpDefinition', 'drop')<CR>
 
 nnoremap <leader><CR> :call CocAction('jumpDefinition', 'split')<CR>
 vnoremap <leader><CR> :call CocAction('jumpDefinition', 'split')<CR>
+nmap <leader><space> <Plug>(coc-references)
 
 nmap bnn <Plug>(coc-diagnostic-next-error)
 nmap bpp <Plug>(coc-diagnostic-prev-error)
