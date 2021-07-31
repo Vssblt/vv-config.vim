@@ -33,7 +33,7 @@ let Tlist_Auto_Open = 0
 """"""""""""""""""""""""""""""
 " EasyMotion settings
 """"""""""""""""""""""""""""""
-let g:EasyMotion_keys = "aoeuidhtnscr" "This is used for dvorak keyboard layout, you can change this option if you'r using qwerty layout.
+let g:EasyMotion_keys = "aoeuidhtns',.pyfgcrl;qjkxbmwvz" "This is used for dvorak keyboard layout, you can change this option if you'r using qwerty layout.
 let g:EasyMotion_smartcase = 1
 
 """"""""""""""""""""""""""""""
@@ -63,7 +63,7 @@ let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "i>", "ip"]
 """"""""""""""""""""""""""""""
 let g:floaterm_autoclose = 1
 let g:floaterm_height = 0.9
-let g:floaterm_widget = 0.9
+let g:floaterm_width = 0.9
 
 """"""""""""""""""""""""""""""
 " vim-plug settings
@@ -88,7 +88,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'yianwillis/vimcdoc'
     "vim chinese doc
 
-    Plug 'vim-scripts/fcitx.vim'
+    "Plug 'vim-scripts/fcitx.vim'
+		"Plug 'brglng/vim-im-select'
+		"Plug 'kevinhwang91/vim-ibus-sw'
     
     Plug 'plasticboy/vim-markdown'
     "markdown highlight
