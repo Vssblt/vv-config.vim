@@ -22,7 +22,7 @@ set mouse=v
 set t_Co=256
 set fillchars=stl:\ 
 set backspace=indent,eol,start
-set foldcolumn=1
+"set foldcolumn=1
 set signcolumn=yes
 
 set undofile
@@ -41,6 +41,8 @@ aug END
 "You can use [Ctrl + x] to complate the code. 
 filetype plugin indent on
 set completeopt=longest,menu
+
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
 """"""""""""""""""""""""""""""
 " vim-interestingwords settings
@@ -167,6 +169,7 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
+let g:airline_powerline_fonts=1
 let g:airline_symbols.linenr = "CL" " current line
 let g:airline_symbols.whitespace = '|'
 let g:airline_symbols.maxlinenr = 'Ml' "maxline
@@ -227,9 +230,10 @@ endfunction
 call Load_vvimrc(expand("%:p:h"))
 
 
-execute ":command! ConfigV :e " g:plugindir.'/config/vv-config.vim'
-execute ":command! HConfigV :e " g:plugindir.'/config/vv-hconfig.vim'
-execute ":command! TConfigV :e " g:plugindir.'/config/temp_config.vim'
+execute ":command! VConfig :e " g:plugindir.'/config/vv-config.vim'
+execute ":command! VHConfig :e " g:plugindir.'/config/vv-hconfig.vim'
+execute ":command! VPlugList :e " g:plugindir.'/config/vim-plug-list.vim'
+execute ":command! VTConfig :e " g:plugindir.'/config/temp_config.vim'
 execute ":command! DvorakSettingsV :e " g:plugindir.'/plugin/vv-layout-dvorak.vim'
 execute ":command! QwertySettingsV :e " g:plugindir.'/plugin/vv-layout-qwerty.vim'
 execute "command! Bda :bufdo bwipeout"
@@ -283,3 +287,9 @@ endif
 let g:myplugin_enablefeature = 1
 let g:myplugin_defaultdir = $HOME
 let g:myplugin_weirdmode = 'm'
+
+""""""""""""""""""""""""""""""
+" fzf.vim settings
+""""""""""""""""""""""""""""""
+let g:fzf_preview_window = ['up:80%:hidden', 'ctrl-/']
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.75 } } 

@@ -7,6 +7,8 @@
 """"""""""""""""""""""""""""""
 "map \ <leader>
 
+nnoremap <leader>b :bp\|sp\|bn\|bd<cr>
+
 tnoremap <C-h> <C-\><C-n>
 
 noremap <c-h> b
@@ -20,6 +22,8 @@ noremap s l
 noremap t k
 noremap n j
 noremap s l
+noremap <c-n> jjj
+noremap <c-t> kkk
 
 noremap T K
 noremap S L
@@ -58,20 +62,20 @@ nmap <leader>uh <Plug>(easymotion-linebackward)
 nmap <leader>ut <Plug>(easymotion-k)
 nmap <leader>un <Plug>(easymotion-j)
 nmap <leader>us <Plug>(easymotion-lineforward)
-nmap <leader>. <Plug>(easymotion-s)
-nmap <leader><leader>. <Plug>(easymotion-sn)
+nmap <leader><leader>. <Plug>(easymotion-s)
+nmap <leader>. <Plug>(easymotion-sn)
 vmap <leader>uh <Plug>(easymotion-linebackward)
 vmap <leader>ut <Plug>(easymotion-k)
 vmap <leader>un <Plug>(easymotion-j)
 vmap <leader>us <Plug>(easymotion-lineforward)
-vmap <leader>. <Plug>(easymotion-s)
-vmap <leader><leader>. <Plug>(easymotion-sn)
+vmap <leader><leader>. <Plug>(easymotion-s)
+vmap <leader>. <Plug>(easymotion-sn)
 omap <leader>uh <Plug>(easymotion-linebackward)
 omap <leader>ut <Plug>(easymotion-k)
 omap <leader>un <Plug>(easymotion-j)
 omap <leader>us <Plug>(easymotion-lineforward)
-omap <leader>. <Plug>(easymotion-s)
-omap <leader><leader>. <Plug>(easymotion-sn)
+omap <leader><leader>. <Plug>(easymotion-s)
+omap <leader>. <Plug>(easymotion-sn)
 
 noremap <leader>; :TlistToggle<CR>
 noremap <leader>q :NERDTreeToggle<CR>
@@ -151,6 +155,14 @@ nmap <leader>e :Files<CR>
 omap <leader>e :Files<CR>
 vmap <leader>e :Files<CR>
 
+nmap <leader>o :GFiles<CR>
+omap <leader>o :GFiles<CR>
+vmap <leader>o :GFiles<CR>
+
+nmap <leader><leader>o :GFiles?<CR>
+omap <leader><leader>o :GFiles?<CR>
+vmap <leader><leader>o :GFiles?<CR>
+
 """"""""""""""""""""""""""""""
 " coc
 """"""""""""""""""""""""""""""
@@ -224,8 +236,8 @@ let g:VM_maps['c'] = 'b'
 let g:VM_maps['C'] = 'B'
 
 let g:VM_maps["Select Operator"] = 'gs'
-let g:VM_maps['Find Under']                  = '<C-n>'
-let g:VM_maps['Find Subword Under']          = '<C-n>'
+let g:VM_maps['Find Under']                  = '<C-l>'
+let g:VM_maps['Find Subword Under']          = '<C-l>'
 let g:VM_maps["Select All"]                  = '\A' 
 let g:VM_maps["Start Regex Search"]          = '\/'
 let g:VM_maps["Add Cursor Down"]             = '<C-Down>'
