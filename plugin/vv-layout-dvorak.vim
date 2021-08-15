@@ -69,6 +69,23 @@ noremap <leader>d ^
 
 nnoremap <space><space> <Esc>/<++><CR>:nohlsearch<CR>4xi
 
+" toggle
+noremap <space>t za  
+
+" create
+noremap <space>c zf  
+
+" delete
+noremap <space>d zd
+
+" next
+noremap <space>k zj
+
+" prev
+noremap <space>j zk
+
+noremap <space>y :<C-u>CocList -A --normal yank<cr>
+
 nmap <leader>uh <Plug>(easymotion-linebackward)
 nmap <leader>ut <Plug>(easymotion-k)
 nmap <leader>un <Plug>(easymotion-j)
@@ -201,17 +218,15 @@ nnoremap <leader><CR> :call CocAction('jumpDefinition', 'split')<CR>
 vnoremap <leader><CR> :call CocAction('jumpDefinition', 'split')<CR>
 nmap <leader><space> <Plug>(coc-references)
 
-nmap bnn <Plug>(coc-diagnostic-next-error)
-nmap bpp <Plug>(coc-diagnostic-prev-error)
-
-nmap bna <Plug>(coc-diagnostic-next)
-nmap bpa <Plug>(coc-diagnostic-prev)
-
-nmap bii <Plug>(coc-diagnostic-info)
-nmap b== <Plug>(coc-format-selected)
-vmap b== <Plug>(coc-format-selected)
-
-nmap b=a <Plug>(coc-format)
+nmap gn <Plug>(coc-diagnostic-next-error)
+nmap gp <Plug>(coc-diagnostic-prev-error)
+nmap gi <Plug>(coc-diagnostic-info)
+nmap g= <Plug>(coc-format-selected)
+vmap g= <Plug>(coc-format-selected)
+nmap ga= <Plug>(coc-format)
+nmap gr <Plug>(coc-rename)
+"nmap bna <Plug>(coc-diagnostic-next)
+"nmap bpa <Plug>(coc-diagnostic-prev)
 
 """"""""""""""""""""""""""""""
 " vim-linemovement

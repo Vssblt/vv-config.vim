@@ -76,7 +76,8 @@ let g:coc_global_extensions = [
     \ 'coc-cmake',
     \ 'coc-vimlsp',
     \ 'coc-highlight',
-    \ 'coc-html'
+    \ 'coc-html',
+    \ 'coc-yank',
   \ ]
 
 """"""""""""""""""""""""""""""
