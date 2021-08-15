@@ -75,15 +75,15 @@ let g:coc_global_extensions = [
     \ 'coc-clangd',
     \ 'coc-cmake',
     \ 'coc-vimlsp',
-    \ 'coc-highlight', 
+    \ 'coc-highlight',
     \ 'coc-html'
   \ ]
 
-    "\ 'coc-html',
 """"""""""""""""""""""""""""""
 " other settings
 """"""""""""""""""""""""""""""
 execute ":colorscheme darkblue2"
+highlight LineNr term=bold cterm=NONE ctermfg=Grey ctermbg=NONE gui=NONE guifg=Grey guibg=NONE
 
 """"""""""""""""""""""""""""""
 " vim-glaive settings

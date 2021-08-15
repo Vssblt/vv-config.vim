@@ -1,3 +1,9 @@
+"         _                              __ _       
+"  __   _(_)_ __ ___     ___ ___  _ __  / _(_) __ _ 
+"  \ \ / / | '_ ` _ \   / __/ _ \| '_ \| |_| |/ _` |
+"   \ V /| | | | | | | | (_| (_) | | | |  _| | (_| |
+"    \_/ |_|_| |_| |_|  \___\___/|_| |_|_| |_|\__, |
+"                                             |___/ 
 "键盘上有很多反人类键，例如dvorak键位下的 'f'，'x', 'l', '/', '='，这些按键要么在快速
 "输入时需要大范围移动手指（f, x），要么频繁使用小指（l, /, =, 三个按键全是一个小指），
 "映射时应尽量避免使这些按键
@@ -25,9 +31,12 @@ noremap s l
 noremap <c-n> jjj
 noremap <c-t> kkk
 
-noremap T K
+noremap T :Marks<CR>
 noremap S L
 noremap N J
+
+nnoremap - -
+nnoremap + +
 
 nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
 vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
@@ -57,6 +66,8 @@ noremap R :source $MYVIMRC<CR>
 
 noremap <leader>- $
 noremap <leader>d ^
+
+nnoremap <space><space> <Esc>/<++><CR>:nohlsearch<CR>4xi
 
 nmap <leader>uh <Plug>(easymotion-linebackward)
 nmap <leader>ut <Plug>(easymotion-k)

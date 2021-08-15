@@ -23,7 +23,9 @@ set t_Co=256
 set fillchars=stl:\ 
 set backspace=indent,eol,start
 "set foldcolumn=1
-set signcolumn=yes
+set signcolumn=number
+set numberwidth=1
+set scrolloff=6
 
 set undofile
 
