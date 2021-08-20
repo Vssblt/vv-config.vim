@@ -34,6 +34,8 @@ aug QFClose
   au WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
 aug END
 
+let g:last_buffer = []
+
 "if !isdirectory(g:undoDirPath)
 "    call mkdir(g:undoDirPath, "p")
 "endif
@@ -294,4 +296,10 @@ let g:myplugin_weirdmode = 'm'
 " fzf.vim settings
 """"""""""""""""""""""""""""""
 let g:fzf_preview_window = ['up:80%:hidden', 'ctrl-/']
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.75 } } 
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.75 } } 
+let g:clockn_enable = 1
+let g:clockn_color = '#000000'
+let g:clockn_winblend = 100
+highlight ClockNormal guifg=#000000
+let g:clockn_to_top = 1
+let g:clockn_to_right = 1

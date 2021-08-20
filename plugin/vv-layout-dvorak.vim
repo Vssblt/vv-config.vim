@@ -13,8 +13,6 @@
 """"""""""""""""""""""""""""""
 "map \ <leader>
 
-nnoremap <leader>b :bp\|sp\|bn\|bd<cr>
-
 tnoremap <C-h> <C-\><C-n>
 
 noremap <c-h> b
@@ -51,6 +49,7 @@ noremap b c
 noremap r :bnext<CR>
 nmap r <Plug>AirlineSelectNextTab
 nmap c <Plug>AirlineSelectPrevTab
+nmap <leader>b :b #<CR>:sp<CR>:b #<CR>:bd<cr>
 
 noremap <ScrollWheelUp> <C-Y><C-Y><C-Y><C-Y>
 noremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
