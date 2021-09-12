@@ -140,7 +140,7 @@ call plug#begin('~/.vim/plugged')
     "<leader>uh/<leader>ut/<leader>un/<leader>us
     "go somewhere
 
-    Plug 't9md/vim-choosewin'
+    Plug 'Vssblt/vim-choosewin'
     "type . to switch window
 
     Plug 'Vssblt/a.vim'
