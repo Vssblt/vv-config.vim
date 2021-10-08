@@ -339,6 +339,6 @@ call plug#begin('~/.vim/plugged')
 
     "Plug 'SirVer/ultisnips'
     Plug 'iamcco/sran.nvim', { 'do': { -> sran#util#install() } }
-    Plug 'iamcco/clock.nvim'
+    "Plug 'iamcco/clock.nvim'
 
 call plug#end()
