@@ -38,6 +38,19 @@ call plug#begin('~/.vim/plugged')
     Plug 'jackguo380/vim-lsp-cxx-highlight'
 
     "****************************************************************************************************************************************************************************************************
+    Plug 'lambdalisue/suda.vim'
+		" Re-open a current file with sudo
+    " :SudaRead
+    
+    " Open /etc/sudoers with sudo
+    " :SudaRead /etc/sudoers
+    "
+    " Forcedly save a current file with sudo
+    " :SudaWrite
+    
+    " Write contents to /etc/profile
+    " :SudaWrite /etc/profile
+
     Plug 'lfv89/vim-interestingwords'
     "<leader>k
     "highlight current word
