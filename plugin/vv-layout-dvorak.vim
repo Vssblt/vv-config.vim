@@ -26,8 +26,8 @@ noremap s l
 noremap t k
 noremap n j
 noremap s l
-noremap <c-n> jjj
-noremap <c-t> kkk
+noremap <c-n> jj
+noremap <c-t> kk
 
 noremap T :Marks<CR>
 noremap S L
@@ -49,7 +49,7 @@ noremap b c
 noremap r :bnext<CR>
 nmap r <Plug>AirlineSelectNextTab
 nmap c <Plug>AirlineSelectPrevTab
-nmap <leader>b :b #<CR>:sp<CR>:b #<CR>:bd<cr>
+nmap <leader>b c:sp<CR>r:bd<cr>
 
 noremap <ScrollWheelUp> <C-Y><C-Y><C-Y><C-Y>
 noremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
@@ -141,6 +141,7 @@ nnoremap <Leader>C :set cursorline! cursorcolumn!<CR>
 
 nnoremap <leader>/ VHoL<Esc>``/\%V
 nnoremap <leader>* VHoL<Esc>``/\%V<C-r><C-w><CR>
+nnoremap # :b#<CR>
 
 """"""""""""""""""""""""""""""
 " Floaterm
@@ -335,4 +336,3 @@ let g:VM_maps["Toggle Multiline"]            = '\M'
 
 """ Customize pmenu colors
 hi Pmenu ctermfg=white ctermbg=black guibg=DarkGrey
-

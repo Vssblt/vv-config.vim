@@ -83,7 +83,7 @@ let g:coc_global_extensions = [
 """"""""""""""""""""""""""""""
 " other settings
 """"""""""""""""""""""""""""""
-execute ":colorscheme darkblue2"
+execute ":colorscheme sonokai"
 highlight LineNr term=bold cterm=NONE ctermfg=Grey ctermbg=NONE gui=NONE guifg=Grey guibg=NONE
 
 """"""""""""""""""""""""""""""

@@ -47,6 +47,8 @@ filetype plugin indent on
 set completeopt=longest,menu
 
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+packadd termdebug
+autocmd filetype cpp nnoremap <F5> :Termdebug<CR> <c-w>2j<c-w>L
 
 """"""""""""""""""""""""""""""
 " vim-interestingwords settings
@@ -69,7 +71,8 @@ let NERDTreeMapOpenInTabSilent='<leader>S'
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 let NERDTreeShowLineNumbers=1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && getwininfo(win_getid())[0]['quickfix']) | q | endif
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.swp']
 let g:NERDTreeGitStatusIndicatorMapCustom = {

@@ -298,7 +298,10 @@ call plug#begin('~/.vim/plugged')
     "****************************************************************************************************************************************************************************************************
     "Other pluins.
 
-    Plug 'airblade/vim-gitgutter'
+    "Plug 'airblade/vim-gitgutter'
+		
+    Plug 'sainnhe/sonokai'
+		"colorscheme
 
     Plug 'srstevenson/vim-picker'
 
@@ -338,7 +341,9 @@ call plug#begin('~/.vim/plugged')
     "
 
     "Plug 'SirVer/ultisnips'
-    Plug 'iamcco/sran.nvim', { 'do': { -> sran#util#install() } }
-    Plug 'iamcco/clock.nvim'
+    "Plug 'iamcco/sran.nvim', { 'do': { -> sran#util#install() } }
+    "Plug 'iamcco/clock.nvim'
+
+    "Plug 'h-youhei/vim-ibus'
 
 call plug#end()
