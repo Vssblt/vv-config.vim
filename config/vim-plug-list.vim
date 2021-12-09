@@ -35,7 +35,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'mzlogin/vim-markdown-toc'  
     "this plugin open your browser when you open a markdown file
 
-    Plug 'jackguo380/vim-lsp-cxx-highlight'
+    "Plug 'jackguo380/vim-lsp-cxx-highlight'
 
     "****************************************************************************************************************************************************************************************************
     Plug 'lambdalisue/suda.vim'

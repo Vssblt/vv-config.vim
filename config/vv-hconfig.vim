@@ -157,6 +157,9 @@ let g:webdevicons_enable_airline_tabline = 1
 "adding to vim-airline's statusline
 let g:webdevicons_enable_airline_statusline = 1
 
+"set highlight cached
+let g:airline_highlighting_cache = 1
+
 
 """"""""""""""""""""""""""""""
 " airline settings
