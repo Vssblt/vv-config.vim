@@ -110,3 +110,6 @@ augroup autoformat_settings
   autocmd FileType vue AutoFormatBuffer prettier
 augroup END
 
+let g:termdebug_wide=160
+let g:termdebug_disasm_window=17
+let g:termdebug_new_tab = 1

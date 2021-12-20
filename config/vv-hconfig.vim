@@ -7,6 +7,7 @@ set laststatus=2
 set showtabline=2
 "set rnu
 set nu
+set relativenumber
 set encoding=utf8
 set fileencodings=ucs-bom,utf8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set hlsearch 
@@ -47,8 +48,8 @@ filetype plugin indent on
 set completeopt=longest,menu
 
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-packadd termdebug
-autocmd filetype cpp nnoremap <F5> :Termdebug<CR> <c-w>2j<c-w>L
+"packadd termdebug
+"autocmd filetype cpp nnoremap <F5> :Termdebug<CR> <c-w>2j<c-w>L
 
 """"""""""""""""""""""""""""""
 " vim-interestingwords settings

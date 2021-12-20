@@ -2,7 +2,7 @@
 " vim-plug settings
 " 需要安装环境 python, npm, node-js, instant-markdown-d
 """"""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
     Plug 'Vssblt/vv-config.vim'
 
@@ -10,8 +10,6 @@ call plug#begin('~/.vim/plugged')
     "Those plugins take effect automatically.
     "
     Plug 'ryanoasis/vim-devicons'
-
-    "Plug 'auxiliary/vim-layout'
 
     Plug 'kshenoy/vim-signature'
 
@@ -35,7 +33,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'mzlogin/vim-markdown-toc'  
     "this plugin open your browser when you open a markdown file
 
-    Plug 'jackguo380/vim-lsp-cxx-highlight'
+    "Plug 'jackguo380/vim-lsp-cxx-highlight'
+    "this plugin probely cause slow.
 
     "****************************************************************************************************************************************************************************************************
     Plug 'lambdalisue/suda.vim'
@@ -201,7 +200,7 @@ call plug#begin('~/.vim/plugged')
     "delete current cursor
 
     Plug 'sjl/gundo.vim'
-    "<leader>c
+    "<leader>j
     "open undolist
 
     Plug 'yssl/QFEnter'
@@ -284,35 +283,9 @@ call plug#begin('~/.vim/plugged')
     "[ydc]i[",[]{}().<>']
     "copy, delete or change text between the characters.
     
-    "Plug 'vim-scripts/lookupfile'
-    "   :LookupFile      Lookup files from tag files. This is a like a fast GNU
-    "                    find on name. It can lookup files from any Vim
-    "                    compatible tag file (which includes those from ctags),
-    "                    but at the moment it is advisable to generate
-    "                    specialized tag files using :find command (see
-    "                    |lookupfile-tags|).
-    "   :LUPath          Lookup files from 'path' using |globpath()|. The :find
-    "                    command while being able to lookup files from 'path', it
-    "                    doesn't provide any completion mechanism, and it is
-    "                    clumsy when there are multiple files with the same name.
-    "                    The :find command doesn't even accept a pattern.
-    "   :LUBufs          Lookup loaded files (buffers) using |bufname()|. This is
-    "                    a great addition to whatever buffer-explorer you are
-    "                    using. When there are too many buffers open, this
-    "                    sometimes makes it easy to find the right buffer, by
-    "                    typing part of its name.
-    "   :LUWalk          Lookup files using |glob()|. This works like the Emacs
-    "                    ido.el, allowing you to walk up and down a path looking
-    "                    for files. If you use the filename completion with :edit
-    "                    command, then you will find this a lot more convenient
-    "                    and faster to use.
-    "   :LUArgs          Lookup files from |:args| list.
-
-    "****************************************************************************************************************************************************************************************************
+    "*****************************************************************************
     "Other pluins.
 
-    "Plug 'airblade/vim-gitgutter'
-		
     Plug 'sainnhe/sonokai'
 		"colorscheme
 
@@ -348,15 +321,7 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'Vssblt/vim-linemovement'
 
-    "Plug 'puremourning/vimspector'
-
     Plug 'tpope/vim-surround'
     "
-
-    "Plug 'SirVer/ultisnips'
-    "Plug 'iamcco/sran.nvim', { 'do': { -> sran#util#install() } }
-    "Plug 'iamcco/clock.nvim'
-
-    "Plug 'h-youhei/vim-ibus'
 
 call plug#end()
