@@ -167,7 +167,6 @@ function! g:Start_Termdebug()
 		execute ":Termdebug"
 	endif
 endfunction
-nnoremap <F5> :Termdebug<CR>
 nnoremap <F6> :!make -j `nproc`<CR>:call g:Start_Termdebug()<CR>
 
 """"""""""""""""""""""""""""""
@@ -497,13 +496,18 @@ nmap <unique> <tab><tab>dh<CR> 67t
 nmap <unique> <tab><tab>dt<CR> 68t
 nmap <unique> <tab><tab>dn<CR> 69t
 
-nmap <unique> <CR>pe <Plug>(PickerEdit)
-nmap <unique> <CR>ps <Plug>(PickerSplit)
-nmap <unique> <CR>pt <Plug>(PickerTabedit)
-nmap <unique> <CR>pd <Plug>(PickerTabdrop)
-nmap <unique> <CR>pv <Plug>(PickerVsplit)
-nmap <unique> <CR>pb <Plug>(PickerBuffer)
-nmap <unique> <CR>p] <Plug>(PickerTag)
-nmap <unique> <CR>pw <Plug>(PickerStag)
-nmap <unique> <CR>po <Plug>(PickerBufferTag)
-nmap <unique> <CR>ph <Plug>(PickerHelp)
+nmap <unique> <leader>pe <Plug>(PickerEdit)
+nmap <unique> <leader>ps <Plug>(PickerSplit)
+nmap <unique> <leader>pt <Plug>(PickerTabedit)
+nmap <unique> <leader>pd <Plug>(PickerTabdrop)
+nmap <unique> <leader>pv <Plug>(PickerVsplit)
+nmap <unique> <leader>pb <Plug>(PickerBuffer)
+nmap <unique> <leader>p] <Plug>(PickerTag)
+nmap <unique> <leader>pw <Plug>(PickerStag)
+nmap <unique> <leader>po <Plug>(PickerBufferTag)
+nmap <unique> <leader>ph <Plug>(PickerHelp)
+
+nnoremap <CR> :Break<CR>
+nnoremap <leader>r :Run<CR>
+nnoremap <leader>c :Continue<CR>
+

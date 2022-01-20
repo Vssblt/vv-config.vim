@@ -105,12 +105,16 @@ hi default debugBreakpoint term=reverse ctermbg=red guibg=red
 hi default debugBreakpointDisabled term=reverse ctermbg=gray guibg=gray
 
 func s:StartDebug(bang, ...)
+  let g:termdebug_current_buffer = bufname("$")
+  let g:termdebug_current_line = line(".")
   " First argument is the command to debug, second core file or process ID.
   call s:StartDebug_internal({'gdb_args': a:000, 'bang': a:bang})
 endfunc
 
 func s:StartDebugCommand(bang, ...)
   " First argument is the command to debug, rest are run arguments.
+  let g:termdebug_current_buffer = bufname("$")
+  let g:termdebug_current_line = line(".")
   call s:StartDebug_internal({'gdb_args': [a:1], 'proc_args': a:000[1:], 'bang': a:bang})
 endfunc
 
@@ -125,7 +129,8 @@ func s:StartDebug_internal(dict)
   endif
 
 	if exists('g:termdebug_new_tab') && g:termdebug_new_tab >= 1
-		execute('tabnew')
+		execute('tabnew '. g:termdebug_current_buffer)
+    execute ":".g:termdebug_current_line
 	endif
 
   let s:ptywin = 0
@@ -188,6 +193,7 @@ func s:StartDebug_internal(dict)
   if exists('#User#TermdebugStartPost')
     doauto <nomodeline> User TermdebugStartPost
   endif
+  startinsert
 endfunc
 
 " Use when debugger didn't start or ended.
@@ -1214,8 +1220,8 @@ function! s:OpenHoverPreview(lines, filetype) abort
         call nvim_win_set_option(float_win_id, 'filetype', a:filetype)
       endif
 
-      call nvim_buf_set_option(buf, 'modified', v:false)
-      call nvim_buf_set_option(buf, 'modifiable', v:false)
+      call nvim_buf_set_option(buf, 'modified', v:true)
+      call nvim_buf_set_option(buf, 'modifiable', v:true)
 
       " Unlike preview window, :pclose does not close window. Instead, close
       " hover window automatically when cursor is moved.
@@ -1265,6 +1271,7 @@ func s:GotoAsmwinOrCreateIt()
     setlocal noswapfile
     setlocal buftype=nofile
     setlocal modifiable
+    setlocal undolevels=1000
 
     let asmbuf = bufnr('Termdebug-asm-listing')
     if asmbuf > 0

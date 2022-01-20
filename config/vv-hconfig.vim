@@ -27,6 +27,14 @@ set backspace=indent,eol,start
 set signcolumn=number
 set numberwidth=1
 set scrolloff=6
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+set softtabstop=0
+let g:localvimrc_ask=0
+"let g:localvimrc_persistent=2
+let g:localvimrc_sandbox=0
 
 set undofile
 
@@ -204,9 +212,9 @@ function! Load_vvimrc(path)
     
     for p in l:all_path
         let l:current_vvimrc = p.'/'.g:vvimrc_name
-	if p == '/'
-        	let l:current_vvimrc = p.g:vvimrc_name
-	endif
+  if p == '/'
+          let l:current_vvimrc = p.g:vvimrc_name
+  endif
         if filereadable(l:current_vvimrc) 
             execute 'source' l:current_vvimrc
             echo l:current_vvimrc." add"

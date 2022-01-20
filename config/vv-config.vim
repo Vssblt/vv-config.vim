@@ -90,7 +90,7 @@ highlight LineNr term=bold cterm=NONE ctermfg=Grey ctermbg=NONE gui=NONE guifg=G
 " vim-glaive settings
 """"""""""""""""""""""""""""""
 call glaive#Install()
-Glaive codefmt clang_format_executable='clang-format-11'
+Glaive codefmt clang_format_executable='clang-format-10'
 Glaive codefmt google_java_executable="java -jar /opt/google-java-format/google-java-format-1.10.0-all-deps.jar"
 
 """"""""""""""""""""""""""""""

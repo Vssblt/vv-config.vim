@@ -11,6 +11,8 @@ call plug#begin('~/.config/nvim/plugged')
     "
     Plug 'ryanoasis/vim-devicons'
 
+    Plug 'embear/vim-localvimrc'
+
     Plug 'kshenoy/vim-signature'
 
     Plug 'vim-airline/vim-airline'
