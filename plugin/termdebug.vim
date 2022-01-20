@@ -62,6 +62,8 @@ else
   let s:way = 'prompt'
 endif
 
+let g:termdebug_started = 0
+let s:break_list = []
 let s:keepcpo = &cpo
 set cpo&vim
 
@@ -69,6 +71,7 @@ set cpo&vim
 " To end type "quit" in the gdb window.
 command -nargs=* -complete=file -bang Termdebug call s:StartDebug(<bang>0, <f-args>)
 command -nargs=+ -complete=file -bang TermdebugCommand call s:StartDebugCommand(<bang>0, <f-args>)
+command -nargs=? Break call g:SetBreakpoint(<q-args>)
 
 " Name of the gdb command, defaults to "gdb".
 if !exists('g:termdebugger')
@@ -105,7 +108,8 @@ hi default debugBreakpoint term=reverse ctermbg=red guibg=red
 hi default debugBreakpointDisabled term=reverse ctermbg=gray guibg=gray
 
 func s:StartDebug(bang, ...)
-  let g:termdebug_current_buffer = bufname("$")
+  let g:termdebug_started = 1
+  let g:termdebug_current_buffer = bufname("%")
   let g:termdebug_current_line = line(".")
   " First argument is the command to debug, second core file or process ID.
   call s:StartDebug_internal({'gdb_args': a:000, 'bang': a:bang})
@@ -113,7 +117,7 @@ endfunc
 
 func s:StartDebugCommand(bang, ...)
   " First argument is the command to debug, rest are run arguments.
-  let g:termdebug_current_buffer = bufname("$")
+  let g:termdebug_current_buffer = bufname("%")
   let g:termdebug_current_line = line(".")
   call s:StartDebug_internal({'gdb_args': [a:1], 'proc_args': a:000[1:], 'bang': a:bang})
 endfunc
@@ -194,6 +198,7 @@ func s:StartDebug_internal(dict)
     doauto <nomodeline> User TermdebugStartPost
   endif
   startinsert
+  call s:LoadBreakPoint()
 endfunc
 
 " Use when debugger didn't start or ended.
@@ -206,6 +211,7 @@ func s:CloseBuffers()
 		execute('tabclose')
 	endif
   unlet! s:gdbwin
+  let g:termdebug_started = 0
 endfunc
 
 func s:CheckGdbRunning()
@@ -839,7 +845,6 @@ func s:InstallCommands()
   let save_cpo = &cpo
   set cpo&vim
 
-  command -nargs=? Break call s:SetBreakpoint(<q-args>)
   command Clear call s:ClearBreakpoint()
   command Step call s:SendResumingCommand('-exec-step')
   command Over call s:SendResumingCommand('-exec-next')
@@ -897,7 +902,6 @@ endfunc
 
 " Delete installed debugger commands in the current window.
 func s:DeleteCommands()
-  delcommand Break
   delcommand Clear
   delcommand Step
   delcommand Over
@@ -946,10 +950,19 @@ func s:DeleteCommands()
   let s:BreakpointSigns = []
 endfunc
 
+func g:AddBreakpointList(at)
+  let s:breakpoint = a:at
+  if (empty(a:at))
+    let s:breakpoint = bufname("%") . ":" . line(".") 
+  endif
+  call add(s:break_list, s:breakpoint)
+endfunc
+
 " :Break - Set a breakpoint at the cursor position.
-func s:SetBreakpoint(at)
+func g:SetBreakpoint(at)
   " Setting a breakpoint may not work while the program is running.
   " Interrupt to make it work.
+  call g:AddBreakpointList(a:at)
   let do_continue = 0
   if !s:stopped
     let do_continue = 1
@@ -964,6 +977,13 @@ func s:SetBreakpoint(at)
   if do_continue
     Continue
   endif
+endfunc
+
+func s:LoadBreakPoint()
+  for i in s:break_list
+    echo i
+    execute ":Break ".i
+  endfor
 endfunc
 
 " :Clear - Delete a breakpoint at the cursor position.
