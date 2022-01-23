@@ -15,8 +15,10 @@
 
 tnoremap <C-h> <C-\><C-n>
 
-noremap <c-h> b
-noremap <c-s> w
+"noremap <c-h> b
+"noremap <c-s> w
+noremap <c-h> hhh
+noremap <c-s> lll
 
 noremap h h
 noremap t k
