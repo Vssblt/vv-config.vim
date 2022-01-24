@@ -16,7 +16,7 @@
 tnoremap <C-h> <C-\><C-n>
 
 func g:Map_Cs()
-  if (g:termdebug_started == 0)
+  if (!exists('g:termdebug_started') || g:termdebug_started == 0)
     call feedkeys("sss")
   else
     exe ':Step'
@@ -24,7 +24,7 @@ func g:Map_Cs()
 endfunc
 
 func g:Map_Ch()
-  if (g:termdebug_started == 0)
+  if (!exists('g:termdebug_started') || g:termdebug_started == 0)
     call feedkeys("hhh")
   else
     exe ':Finish'
@@ -45,7 +45,7 @@ noremap n j
 noremap s l
 
 func g:Map_Cn()
-  if (g:termdebug_started == 0)
+  if (!exists('g:termdebug_started') || g:termdebug_started == 0)
     call feedkeys("nn")
   else
     exe ':Over'

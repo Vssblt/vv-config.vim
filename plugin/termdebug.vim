@@ -57,12 +57,12 @@ endif
 
 " Need either the +terminal feature or +channel and the prompt buffer.
 " The terminal feature does not work with gdb on win32.
-if has('terminal') && !has('win32')
+if (has('terminal') || exists(':terminal')) && !has('win32')
   let s:way = 'terminal'
 elseif has('channel') && exists('*prompt_setprompt')
   let s:way = 'prompt'
 else
-  if has('terminal')
+  if (has('terminal') || exists('terminal')) 
     let s:err = 'Cannot debug, missing prompt buffer support'
   else
     let s:err = 'Cannot debug, +channel feature is not supported'
