@@ -72,7 +72,8 @@ set cpo&vim
 " To end type "quit" in the gdb window.
 command -nargs=* -complete=file -bang Termdebug call s:StartDebug(<bang>0, <f-args>)
 command -nargs=+ -complete=file -bang TermdebugCommand call s:StartDebugCommand(<bang>0, <f-args>)
-command -nargs=? Break call g:AddBreakpointList(<q-args>)
+command -nargs=? Break call g:AddGlobalBreakPoint(<q-args>)
+command -nargs=? ToggleBreak call g:ToggleGlobalBreakPoint(<q-args>)
 
 " Name of the gdb command, defaults to "gdb".
 if !exists('g:termdebugger')
@@ -110,16 +111,16 @@ hi default debugBreakpointDisabled term=reverse ctermbg=gray guibg=gray
 
 func s:StartDebug(bang, ...)
   let g:termdebug_started = 1
-  let g:termdebug_current_buffer = bufname("%")
-  let g:termdebug_current_line = line(".")
+  let s:termdebug_current_buffer = expand("%:p")
+  let s:termdebug_current_line = line(".")
   " First argument is the command to debug, second core file or process ID.
   call s:StartDebug_internal({'gdb_args': a:000, 'bang': a:bang})
 endfunc
 
 func s:StartDebugCommand(bang, ...)
   " First argument is the command to debug, rest are run arguments.
-  let g:termdebug_current_buffer = bufname("%")
-  let g:termdebug_current_line = line(".")
+  let s:termdebug_current_buffer = expand("%:p")
+  let s:termdebug_current_line = line(".")
   call s:StartDebug_internal({'gdb_args': [a:1], 'proc_args': a:000[1:], 'bang': a:bang})
 endfunc
 
@@ -134,8 +135,8 @@ func s:StartDebug_internal(dict)
   endif
 
 	if exists('g:termdebug_new_tab') && g:termdebug_new_tab >= 1
-		execute('tabnew '. g:termdebug_current_buffer)
-    execute ":".g:termdebug_current_line
+		execute('tabnew '. s:termdebug_current_buffer)
+    execute ":".s:termdebug_current_line
 	endif
 
   let s:ptywin = 0
@@ -199,6 +200,7 @@ func s:StartDebug_internal(dict)
     doauto <nomodeline> User TermdebugStartPost
   endif
   startinsert
+  call g:UnplaceGlobalBreakPointSign()
   call s:LoadBreakPoint()
 endfunc
 
@@ -227,6 +229,7 @@ func s:StartDebug_term(dict)
   " Open a terminal window without a job, to run the debugged program in.
   execute s:vertical ? 'vnew' : 'new'
   let s:pty_job_id = termopen('tail -f /dev/null;#gdb program')
+  setlocal undolevels=1000
   if s:pty_job_id == 0
     echoerr 'invalid argument (or job table is full) while opening terminal window'
     return
@@ -289,6 +292,7 @@ func s:StartDebug_term(dict)
   execute 'new'
   " call ch_log('executing "' . join(gdb_cmd) . '"')
   let s:gdb_job_id = termopen(gdb_cmd, {'on_exit': function('s:EndTermDebug')})
+  setlocal undolevels=1000
   if s:gdb_job_id == 0
     echoerr 'invalid argument (or job table is full) while opening gdb terminal window'
     exe 'bwipe! ' . s:ptybuf
@@ -443,6 +447,7 @@ func s:StartDebug_prompt(dict)
     execute 'new'
     wincmd x | wincmd j
     belowright let s:pty_job_id = termopen('tail -f /dev/null;#gdb program')
+    setlocal undolevels=1000
     if s:pty_job_id == 0
       echoerr 'invalid argument (or job table is full) while opening terminal window'
       return                                                        
@@ -689,8 +694,8 @@ func s:rePlaceSign()
   for [key, value] in items(g:global_breakpoint_list)
     for id in g:global_breakpoint_list[key]
       let entry = split(key, ":")
-      call g:CreateBreakpoint(count, count, "y")
-      call g:PlaceSign(count, count, entry)
+      call g:CreateBreakpoint(count, 0, "y")
+      call g:PlaceSign(count, 0, entry)
       let count += 1
     endfor
   endfor
@@ -965,11 +970,11 @@ func s:DeleteCommands()
   let s:BreakpointSigns = []
 endfunc
 
-func g:AddBreakpointList(at)
+func g:AddGlobalBreakPoint(at)
   if (g:termdebug_started == 0)
     let s:breakpoint = a:at
     if (empty(a:at))
-      let s:breakpoint = bufname("%") . ":" . line(".") 
+      let s:breakpoint = expand("%:p") . ":" . line(".") 
     endif
     let s:split_list = split(s:breakpoint, ":")
     if (len(s:split_list) != 2)
@@ -981,12 +986,43 @@ func g:AddBreakpointList(at)
     else
       let g:global_breakpoint_list[s:breakpoint] = [s:next_id]
     endif
-    call g:CreateBreakpoint(s:next_id, s:next_id, "y")
-    call g:PlaceSign(s:next_id, s:next_id, s:entry)
+    call g:CreateBreakpoint(s:next_id, 0, "y")
+    call g:PlaceSign(s:next_id, 0, s:entry)
     let s:next_id += 1
   else
     call g:SetBreakpoint(a:at)
   endif
+endfunc
+
+func g:RemoveGlobalBreakPoint(at)
+  if (g:termdebug_started == 0)
+    let s:breakpoint = a:at
+    if (empty(a:at))
+      let s:breakpoint = expand("%:p") . ":" . line(".") 
+    endif
+    if (has_key(g:global_breakpoint_list, s:breakpoint))
+      for id in g:global_breakpoint_list[s:breakpoint]
+        exe "sign unplace " . s:Breakpoint2SignNumber(id, 0)
+      endfor
+      call remove(g:global_breakpoint_list, s:breakpoint)
+    endif
+  else
+    call g:UnsetBreakpoint(a:at)
+  endif
+endfunc
+
+func g:ToggleGlobalBreakPoint(at)
+  let s:breakpoint = a:at
+  if (empty(a:at))
+    let s:breakpoint = expand("%:p") . ":" . line(".") 
+  endif
+  for [key, value] in items(g:global_breakpoint_list)
+    if (key == s:breakpoint)
+      call g:RemoveGlobalBreakPoint(a:at)
+      return 
+    endif
+  endfor
+  call g:AddGlobalBreakPoint(a:at)
 endfunc
 
 " :Break - Set a breakpoint at the cursor position.
@@ -1009,16 +1045,55 @@ func g:SetBreakpoint(at)
   endif
 endfunc
 
-func s:LoadBreakPoint()
-  "bugs!
-  "sort needed!
+" :Unbreak - Unset all breakpoints at the cursor position.
+func g:UnsetBreakpoint(at)
+  " Setting a breakpoint may not work while the program is running.
+  " Interrupt to make it work.
+  let do_continue = 0
+  if !s:stopped
+    let do_continue = 1
+    Stop
+    sleep 10m
+  endif
+
+  " Use the fname:lnum format, older gdb can't handle --source.
+  let at = empty(a:at) ?
+  \ fnameescape(expand('%:p')) . ':' . line('.') : a:at
+  if (has_key(s:breakpoint_locations, at))
+    for id in s:breakpoint_locations[at]
+      call s:SendCommand('-break-delete ' . id)
+      for subid in keys(s:breakpoints[id])
+        exe 'sign unplace ' . s:Breakpoint2SignNumber(id, subid)
+      endfor
+    endfor
+    call remove(g:global_breakpoint_list, at)
+    call remove(s:breakpoint_locations, at)
+  endif
+  if do_continue
+    Continue
+  endif
+endfunc
+
+func g:UnplaceGlobalBreakPointSign()
+  "clear all sign first
   for [key, value] in items(g:global_breakpoint_list)
-    for j in g:global_breakpoint_list[key]
+    for id in g:global_breakpoint_list[key]
+      let nr = printf('%d.%d', id, 0)
+      exe "sign unplace " . s:Breakpoint2SignNumber(id, 0)
+    endfor
+  endfor
+endfunc
+
+func s:LoadBreakPoint()
+  "rebreak point
+  let breakpoint_list = g:global_breakpoint_list
+  let g:global_breakpoint_list = {}
+  for [key, value] in items(breakpoint_list)
+    for j in breakpoint_list[key]
       execute ":Break ".key
     endfor
   endfor
 
-  let g:global_breakpoint_list = {}
   let s:next_id = 1
 endfunc
 
@@ -1584,4 +1659,3 @@ endfunc
 
 let &cpo = s:keepcpo
 unlet s:keepcpo
-

@@ -15,10 +15,25 @@
 
 tnoremap <C-h> <C-\><C-n>
 
-"noremap <c-h> b
-"noremap <c-s> w
-noremap <c-h> hhh
-noremap <c-s> lll
+func g:Map_Cs()
+  if (g:termdebug_started == 0)
+    call feedkeys("sss")
+  else
+    exe ':Step'
+  endif
+endfunc
+
+func g:Map_Ch()
+  if (g:termdebug_started == 0)
+    call feedkeys("hhh")
+  else
+    exe ':Finish'
+  endif
+endfunc
+
+
+noremap <c-h> :call g:Map_Ch()<CR>
+noremap <c-s> :call g:Map_Cs()<CR>
 
 noremap h h
 noremap t k
@@ -28,8 +43,17 @@ noremap s l
 noremap t k
 noremap n j
 noremap s l
-noremap <c-n> jj
-noremap <c-t> kk
+
+func g:Map_Cn()
+  if (g:termdebug_started == 0)
+    call feedkeys("nn")
+  else
+    exe ':Over'
+  endif
+endfunc
+
+noremap <C-n> :call g:Map_Cn()<CR>
+noremap <C-t> kk
 
 noremap T :Marks<CR>
 noremap S L
@@ -190,6 +214,7 @@ vmap <leader>a :Ranger<CR>
 nmap <leader>e :Files<CR>
 omap <leader>e :Files<CR>
 vmap <leader>e :Files<CR>
+nnoremap B :Buffer<CR>
 
 nmap <leader>o :GFiles<CR>
 omap <leader>o :GFiles<CR>
@@ -509,7 +534,8 @@ nmap <unique> <leader>pw <Plug>(PickerStag)
 nmap <unique> <leader>po <Plug>(PickerBufferTag)
 nmap <unique> <leader>ph <Plug>(PickerHelp)
 
-nnoremap <CR> :Break<CR>
+nnoremap <CR> :ToggleBreak<CR>
 nnoremap <leader>r :Run<CR>
 nnoremap <leader>c :Continue<CR>
+" C-n C-s 
 
