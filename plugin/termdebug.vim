@@ -55,11 +55,21 @@ if exists(':Termdebug')
   finish
 endif
 
+" Need either the +terminal feature or +channel and the prompt buffer.
 " The terminal feature does not work with gdb on win32.
-if !has('win32')
+if has('terminal') && !has('win32')
   let s:way = 'terminal'
-else
+elseif has('channel') && exists('*prompt_setprompt')
   let s:way = 'prompt'
+else
+  if has('terminal')
+    let s:err = 'Cannot debug, missing prompt buffer support'
+  else
+    let s:err = 'Cannot debug, +channel feature is not supported'
+  endif
+  command -nargs=* -complete=file -bang Termdebug echoerr s:err
+  command -nargs=+ -complete=file -bang TermdebugCommand echoerr s:err
+  finish
 endif
 
 let g:termdebug_started = 0
