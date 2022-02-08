@@ -37,6 +37,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     "Plug 'jackguo380/vim-lsp-cxx-highlight'
     "this plugin probely cause slow.
+    
+    Plug 'adi/vim-indent-rainbow'
 
     "****************************************************************************************************************************************************************************************************
     Plug 'lambdalisue/suda.vim'

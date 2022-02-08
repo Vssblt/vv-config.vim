@@ -84,13 +84,13 @@ let g:coc_global_extensions = [
 " other settings
 """"""""""""""""""""""""""""""
 execute ":colorscheme sonokai"
-highlight LineNr term=bold cterm=NONE ctermfg=Grey ctermbg=NONE gui=NONE guifg=Grey guibg=NONE
+highlight LineNr term=bold cterm=NONE ctermfg=red ctermbg=NONE gui=NONE guifg=red guibg=NONE
 
 """"""""""""""""""""""""""""""
 " vim-glaive settings
 """"""""""""""""""""""""""""""
 call glaive#Install()
-Glaive codefmt clang_format_executable='clang-format-10'
+Glaive codefmt clang_format_executable='clang-format'
 Glaive codefmt google_java_executable="java -jar /opt/google-java-format/google-java-format-1.10.0-all-deps.jar"
 
 """"""""""""""""""""""""""""""
@@ -113,3 +113,9 @@ augroup END
 let g:termdebug_wide=160
 let g:termdebug_disasm_window=17
 let g:termdebug_new_tab = 1
+
+""""""""""""""""""""""""""""""
+" vim-indent-rainbow settings
+""""""""""""""""""""""""""""""
+let g:rainbow_colors_black= [236, 235] 
+call rainbow#enable()

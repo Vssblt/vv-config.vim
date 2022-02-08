@@ -37,6 +37,7 @@ let g:localvimrc_ask=0
 let g:localvimrc_sandbox=0
 
 set undofile
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 
 aug QFClose
   au!
@@ -104,7 +105,6 @@ let g:NERDTreeWinSize = 50
 " ranger settings
 """"""""""""""""""""""""""""""
 let g:ranger_map_keys = 0
-"let g:ranger_replace_netrw = 1
 
 
 """"""""""""""""""""""""""""""

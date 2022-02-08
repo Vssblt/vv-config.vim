@@ -173,8 +173,6 @@ func s:StartDebug_internal(dict)
     	let s:vertical = 0
 			if exists('g:force_termdebug_disasm_window') && g:force_termdebug_disasm_window >= 1
 				let g:termdebug_disasm_window = g:force_termdebug_disasm_window
-			else
-				unlet g:termdebug_disasm_window
 			endif
 		else
     	let s:vertical = 1

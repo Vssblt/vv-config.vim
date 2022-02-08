@@ -17,7 +17,7 @@ tnoremap <C-h> <C-\><C-n>
 
 func g:Map_Cs()
   if (!exists('g:termdebug_started') || g:termdebug_started == 0)
-    call feedkeys("sss")
+    execute("normal! lll")
   else
     exe ':Step'
   endif
@@ -25,15 +25,17 @@ endfunc
 
 func g:Map_Ch()
   if (!exists('g:termdebug_started') || g:termdebug_started == 0)
-    call feedkeys("hhh")
+    execute("normal! hhh")
   else
     exe ':Finish'
   endif
 endfunc
 
 
-noremap <c-h> :call g:Map_Ch()<CR>
-noremap <c-s> :call g:Map_Cs()<CR>
+nnoremap <c-h> :call g:Map_Ch()<CR>
+nnoremap <c-s> :call g:Map_Cs()<CR>
+vnoremap <c-h> hh
+vnoremap <c-s> ll
 
 noremap h h
 noremap t k
@@ -109,8 +111,6 @@ noremap <space>k zj
 " prev
 noremap <space>j zk
 
-noremap <space>y :<C-u>CocList -A --normal yank<cr>
-
 nmap <leader>uh <Plug>(easymotion-linebackward)
 nmap <leader>ut <Plug>(easymotion-k)
 nmap <leader>un <Plug>(easymotion-j)
@@ -174,6 +174,7 @@ nnoremap # :b#<CR>
 """"""""""""""""""""""""""""""
 noremap <leader><leader>n :FloatermNew<CR>
 noremap <leader><leader>h :FloatermHide<CR>
+noremap ,,h :FloatermHide<CR>
 noremap <leader><leader>s :FloatermShow<CR>
 noremap <leader><leader>l :FloatermNext<CR>
 noremap <leader><leader>L :FloatermPrev<CR>
@@ -184,30 +185,28 @@ inoremap  <C-W>
 
 
 """"""""""""""""""""""""""""""
-" make 
-""""""""""""""""""""""""""""""
-nnoremap <F4> :Make -j `nproc`<CR>
-nnoremap <F2> :copen<CR>
-function! g:Start_Termdebug()
-	if v:shell_error == 0
-		execute ":Termdebug"
-	endif
-endfunction
-nnoremap <F6> :!make -j `nproc`<CR>:call g:Start_Termdebug()<CR>
-
-""""""""""""""""""""""""""""""
 " ranger
 """"""""""""""""""""""""""""""
-"nmap <leader>o :RangerNewTab<CR>
-"nmap <leader>a :Ranger<CR>
-"omap <leader>o :RangerNewTab<CR>
-"omap <leader>a :Ranger<CR>
-"vmap <leader>o :RangerNewTab<CR>
-"vmap <leader>a :Ranger<CR>
-"nmap <leader>e :tabnew<CR>:Files<CR>
-"omap <leader>e :tabnew<CR>:Files<CR>
-"vmap <leader>e :tabnew<CR>:Files<CR>
+autocmd TermOpen * call TermInit()
+func TermInit()
+  setlocal nonu
+  setlocal norelativenumber
+  startinsert
+endfunc
 
+autocmd TermEnter * call TermEnter()
+func TermEnter()
+  call rainbow#disable()
+  startinsert
+endfunc
+
+autocmd TermLeave * call TermLeave()
+func TermLeave()
+  call rainbow#enable()
+endfunc
+
+"autocmd BufWinEnter,WinEnter term://* call rainbow#disable()
+"nmap <leader>a :Ranger<CR><C-h>:setlocal nonu<CR>:setlocal norelativenumber<CR>:call rainbow#disable()<CR>i
 nmap <leader>a :Ranger<CR>
 omap <leader>a :Ranger<CR>
 vmap <leader>a :Ranger<CR>
@@ -227,22 +226,21 @@ vmap <leader><leader>o :GFiles?<CR>
 """"""""""""""""""""""""""""""
 " coc
 """"""""""""""""""""""""""""""
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+noremap <space>y :<C-u>CocList -A --normal yank<cr>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <NUL> coc#refresh()
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
-
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <silent><expr> <NUL> coc#refresh()
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 nnoremap <leader><Tab> :call CocAction('jumpDefinition', 'drop')<CR>
 vnoremap <leader><Tab> :call CocAction('jumpDefinition', 'drop')<CR>
@@ -295,8 +293,8 @@ let g:VM_maps['c'] = 'b'
 let g:VM_maps['C'] = 'B'
 
 let g:VM_maps["Select Operator"] = 'gs'
-let g:VM_maps['Find Under']                  = '<C-l>'
-let g:VM_maps['Find Subword Under']          = '<C-l>'
+let g:VM_maps['Find Under']                  = '<c-l>'
+let g:VM_maps['Find Subword Under']          = '<c-l>'
 let g:VM_maps["Select All"]                  = '\A' 
 let g:VM_maps["Start Regex Search"]          = '\/'
 let g:VM_maps["Add Cursor Down"]             = '<C-Down>'
@@ -371,171 +369,221 @@ let g:VM_maps["Toggle Multiline"]            = '\M'
 hi Pmenu ctermfg=white ctermbg=black guibg=DarkGrey
 
 """ custom
-nmap <unique> <tab>a<CR> 1n
-nmap <unique> <tab>o<CR> 2n
-nmap <unique> <tab>e<CR> 3n
-nmap <unique> <tab>u<CR> 4n
-nmap <unique> <tab>i<CR> 5n
-nmap <unique> <tab>d<CR> 6n
-nmap <unique> <tab>h<CR> 7n
-nmap <unique> <tab>t<CR> 8n
-nmap <unique> <tab>n<CR> 9n
+nmap <tab>a<CR> 1n
+nmap <tab>o<CR> 2n
+nmap <tab>e<CR> 3n
+nmap <tab>u<CR> 4n
+nmap <tab>i<CR> 5n
+nmap <tab>d<CR> 6n
+nmap <tab>h<CR> 7n
+nmap <tab>t<CR> 8n
+nmap <tab>n<CR> 9n
 
-nmap <unique> <tab>as<CR> 10n
-nmap <unique> <tab>aa<CR> 11n
-nmap <unique> <tab>ao<CR> 12n
-nmap <unique> <tab>ae<CR> 13n
-nmap <unique> <tab>au<CR> 14n
-nmap <unique> <tab>ai<CR> 15n
-nmap <unique> <tab>ad<CR> 16n
-nmap <unique> <tab>ah<CR> 17n
-nmap <unique> <tab>at<CR> 18n
-nmap <unique> <tab>an<CR> 19n
+nmap <tab>as<CR> 10n
+nmap <tab>aa<CR> 11n
+nmap <tab>ao<CR> 12n
+nmap <tab>ae<CR> 13n
+nmap <tab>au<CR> 14n
+nmap <tab>ai<CR> 15n
+nmap <tab>ad<CR> 16n
+nmap <tab>ah<CR> 17n
+nmap <tab>at<CR> 18n
+nmap <tab>an<CR> 19n
 
-nmap <unique> <tab>os<CR> 20n
-nmap <unique> <tab>oa<CR> 21n
-nmap <unique> <tab>oo<CR> 22n
-nmap <unique> <tab>oe<CR> 23n
-nmap <unique> <tab>ou<CR> 24n
-nmap <unique> <tab>oi<CR> 25n
-nmap <unique> <tab>od<CR> 26n
-nmap <unique> <tab>oh<CR> 27n
-nmap <unique> <tab>ot<CR> 28n
-nmap <unique> <tab>on<CR> 29n
+nmap <tab>os<CR> 20n
+nmap <tab>oa<CR> 21n
+nmap <tab>oo<CR> 22n
+nmap <tab>oe<CR> 23n
+nmap <tab>ou<CR> 24n
+nmap <tab>oi<CR> 25n
+nmap <tab>od<CR> 26n
+nmap <tab>oh<CR> 27n
+nmap <tab>ot<CR> 28n
+nmap <tab>on<CR> 29n
 
-nmap <unique> <tab>es<CR> 30n
-nmap <unique> <tab>ea<CR> 31n
-nmap <unique> <tab>eo<CR> 32n
-nmap <unique> <tab>ee<CR> 33n
-nmap <unique> <tab>eu<CR> 34n
-nmap <unique> <tab>ei<CR> 35n
-nmap <unique> <tab>ed<CR> 36n
-nmap <unique> <tab>eh<CR> 37n
-nmap <unique> <tab>et<CR> 38n
-nmap <unique> <tab>en<CR> 39n
+nmap <tab>es<CR> 30n
+nmap <tab>ea<CR> 31n
+nmap <tab>eo<CR> 32n
+nmap <tab>ee<CR> 33n
+nmap <tab>eu<CR> 34n
+nmap <tab>ei<CR> 35n
+nmap <tab>ed<CR> 36n
+nmap <tab>eh<CR> 37n
+nmap <tab>et<CR> 38n
+nmap <tab>en<CR> 39n
 
-nmap <unique> <tab>us<CR> 40n
-nmap <unique> <tab>ua<CR> 41n
-nmap <unique> <tab>uo<CR> 42n
-nmap <unique> <tab>ue<CR> 43n
-nmap <unique> <tab>uu<CR> 44n
-nmap <unique> <tab>ui<CR> 45n
-nmap <unique> <tab>ud<CR> 46n
-nmap <unique> <tab>uh<CR> 47n
-nmap <unique> <tab>ut<CR> 48n
-nmap <unique> <tab>un<CR> 49n
+nmap <tab>us<CR> 40n
+nmap <tab>ua<CR> 41n
+nmap <tab>uo<CR> 42n
+nmap <tab>ue<CR> 43n
+nmap <tab>uu<CR> 44n
+nmap <tab>ui<CR> 45n
+nmap <tab>ud<CR> 46n
+nmap <tab>uh<CR> 47n
+nmap <tab>ut<CR> 48n
+nmap <tab>un<CR> 49n
 
-nmap <unique> <tab>is<CR> 50n
-nmap <unique> <tab>ia<CR> 51n
-nmap <unique> <tab>io<CR> 52n
-nmap <unique> <tab>ie<CR> 53n
-nmap <unique> <tab>iu<CR> 54n
-nmap <unique> <tab>ii<CR> 55n
-nmap <unique> <tab>id<CR> 56n
-nmap <unique> <tab>ih<CR> 57n
-nmap <unique> <tab>it<CR> 58n
-nmap <unique> <tab>in<CR> 59n
+nmap <tab>is<CR> 50n
+nmap <tab>ia<CR> 51n
+nmap <tab>io<CR> 52n
+nmap <tab>ie<CR> 53n
+nmap <tab>iu<CR> 54n
+nmap <tab>ii<CR> 55n
+nmap <tab>id<CR> 56n
+nmap <tab>ih<CR> 57n
+nmap <tab>it<CR> 58n
+nmap <tab>in<CR> 59n
 
-nmap <unique> <tab>ds<CR> 60n
-nmap <unique> <tab>da<CR> 61n
-nmap <unique> <tab>do<CR> 62n
-nmap <unique> <tab>de<CR> 63n
-nmap <unique> <tab>du<CR> 64n
-nmap <unique> <tab>di<CR> 65n
-nmap <unique> <tab>dd<CR> 66n
-nmap <unique> <tab>dh<CR> 67n
-nmap <unique> <tab>dt<CR> 68n
-nmap <unique> <tab>dn<CR> 69n
+nmap <tab>ds<CR> 60n
+nmap <tab>da<CR> 61n
+nmap <tab>do<CR> 62n
+nmap <tab>de<CR> 63n
+nmap <tab>du<CR> 64n
+nmap <tab>di<CR> 65n
+nmap <tab>dd<CR> 66n
+nmap <tab>dh<CR> 67n
+nmap <tab>dt<CR> 68n
+nmap <tab>dn<CR> 69n
 
-nmap <unique> <tab><tab>a<CR> 1t
-nmap <unique> <tab><tab>o<CR> 2t
-nmap <unique> <tab><tab>e<CR> 3t
-nmap <unique> <tab><tab>u<CR> 4t
-nmap <unique> <tab><tab>i<CR> 5t
-nmap <unique> <tab><tab>d<CR> 6t
-nmap <unique> <tab><tab>h<CR> 7t
-nmap <unique> <tab><tab>t<CR> 8t
-nmap <unique> <tab><tab>n<CR> 9t
+nmap <tab><tab>a<CR> 1t
+nmap <tab><tab>o<CR> 2t
+nmap <tab><tab>e<CR> 3t
+nmap <tab><tab>u<CR> 4t
+nmap <tab><tab>i<CR> 5t
+nmap <tab><tab>d<CR> 6t
+nmap <tab><tab>h<CR> 7t
+nmap <tab><tab>t<CR> 8t
+nmap <tab><tab>n<CR> 9t
 
-nmap <unique> <tab><tab>as<CR> 10t
-nmap <unique> <tab><tab>aa<CR> 11t
-nmap <unique> <tab><tab>ao<CR> 12t
-nmap <unique> <tab><tab>ae<CR> 13t
-nmap <unique> <tab><tab>au<CR> 14t
-nmap <unique> <tab><tab>ai<CR> 15t
-nmap <unique> <tab><tab>ad<CR> 16t
-nmap <unique> <tab><tab>ah<CR> 17t
-nmap <unique> <tab><tab>at<CR> 18t
-nmap <unique> <tab><tab>an<CR> 19t
+nmap <tab><tab>as<CR> 10t
+nmap <tab><tab>aa<CR> 11t
+nmap <tab><tab>ao<CR> 12t
+nmap <tab><tab>ae<CR> 13t
+nmap <tab><tab>au<CR> 14t
+nmap <tab><tab>ai<CR> 15t
+nmap <tab><tab>ad<CR> 16t
+nmap <tab><tab>ah<CR> 17t
+nmap <tab><tab>at<CR> 18t
+nmap <tab><tab>an<CR> 19t
 
-nmap <unique> <tab><tab>os<CR> 20t
-nmap <unique> <tab><tab>oa<CR> 21t
-nmap <unique> <tab><tab>oo<CR> 22t
-nmap <unique> <tab><tab>oe<CR> 23t
-nmap <unique> <tab><tab>ou<CR> 24t
-nmap <unique> <tab><tab>oi<CR> 25t
-nmap <unique> <tab><tab>od<CR> 26t
-nmap <unique> <tab><tab>oh<CR> 27t
-nmap <unique> <tab><tab>ot<CR> 28t
-nmap <unique> <tab><tab>on<CR> 29t
+nmap <tab><tab>os<CR> 20t
+nmap <tab><tab>oa<CR> 21t
+nmap <tab><tab>oo<CR> 22t
+nmap <tab><tab>oe<CR> 23t
+nmap <tab><tab>ou<CR> 24t
+nmap <tab><tab>oi<CR> 25t
+nmap <tab><tab>od<CR> 26t
+nmap <tab><tab>oh<CR> 27t
+nmap <tab><tab>ot<CR> 28t
+nmap <tab><tab>on<CR> 29t
 
-nmap <unique> <tab><tab>es<CR> 30t
-nmap <unique> <tab><tab>ea<CR> 31t
-nmap <unique> <tab><tab>eo<CR> 32t
-nmap <unique> <tab><tab>ee<CR> 33t
-nmap <unique> <tab><tab>eu<CR> 34t
-nmap <unique> <tab><tab>ei<CR> 35t
-nmap <unique> <tab><tab>ed<CR> 36t
-nmap <unique> <tab><tab>eh<CR> 37t
-nmap <unique> <tab><tab>et<CR> 38t
-nmap <unique> <tab><tab>en<CR> 39t
+nmap <tab><tab>es<CR> 30t
+nmap <tab><tab>ea<CR> 31t
+nmap <tab><tab>eo<CR> 32t
+nmap <tab><tab>ee<CR> 33t
+nmap <tab><tab>eu<CR> 34t
+nmap <tab><tab>ei<CR> 35t
+nmap <tab><tab>ed<CR> 36t
+nmap <tab><tab>eh<CR> 37t
+nmap <tab><tab>et<CR> 38t
+nmap <tab><tab>en<CR> 39t
 
-nmap <unique> <tab><tab>us<CR> 40t
-nmap <unique> <tab><tab>ua<CR> 41t
-nmap <unique> <tab><tab>uo<CR> 42t
-nmap <unique> <tab><tab>ue<CR> 43t
-nmap <unique> <tab><tab>uu<CR> 44t
-nmap <unique> <tab><tab>ui<CR> 45t
-nmap <unique> <tab><tab>ud<CR> 46t
-nmap <unique> <tab><tab>uh<CR> 47t
-nmap <unique> <tab><tab>ut<CR> 48t
-nmap <unique> <tab><tab>un<CR> 49t
+nmap <tab><tab>us<CR> 40t
+nmap <tab><tab>ua<CR> 41t
+nmap <tab><tab>uo<CR> 42t
+nmap <tab><tab>ue<CR> 43t
+nmap <tab><tab>uu<CR> 44t
+nmap <tab><tab>ui<CR> 45t
+nmap <tab><tab>ud<CR> 46t
+nmap <tab><tab>uh<CR> 47t
+nmap <tab><tab>ut<CR> 48t
+nmap <tab><tab>un<CR> 49t
 
-nmap <unique> <tab><tab>is<CR> 50t
-nmap <unique> <tab><tab>ia<CR> 51t
-nmap <unique> <tab><tab>io<CR> 52t
-nmap <unique> <tab><tab>ie<CR> 53t
-nmap <unique> <tab><tab>iu<CR> 54t
-nmap <unique> <tab><tab>ii<CR> 55t
-nmap <unique> <tab><tab>id<CR> 56t
-nmap <unique> <tab><tab>ih<CR> 57t
-nmap <unique> <tab><tab>it<CR> 58t
-nmap <unique> <tab><tab>in<CR> 59t
+nmap <tab><tab>is<CR> 50t
+nmap <tab><tab>ia<CR> 51t
+nmap <tab><tab>io<CR> 52t
+nmap <tab><tab>ie<CR> 53t
+nmap <tab><tab>iu<CR> 54t
+nmap <tab><tab>ii<CR> 55t
+nmap <tab><tab>id<CR> 56t
+nmap <tab><tab>ih<CR> 57t
+nmap <tab><tab>it<CR> 58t
+nmap <tab><tab>in<CR> 59t
 
-nmap <unique> <tab><tab>ds<CR> 60t
-nmap <unique> <tab><tab>da<CR> 61t
-nmap <unique> <tab><tab>do<CR> 62t
-nmap <unique> <tab><tab>de<CR> 63t
-nmap <unique> <tab><tab>du<CR> 64t
-nmap <unique> <tab><tab>di<CR> 65t
-nmap <unique> <tab><tab>dd<CR> 66t
-nmap <unique> <tab><tab>dh<CR> 67t
-nmap <unique> <tab><tab>dt<CR> 68t
-nmap <unique> <tab><tab>dn<CR> 69t
+nmap <tab><tab>ds<CR> 60t
+nmap <tab><tab>da<CR> 61t
+nmap <tab><tab>do<CR> 62t
+nmap <tab><tab>de<CR> 63t
+nmap <tab><tab>du<CR> 64t
+nmap <tab><tab>di<CR> 65t
+nmap <tab><tab>dd<CR> 66t
+nmap <tab><tab>dh<CR> 67t
+nmap <tab><tab>dt<CR> 68t
+nmap <tab><tab>dn<CR> 69t
 
-nmap <unique> <leader>pe <Plug>(PickerEdit)
-nmap <unique> <leader>ps <Plug>(PickerSplit)
-nmap <unique> <leader>pt <Plug>(PickerTabedit)
-nmap <unique> <leader>pd <Plug>(PickerTabdrop)
-nmap <unique> <leader>pv <Plug>(PickerVsplit)
-nmap <unique> <leader>pb <Plug>(PickerBuffer)
-nmap <unique> <leader>p] <Plug>(PickerTag)
-nmap <unique> <leader>pw <Plug>(PickerStag)
-nmap <unique> <leader>po <Plug>(PickerBufferTag)
-nmap <unique> <leader>ph <Plug>(PickerHelp)
+nmap <leader>pe <Plug>(PickerEdit)
+nmap <leader>ps <Plug>(PickerSplit)
+nmap <leader>pt <Plug>(PickerTabedit)
+nmap <leader>pd <Plug>(PickerTabdrop)
+nmap <leader>pv <Plug>(PickerVsplit)
+nmap <leader>pb <Plug>(PickerBuffer)
+nmap <leader>p] <Plug>(PickerTag)
+nmap <leader>pw <Plug>(PickerStag)
+nmap <leader>po <Plug>(PickerBufferTag)
+nmap <leader>ph <Plug>(PickerHelp)
+
+""""""""""""""""""""""""""""""
+" make 
+""""""""""""""""""""""""""""""
+nnoremap <F4> :Make -j `nproc`<CR>
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <silent> <F2> :call ToggleList("Quickfix", 'c')<CR>
+
+function! g:Start_Termdebug(arg)
+	if v:shell_error == 0
+		execute "Termdebug " . a:arg
+	endif
+endfunction
+nnoremap <F6> :!make -j `nproc`<CR>:call g:Start_Termdebug("")<CR>
+
+
+"***********************************
+" vim-termdebug
+"***********************************
+
+function! TermDebug_run(program)
+  if (g:termdebug_started != 0)
+    call execute("Run")
+  else
+    call g:Start_Termdebug(a:program)
+  endif
+endfunc
 
 nnoremap <CR> :ToggleBreak<CR>
-nnoremap <leader>r :Run<CR>
-nnoremap <leader>c :Continue<CR>
-" C-n C-s 
-
+noremap <leader>c :Continue<CR>
