@@ -327,5 +327,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'tpope/vim-surround'
     "
+    
+    Plug 'aperezdc/vim-template'
 
 call plug#end()
