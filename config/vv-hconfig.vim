@@ -201,7 +201,7 @@ let g:airline_symbols.crypt = "CR"
 """"""""""""""""""""""""""""""
 " coc settings
 """"""""""""""""""""""""""""""
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 
 """"""""""""""""""""""""""""""

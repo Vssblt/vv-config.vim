@@ -29,6 +29,8 @@ let Tlist_Show_One_File = 1
 let Tlist_Use_Right_Window = 0
 let Tlist_Show_Menu = 1
 let Tlist_Auto_Open = 0
+let g:TagList_showNum = 0
+let g:TagList_showRelativeNumber = 0
 
 """"""""""""""""""""""""""""""
 " EasyMotion settings

@@ -34,8 +34,8 @@ endfunc
 
 nnoremap <c-h> :call g:Map_Ch()<CR>
 nnoremap <c-s> :call g:Map_Cs()<CR>
-vnoremap <c-h> hh
-vnoremap <c-s> ll
+vnoremap <c-h> :call g:Map_Ch()<CR>
+vnoremap <c-s> :call g:Map_Cs()<CR>
 
 noremap h h
 noremap t k
@@ -203,6 +203,25 @@ endfunc
 autocmd TermLeave * call TermLeave()
 func TermLeave()
   call rainbow#enable()
+endfunc
+
+autocmd BufEnter * call BufEnter()
+func BufEnter()
+  let l:bufname=bufname("%")
+  let l:bufwinnr = bufwinnr(bufname)
+  if (exists("g:TagList_title") && l:bufname == g:TagList_title)
+    if (exists("g:TagList_showNum") && g:TagList_showNum == 1)
+      setlocal nu
+    else
+      setlocal nonu
+    endif
+    if (exists("g:TagList_showRelativeNumber") && g:TagList_showRelativeNumber == 1)
+      setlocal relativenumber
+    else
+      setlocal norelativenumber
+    endif
+    call rainbow#disable()
+  endif
 endfunc
 
 "autocmd BufWinEnter,WinEnter term://* call rainbow#disable()
