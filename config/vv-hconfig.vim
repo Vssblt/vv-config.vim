@@ -32,6 +32,8 @@ set shiftwidth=2
 set expandtab
 set smarttab
 set softtabstop=0
+set hidden
+set synmaxcol=180    " Normally, the column count will not overtake 180.
 let g:localvimrc_ask=0
 "let g:localvimrc_persistent=2
 let g:localvimrc_sandbox=0
@@ -201,7 +203,7 @@ let g:airline_symbols.crypt = "CR"
 """"""""""""""""""""""""""""""
 " coc settings
 """"""""""""""""""""""""""""""
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 
 """"""""""""""""""""""""""""""

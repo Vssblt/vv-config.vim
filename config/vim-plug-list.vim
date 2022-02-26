@@ -40,6 +40,8 @@ call plug#begin('~/.config/nvim/plugged')
     
     Plug 'adi/vim-indent-rainbow'
 
+    Plug 'unblevable/quick-scope'
+
     "****************************************************************************************************************************************************************************************************
     Plug 'lambdalisue/suda.vim'
 		" Re-open a current file with sudo
