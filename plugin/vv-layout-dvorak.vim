@@ -31,11 +31,22 @@ func g:Map_Ch()
   endif
 endfunc
 
+func g:Map_Cn()
+  if (!exists('g:termdebug_started') || g:termdebug_started == 0)
+    call feedkeys("nn")
+  else
+    exe ':Over'
+  endif
+endfunc
 
+nnoremap <C-n> :call g:Map_Cn()<CR>
+nnoremap <C-t> kkk
 nnoremap <c-h> :call g:Map_Ch()<CR>
 nnoremap <c-s> :call g:Map_Cs()<CR>
-vnoremap <c-h> :call g:Map_Ch()<CR>
-vnoremap <c-s> :call g:Map_Cs()<CR>
+vnoremap <c-h> hhh
+vnoremap <c-s> lll
+vnoremap <c-n> jjj
+vnoremap <c-t> kkk
 
 noremap h h
 noremap t k
@@ -46,16 +57,8 @@ noremap t k
 noremap n j
 noremap s l
 
-func g:Map_Cn()
-  if (!exists('g:termdebug_started') || g:termdebug_started == 0)
-    call feedkeys("nn")
-  else
-    exe ':Over'
-  endif
-endfunc
-
-noremap <C-n> :call g:Map_Cn()<CR>
-noremap <C-t> kk
+nnoremap <c-a> ggVGy``
+vnoremap <c-a> ggVGy``
 
 noremap T :Marks<CR>
 noremap S L
@@ -302,19 +305,14 @@ xmap gS  <Plug>VgSurround
 """"""""""""""""""""""""""""""
 " vim-visual-multi
 """"""""""""""""""""""""""""""
-let g:VM_maps['j'] = 'n'
-let g:VM_maps['J'] = 'N'
-let g:VM_maps['k'] = 't'
-let g:VM_maps['K'] = 'T'
-let g:VM_maps['l'] = 's'
-let g:VM_maps['L'] = 'S'
-let g:VM_maps['c'] = 'b'
-let g:VM_maps['C'] = 'B'
+nmap <leader><c-a> <c-l><c-a>
+let g:VM_leader = ','
+let g:VM_maps = {}
+let g:VM_custom_remaps = {'s' : 'l', ',d' : 'k', ',-' : 'j', '<c-a>' : '<leader>A'}
 
-let g:VM_maps["Select Operator"] = 'gs'
 let g:VM_maps['Find Under']                  = '<c-l>'
 let g:VM_maps['Find Subword Under']          = '<c-l>'
-let g:VM_maps["Select All"]                  = '\A' 
+let g:VM_maps["Select All"]                  = '<leader>A' 
 let g:VM_maps["Start Regex Search"]          = '\/'
 let g:VM_maps["Add Cursor Down"]             = '<C-Down>'
 let g:VM_maps["Add Cursor Up"]               = '<C-Up>'
@@ -353,7 +351,7 @@ let g:VM_maps["Tools Menu"]                  = '\`'
 let g:VM_maps["Show Registers"]              = '\"'
 let g:VM_maps["Case Setting"]                = '\c'
 let g:VM_maps["Toggle Whole Word"]           = '\w'
-let g:VM_maps["Transpose"]                   = '\t'
+"let g:VM_maps["Transpose"]                   = '\t'
 let g:VM_maps["Align"]                       = '\a'
 let g:VM_maps["Duplicate"]                   = '\d'
 let g:VM_maps["Rewrite Last Search"]         = '\r'

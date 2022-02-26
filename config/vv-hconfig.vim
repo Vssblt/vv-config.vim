@@ -15,7 +15,7 @@ set incsearch
 set showmatch 
 set ignorecase
 set viminfo='20,\"50000
-set timeoutlen=1000
+set timeoutlen=10000
 set ttimeoutlen=10
 set updatetime=0
 set clipboard^=unnamed,unnamedplus
