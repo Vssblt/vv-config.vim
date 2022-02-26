@@ -511,7 +511,7 @@ func s:StartDebugCommon(dict)
 
   " Contains breakpoints by file/lnum.  The key is "fname:lnum".
   " Each entry is a list of breakpoint IDs at that position.
-  let s:breakpoint_locations = {}
+  let g:breakpoint_locations = {}
 
   augroup TermDebug
     au BufRead * call s:BufRead()
@@ -691,16 +691,24 @@ function s:EndTermDebug(job_id, exit_code, event)
 
   unlet s:gdbwin
 
-  let g:global_breakpoint_list = s:breakpoint_locations
+  let g:global_breakpoint_list = g:breakpoint_locations
   call s:EndDebugCommon()
   call s:rePlaceSign()
+
+  "unduplication
+  for [key, value] in items(g:global_breakpoint_list)
+    let undup_list=filter(copy(g:global_breakpoint_list[key]), 'index(g:global_breakpoint_list[key], v:val, v:key+1)==-1')
+    let g:global_breakpoint_list[key] = undup_list
+  endfor
   let g:termdebug_started = 0
 endfunc
 
 func s:rePlaceSign()
   let count = 1
   for [key, value] in items(g:global_breakpoint_list)
-    for id in g:global_breakpoint_list[key]
+    let undup_list=filter(copy(g:global_breakpoint_list[key]), 'index(g:global_breakpoint_list[key], v:val, v:key+1)==-1')
+    for id in undup_list
+      echo id
       let entry = split(key, ":")
       call g:CreateBreakpoint(count, 0, "y")
       call g:PlaceSign(count, 0, entry)
@@ -713,7 +721,6 @@ func s:EndDebugCommon()
   let curwinid = win_getid(winnr())
 
   if exists('s:ptybuf') && s:ptybuf
-		echo s:ptybuf
     exe 'bwipe! ' . s:ptybuf
   endif
   if exists('s:asmbufnr') && s:asmbufnr
@@ -826,7 +833,6 @@ func s:HandleDisasmMsg(msg)
 endfunc
 
 func s:CommOutput(job_id, msgs, event)
-
   for msg in a:msgs
     " remove prefixed NL
     if msg[0] == "\n"
@@ -969,7 +975,7 @@ func s:DeleteCommands()
   "  endfor
   "endfor
   unlet s:breakpoints
-  unlet s:breakpoint_locations
+  unlet g:breakpoint_locations
 
   sign undefine debugPC
   for val in s:BreakpointSigns
@@ -1067,15 +1073,15 @@ func g:UnsetBreakpoint(at)
   " Use the fname:lnum format, older gdb can't handle --source.
   let at = empty(a:at) ?
   \ fnameescape(expand('%:p')) . ':' . line('.') : a:at
-  if (has_key(s:breakpoint_locations, at))
-    for id in s:breakpoint_locations[at]
+  if (has_key(g:breakpoint_locations, at))
+    for id in g:breakpoint_locations[at]
       call s:SendCommand('-break-delete ' . id)
       for subid in keys(s:breakpoints[id])
         exe 'sign unplace ' . s:Breakpoint2SignNumber(id, subid)
       endfor
     endfor
     call remove(g:global_breakpoint_list, at)
-    call remove(s:breakpoint_locations, at)
+    call remove(g:breakpoint_locations, at)
   endif
   if do_continue
     Continue
@@ -1110,10 +1116,10 @@ func s:ClearBreakpoint()
   let fname = fnameescape(expand('%:p'))
   let lnum = line('.')
   let bploc = printf('%s:%d', fname, lnum)
-  if has_key(s:breakpoint_locations, bploc)
+  if has_key(g:breakpoint_locations, bploc)
     let idx = 0
     let nr = 0
-    for id in s:breakpoint_locations[bploc]
+    for id in g:breakpoint_locations[bploc]
       if has_key(s:breakpoints, id)
         " Assume this always works, the reply is simply "^done".
         call s:SendCommand('-break-delete ' . id)
@@ -1121,7 +1127,7 @@ func s:ClearBreakpoint()
           exe 'sign unplace ' . s:Breakpoint2SignNumber(id, subid)
         endfor
         unlet s:breakpoints[id]
-        unlet s:breakpoint_locations[bploc][idx]
+        unlet g:breakpoint_locations[bploc][idx]
         let nr = id
         break
       else
@@ -1129,8 +1135,8 @@ func s:ClearBreakpoint()
       endif
     endfor
     if nr != 0
-      if empty(s:breakpoint_locations[bploc])
-        unlet s:breakpoint_locations[bploc]
+      if empty(g:breakpoint_locations[bploc])
+        unlet g:breakpoint_locations[bploc]
       endif
       echomsg 'Breakpoint ' . id . ' cleared from line ' . lnum . '.'
     else
@@ -1575,10 +1581,10 @@ func s:HandleNewBreakpoint(msg, modifiedFlag)
     let entry['lnum'] = lnum
 
     let bploc = printf('%s:%d', fname, lnum)
-    if !has_key(s:breakpoint_locations, bploc)
-      let s:breakpoint_locations[bploc] = []
+    if !has_key(g:breakpoint_locations, bploc)
+      let g:breakpoint_locations[bploc] = []
     endif
-    let s:breakpoint_locations[bploc] += [id]
+    let g:breakpoint_locations[bploc] += [id]
     if !has_key(g:global_breakpoint_list, bploc)
       let g:global_breakpoint_list[bploc] = []
     endif
@@ -1611,8 +1617,6 @@ endfunc
 " Handle deleting a breakpoint
 " Will remove the sign that shows the breakpoint
 func s:HandleBreakpointDelete(msg)
-  echo a:msg
-  debug
   let id = substitute(a:msg, '.*id="\([0-9]*\)\".*', '\1', '') + 0
   if empty(id)
     return
