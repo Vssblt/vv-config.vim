@@ -33,7 +33,7 @@ endfunc
 
 func g:Map_Cn()
   if (!exists('g:termdebug_started') || g:termdebug_started == 0)
-    call feedkeys("nn")
+    call feedkeys("nnn")
   else
     exe ':Over'
   endif
