@@ -167,7 +167,7 @@ func s:StartDebug_internal(dict)
   let b:save_signcolumn = &signcolumn
   let s:signcolumn_buflist = [bufnr()]
 
-  let s:allleft = 0
+  let s:allright = 0
   if exists('g:termdebug_wide')
     if &columns < g:termdebug_wide
     	let s:vertical = 0
@@ -176,7 +176,7 @@ func s:StartDebug_internal(dict)
 			endif
 		else
     	let s:vertical = 1
-    	let s:allleft = 1
+    	let s:allright = 1
     endif
   else
     let s:vertical = 0
@@ -207,6 +207,11 @@ func s:StartDebug_internal(dict)
   if exists('#User#TermdebugStartPost')
     doauto <nomodeline> User TermdebugStartPost
   endif
+
+  call win_gotoid(s:sourcewin)
+  exe 'vertical resize ' . 123
+  call win_gotoid(curwinid)
+
   startinsert
   call g:UnplaceGlobalBreakPointSign()
   call s:LoadBreakPoint()
@@ -214,9 +219,9 @@ endfunc
 
 " Use when debugger didn't start or ended.
 func s:CloseBuffers()
-  exe 'bwipe! ' . s:ptybuf
+  exe 'silent bwipe! ' . s:ptybuf
   if exists('s:asmbufnr') && s:asmbufnr
-		exe 'bwipe! ' . s:asmbufnr
+		exe 'silent bwipe! ' . s:asmbufnr
 	endif
 	if exists('g:termdebug_new_tab') && g:termdebug_new_tab
 		execute('tabclose')
@@ -235,7 +240,7 @@ endfunc
 
 func s:StartDebug_term(dict)
   " Open a terminal window without a job, to run the debugged program in.
-  execute s:vertical ? 'vnew' : 'new'
+  execute s:vertical ? 'rightbelow vnew' : 'rightbelow new'
   let s:pty_job_id = termopen('tail -f /dev/null;#gdb program')
   setlocal undolevels=1000
   if s:pty_job_id == 0
@@ -253,10 +258,6 @@ func s:StartDebug_term(dict)
     " Assuming the source code window will get a signcolumn, use two more
     " columns for that, thus one less for the terminal window.
     exe (&columns / 2 - 1) . "wincmd |"
-    if s:allleft
-      " use the whole left column
-      wincmd H
-    endif
   endif
 
   " Create a hidden terminal window to communicate with gdb
@@ -267,11 +268,11 @@ func s:StartDebug_term(dict)
   " hide terminal buffer
   if s:comm_job_id == 0
     echoerr 'invalid argument (or job table is full) while opening communication terminal window'
-    exe 'bwipe! ' . s:ptybuf
+    exe 'silent bwipe! ' . s:ptybuf
     return
   elseif s:comm_job_id == -1
     echoerr 'Failed to open the communication terminal window'
-    exe 'bwipe! ' . s:ptybuf
+    exe 'silent bwipe! ' . s:ptybuf
     return
   endif
   let comm_job_info = nvim_get_chan_info(s:comm_job_id)
@@ -303,7 +304,7 @@ func s:StartDebug_term(dict)
   setlocal undolevels=1000
   if s:gdb_job_id == 0
     echoerr 'invalid argument (or job table is full) while opening gdb terminal window'
-    exe 'bwipe! ' . s:ptybuf
+    exe 'silent bwipe! ' . s:ptybuf
     return
   elseif s:gdb_job_id == -1
     echoerr 'Failed to open the gdb terminal window'
@@ -437,7 +438,7 @@ func s:StartDebug_prompt(dict)
     \ })
   if s:gdbjob == 0
     echoerr 'invalid argument (or job table is full) while starting gdb job'
-    exe 'bwipe! ' . s:ptybuf
+    exe 'silent bwipe! ' . s:ptybuf
     return
   elseif s:gdbjob == -1
     echoerr 'Failed to start the gdb job'
@@ -721,10 +722,10 @@ func s:EndDebugCommon()
   let curwinid = win_getid(winnr())
 
   if exists('s:ptybuf') && s:ptybuf
-    exe 'bwipe! ' . s:ptybuf
+    exe 'silent bwipe! ' . s:ptybuf
   endif
   if exists('s:asmbufnr') && s:asmbufnr
-		exe 'bwipe! ' . s:asmbufnr
+		exe 'silent bwipe! ' . s:asmbufnr
 	endif
 	if exists('g:termdebug_new_tab') && g:termdebug_new_tab >= 1
 		execute('tabclose')
