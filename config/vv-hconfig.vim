@@ -5,13 +5,12 @@ set lazyredraw
 set wildmenu
 set laststatus=2
 set showtabline=2
-"set rnu
 set nu
 set relativenumber
 set encoding=utf8
 set fileencodings=ucs-bom,utf8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set hlsearch 
-set incsearch
+"set incsearch
 set showmatch 
 set ignorecase
 set viminfo='20,\"50000
@@ -34,6 +33,7 @@ set smarttab
 set softtabstop=0
 set hidden
 set synmaxcol=180    " Normally, the column count will not overtake 180.
+set matchpairs+=
 let g:localvimrc_ask=0
 "let g:localvimrc_persistent=2
 let g:localvimrc_sandbox=0

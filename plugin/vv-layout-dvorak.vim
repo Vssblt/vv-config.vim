@@ -15,104 +15,107 @@
 
 tnoremap <C-h> <C-\><C-n>
 
-func g:Map_Cs()
-  if (!exists('g:termdebug_started') || g:termdebug_started == 0)
-    execute("normal! lll")
-  else
-    exe ':Step'
-  endif
-endfunc
-
-func g:Map_Ch()
-  if (!exists('g:termdebug_started') || g:termdebug_started == 0)
-    execute("normal! hhh")
-  else
-    exe ':Finish'
-  endif
-endfunc
-
-func g:Map_Cn()
-  if (!exists('g:termdebug_started') || g:termdebug_started == 0)
-    call feedkeys("nnn")
-  else
-    exe ':Over'
-  endif
-endfunc
-
-nnoremap <C-n> :call g:Map_Cn()<CR>
+nnoremap <C-n> jjj
 nnoremap <C-t> kkk
-nnoremap <c-h> :call g:Map_Ch()<CR>
-nnoremap <c-s> :call g:Map_Cs()<CR>
-vnoremap <c-h> hhh
-vnoremap <c-s> lll
-vnoremap <c-n> jjj
-vnoremap <c-t> kkk
+nnoremap <c-h> hhh
+nnoremap <c-s> lll
+xnoremap <c-h> hhh
+xnoremap <c-s> lll
+xnoremap <c-n> jjj
+xnoremap <c-t> kkk
 
-noremap h h
-noremap t k
-noremap n j
-noremap s l
+nnoremap h h
+nnoremap t k
+nnoremap n j
+nnoremap s l
+xnoremap h h
+xnoremap t k
+xnoremap n j
+xnoremap s l
 
-noremap t k
-noremap n j
-noremap s l
+nnoremap t k
+nnoremap n j
+nnoremap s l
+xnoremap t k
+xnoremap n j
+xnoremap s l
 
-nnoremap <c-a> ggVGy``
-vnoremap <c-a> ggVGy``
-
-noremap T :Marks<CR>
-noremap S L
-noremap N J
+nnoremap T :Marks<CR>
+nnoremap S L
+nnoremap N J
+xnoremap T :Marks<CR>
+xnoremap S L
+xnoremap N J
 
 nnoremap - -
 nnoremap + +
 
 nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
-vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
+xnoremap <silent> <leader>k :call InterestingWords('v')<cr>
 nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 nnoremap <silent> l :call WordNavigation(1)<cr>
 nnoremap <silent> L :call WordNavigation(0)<cr>
 
-noremap j 12<c-y>
-noremap k 12<c-e>
+nnoremap j 12<c-y>
+nnoremap k 12<c-e>
+xnoremap j 12<c-y>
+xnoremap k 12<c-e>
 
-noremap b c
-noremap r :bnext<CR>
+nnoremap b c
+nnoremap r :bnext<CR>
+xnoremap b c
+xnoremap r :bnext<CR>
 nmap r <Plug>AirlineSelectNextTab
 nmap c <Plug>AirlineSelectPrevTab
 nmap <leader>b c:sp<CR>r:bd<cr>
 
-noremap <ScrollWheelUp> <C-Y><C-Y><C-Y><C-Y>
-noremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
+nnoremap <ScrollWheelUp> <C-Y><C-Y><C-Y><C-Y>
+nnoremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
+xnoremap <ScrollWheelUp> <C-Y><C-Y><C-Y><C-Y>
+xnoremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
 inoremap <ScrollWheelUp> <C-Y><C-Y><C-Y><C-Y>
 inoremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
 
-noremap [ [[
-noremap ] ]]
+nnoremap <C-e> <C-i>
 
-noremap <C-e> <C-i>
+nnoremap R :source $MYVIMRC<CR>
 
-noremap R :source $MYVIMRC<CR>
+nnoremap <leader>- $
+nnoremap <leader>d ^
+xnoremap <leader>- $
+xnoremap <leader>d ^
 
-noremap <leader>- $
-noremap <leader>d ^
-
-nnoremap <space><space> <Esc>/<++><CR>:nohlsearch<CR>4xi
+nnoremap <space><space> <Esc>/\(\(\[TODO\:\)\\|\(<+\)\).*\(\(\]\)\\|\(+>\)\)<CR>:nohlsearch<CR>"_cgn
 
 " toggle
-noremap <space>t za  
+nnoremap <space>t za  
 
 " create
-noremap <space>c zf  
+nnoremap <space>c zf  
 
 " delete
-noremap <space>d zd
+nnoremap <space>d zd
 
 " next
-noremap <space>k zj
+nnoremap <space>k zj
 
 " prev
-noremap <space>j zk
+nnoremap <space>j zk
+
+" toggle
+xnoremap <space>t za  
+
+" create
+xnoremap <space>c zf  
+
+" delete
+xnoremap <space>d zd
+
+" next
+xnoremap <space>k zj
+
+" prev
+xnoremap <space>j zk
 
 nmap <leader>uh <Plug>(easymotion-linebackward)
 nmap <leader>ut <Plug>(easymotion-k)
@@ -120,12 +123,12 @@ nmap <leader>un <Plug>(easymotion-j)
 nmap <leader>us <Plug>(easymotion-lineforward)
 nmap <leader><leader>. <Plug>(easymotion-s)
 nmap <leader>. <Plug>(easymotion-sn)
-vmap <leader>uh <Plug>(easymotion-linebackward)
-vmap <leader>ut <Plug>(easymotion-k)
-vmap <leader>un <Plug>(easymotion-j)
-vmap <leader>us <Plug>(easymotion-lineforward)
-vmap <leader><leader>. <Plug>(easymotion-s)
-vmap <leader>. <Plug>(easymotion-sn)
+xmap <leader>uh <Plug>(easymotion-linebackward)
+xmap <leader>ut <Plug>(easymotion-k)
+xmap <leader>un <Plug>(easymotion-j)
+xmap <leader>us <Plug>(easymotion-lineforward)
+xmap <leader><leader>. <Plug>(easymotion-s)
+xmap <leader>. <Plug>(easymotion-sn)
 omap <leader>uh <Plug>(easymotion-linebackward)
 omap <leader>ut <Plug>(easymotion-k)
 omap <leader>un <Plug>(easymotion-j)
@@ -133,13 +136,15 @@ omap <leader>us <Plug>(easymotion-lineforward)
 omap <leader><leader>. <Plug>(easymotion-s)
 omap <leader>. <Plug>(easymotion-sn)
 
-noremap <leader>; :TlistToggle<CR>
-noremap <leader>q :NERDTreeToggle<CR>
-noremap <leader>j :GundoToggle<CR>
+nnoremap <leader>; :TlistToggle<CR>
+nnoremap <leader>q :NERDTreeToggle<CR>
+nnoremap <leader>j :GundoToggle<CR>
 
 nmap . <Plug>(choosewin)
-noremap > .
-noremap < ,
+nnoremap > .
+nnoremap < ,
+xnoremap > .
+xnoremap < ,
 
 function! CopyAppend()
 	if g:with_x11 == 1
@@ -159,9 +164,9 @@ function! CutAppend()
 endfunction
 
 nnoremap <leader>yy :call CopyAppend()<CR>
-vnoremap <leader>yy :call CopyAppend()<CR>
+xnoremap <leader>yy :call CopyAppend()<CR>
 nnoremap <leader>yd :call CutAppend()<CR>
-vnoremap <leader>yd :call CutAppend()<CR>
+xnoremap <leader>yd :call CutAppend()<CR>
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
@@ -175,13 +180,13 @@ nnoremap # :b#<CR>
 """"""""""""""""""""""""""""""
 " Floaterm
 """"""""""""""""""""""""""""""
-noremap <leader><leader>n :FloatermNew<CR>
-noremap <leader><leader>h :FloatermHide<CR>
-noremap ,,h :FloatermHide<CR>
-noremap <leader><leader>s :FloatermShow<CR>
-noremap <leader><leader>l :FloatermNext<CR>
-noremap <leader><leader>L :FloatermPrev<CR>
-noremap <leader><leader>i :FloatermNew
+nnoremap <leader><leader>n :FloatermNew<CR>
+nnoremap <leader><leader>h :FloatermHide<CR>
+nnoremap ,,h :FloatermHide<CR>
+nnoremap <leader><leader>s :FloatermShow<CR>
+nnoremap <leader><leader>l :FloatermNext<CR>
+nnoremap <leader><leader>L :FloatermPrev<CR>
+nnoremap <leader><leader>i :FloatermNew
 
 inoremap <C-BS> <C-W>
 inoremap  <C-W>
@@ -231,24 +236,25 @@ endfunc
 "nmap <leader>a :Ranger<CR><C-h>:setlocal nonu<CR>:setlocal norelativenumber<CR>:call rainbow#disable()<CR>i
 nmap <leader>a :Ranger<CR>
 omap <leader>a :Ranger<CR>
-vmap <leader>a :Ranger<CR>
+xmap <leader>a :Ranger<CR>
 nmap <leader>e :Files<CR>
 omap <leader>e :Files<CR>
-vmap <leader>e :Files<CR>
+xmap <leader>e :Files<CR>
 nnoremap B :Buffer<CR>
 
 nmap <leader>o :GFiles<CR>
 omap <leader>o :GFiles<CR>
-vmap <leader>o :GFiles<CR>
+xmap <leader>o :GFiles<CR>
 
 nmap <leader><leader>o :GFiles?<CR>
 omap <leader><leader>o :GFiles?<CR>
-vmap <leader><leader>o :GFiles?<CR>
+xmap <leader><leader>o :GFiles?<CR>
 
 """"""""""""""""""""""""""""""
 " coc
 """"""""""""""""""""""""""""""
-noremap <space>y :<C-u>CocList -A --normal yank<cr>
+nnoremap <space>y :<C-u>CocList -A --normal yank<cr>
+xnoremap <space>y :<C-u>CocList -A --normal yank<cr>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -265,27 +271,25 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 nnoremap <leader><Tab> :call CocAction('jumpDefinition', 'drop')<CR>
-vnoremap <leader><Tab> :call CocAction('jumpDefinition', 'drop')<CR>
+xnoremap <leader><Tab> :call CocAction('jumpDefinition', 'drop')<CR>
 
 nnoremap <leader><CR> :call CocAction('jumpDefinition', 'split')<CR>
-vnoremap <leader><CR> :call CocAction('jumpDefinition', 'split')<CR>
+xnoremap <leader><CR> :call CocAction('jumpDefinition', 'split')<CR>
 nmap <leader><space> <Plug>(coc-references)
 
 nmap gn <Plug>(coc-diagnostic-next-error)
 nmap gp <Plug>(coc-diagnostic-prev-error)
 nmap gi <Plug>(coc-diagnostic-info)
 nmap g= <Plug>(coc-format-selected)
-vmap g= <Plug>(coc-format-selected)
+xmap g= <Plug>(coc-format-selected)
 nmap ga= <Plug>(coc-format)
 nmap gr <Plug>(coc-rename)
+nmap g<space> :<C-u>CocFzfList<CR>
+comm! -nargs=? -bang A CocCommand clangd.switchSourceHeader
+comm! -nargs=? -bang AS CocCommand clangd.switchSourceHeader split
+comm! -nargs=? -bang AV CocCommand clangd.switchSourceHeader vsplit
 "nmap bna <Plug>(coc-diagnostic-next)
 "nmap bpa <Plug>(coc-diagnostic-prev)
-
-""""""""""""""""""""""""""""""
-" vim-linemovement
-""""""""""""""""""""""""""""""
-let g:linemovement_up="<c-j>"
-let g:linemovement_down="<c-k>"
 
 """"""""""""""""""""""""""""""
 " vim-surround
@@ -603,4 +607,9 @@ function! TermDebug_run(program)
 endfunc
 
 nnoremap <CR> :ToggleBreak<CR>
-noremap <leader>c :Continue<CR>
+nnoremap <leader>c :Continue<CR>
+
+if &diff != 0
+nnoremap dg :diffget<CR>
+xnoremap dg :diffget<CR>
+endif 

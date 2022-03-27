@@ -6,7 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'Vssblt/vv-config.vim'
 
-    "****************************************************************************************************************************************************************************************************
+    "*************************************************************************************
     "Those plugins take effect automatically.
     "
     Plug 'ryanoasis/vim-devicons'
@@ -42,7 +42,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'unblevable/quick-scope'
 
-    "****************************************************************************************************************************************************************************************************
+    "*************************************************************************************
     Plug 'lambdalisue/suda.vim'
 		" Re-open a current file with sudo
     " :SudaRead
@@ -161,31 +161,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'Vssblt/vim-choosewin'
     "type . to switch window
 
-    Plug 'Vssblt/a.vim'
-    ":A
-    "go .h or .cpp
-    "
-    ":AS
-    "A and spilt
-    "
-    ":AV
-    "A and vspilt
-    "
-    ":AT
-    "A and new tab
-    "
-    ":IH
-    "current cursor header
-    "
-    ":IHS
-    "current cursor header and spilt
-    "
-    ":IHV
-    "current cursor header and vspilt
-    "
-    ":IHT
-    "current cursor header and open in new tab
-
     Plug 'mg979/vim-visual-multi'
     "ctrl + n
     "select current word and create a cursor
@@ -289,7 +264,14 @@ call plug#begin('~/.config/nvim/plugged')
     "[ydc]i[",[]{}().<>']
     "copy, delete or change text between the characters.
     
-    "*****************************************************************************
+    Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+    " gc 
+    " Add doxygen document on class, function or the other definitions.
+    " <c-n> 
+    " Jump forward position.
+    " <c-t>
+    " Jump backward position.
+    "*************************************************************************************
     "Other pluins.
 
     Plug 'sainnhe/sonokai'
@@ -325,11 +307,15 @@ call plug#begin('~/.config/nvim/plugged')
  
     Plug 'tpope/vim-dispatch'
 
-    Plug 'Vssblt/vim-linemovement'
-
     Plug 'tpope/vim-surround'
     "
     
     Plug 'aperezdc/vim-template'
+
+    "
+    Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
+    Plug 'junegunn/fzf.vim' " needed for previews
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'antoinemadec/coc-fzf'
 
 call plug#end()
