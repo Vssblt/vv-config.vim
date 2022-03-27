@@ -109,7 +109,7 @@ augroup autoformat_settings
 augroup END
 
 let g:termdebug_wide = 160
-let g:termdebug_disasm_window = 17
+let g:termdebug_disasm_window = 0
 let g:termdebug_new_tab = 1
 
 """"""""""""""""""""""""""""""

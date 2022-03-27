@@ -196,9 +196,9 @@ func s:StartDebug_internal(dict)
     call s:StartDebug_term(a:dict)
   endif
 
+  let curwinid = win_getid(winnr())
   if exists('g:termdebug_disasm_window')
-    if g:termdebug_disasm_window
-      let curwinid = win_getid(winnr())
+    if g:termdebug_disasm_window > 0
       call s:GotoAsmwinOrCreateIt()
       call win_gotoid(curwinid)
     endif
@@ -298,7 +298,7 @@ func s:StartDebug_term(dict)
   " Adding arguments requested by the user
   let gdb_cmd += gdb_args
 
-  execute 'new'
+  execute s:vertical ? 'rightbelow new': 'leftabove new'
   " call ch_log('executing "' . join(gdb_cmd) . '"')
   let s:gdb_job_id = termopen(gdb_cmd, {'on_exit': function('s:EndTermDebug')})
   setlocal undolevels=1000
