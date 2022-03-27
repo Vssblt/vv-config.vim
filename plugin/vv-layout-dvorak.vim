@@ -608,6 +608,7 @@ endfunc
 
 nnoremap <CR> :ToggleBreak<CR>
 nnoremap <leader>c :Continue<CR>
+nnoremap <leader>r :Run<CR>
 
 if &diff != 0
 nnoremap dg :diffget<CR>
