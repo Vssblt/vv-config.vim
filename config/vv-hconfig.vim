@@ -101,6 +101,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ }
 let NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 50
+let g:NERDTreeWinPos = "right"
 
 
 """"""""""""""""""""""""""""""

@@ -21,7 +21,7 @@ execute ':source' g:plugindir."/config/vv-hconfig.vim"
 let Tlist_WinWidth = 40
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Show_One_File = 1
-let Tlist_Use_Right_Window = 0
+let Tlist_Use_Right_Window = 1
 let Tlist_Show_Menu = 1
 let Tlist_Auto_Open = 0
 let g:TagList_showNum = 0
@@ -36,7 +36,7 @@ let g:EasyMotion_smartcase = 1
 """"""""""""""""""""""""""""""
 " choosewin settings
 """"""""""""""""""""""""""""""
-let g:choosewin_overlay_enable = 1
+let g:choosewin_overlay_enable = 0
 let g:choosewin_label = "aoeuidhtns"
 
 """"""""""""""""""""""""""""""
@@ -83,6 +83,7 @@ let g:coc_global_extensions = [
 """"""""""""""""""""""""""""""
 execute ":colorscheme sonokai"
 highlight LineNr term=bold cterm=NONE ctermfg=red ctermbg=NONE gui=NONE guifg=red guibg=NONE
+highlight FloatermBorder ctermfg=green cterm=bold
 
 """"""""""""""""""""""""""""""
 " vim-glaive settings

@@ -210,6 +210,9 @@ func s:StartDebug_internal(dict)
 
   call win_gotoid(s:sourcewin)
   exe 'vertical resize ' . 125
+  execute s:vertical ? 1 : 'resize ' . 110
+  call win_gotoid(s:gdbwin)
+  exe 'resize ' . 25
   call win_gotoid(curwinid)
 
   startinsert
