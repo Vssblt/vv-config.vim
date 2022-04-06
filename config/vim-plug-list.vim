@@ -9,6 +9,8 @@ call plug#begin('~/.config/nvim/plugged')
     "*************************************************************************************
     " Those plugins take effect automatically.
     "
+    Plug 'Vssblt/vim-airline-cwd'
+
     Plug 'ryanoasis/vim-devicons'
 
     Plug 'embear/vim-localvimrc'
@@ -132,15 +134,6 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'Vssblt/taglist.vim'
     " type <leader>; to open taglist window.
-
-    Plug 'scrooloose/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    " :NERDTreeToggle
-    " Open dir tree
-    " 
-    " <leader>q
-    " Opendir tree
 
     Plug 'easymotion/vim-easymotion'
     " <leader>.

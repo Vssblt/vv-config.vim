@@ -76,6 +76,7 @@ let g:coc_global_extensions = [
     \ 'coc-highlight',
     \ 'coc-html',
     \ 'coc-yank',
+    \ 'coc-explorer', 
   \ ]
 
 """"""""""""""""""""""""""""""

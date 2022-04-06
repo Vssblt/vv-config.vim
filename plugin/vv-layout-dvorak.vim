@@ -1,11 +1,12 @@
 "         _                              __ _       
+
 "  __   _(_)_ __ ___     ___ ___  _ __  / _(_) __ _ 
 "  \ \ / / | '_ ` _ \   / __/ _ \| '_ \| |_| |/ _` |
 "   \ V /| | | | | | | | (_| (_) | | | |  _| | (_| |
 "    \_/ |_|_| |_| |_|  \___\___/|_| |_|_| |_|\__, |
 "                                             |___/ 
-"键盘上有很多反人类键，例如dvorak键位下的 'f'，'x', 'l', '/', '='，这些按键要么在快速
-"输入时需要大范围移动手指（f, x），要么频繁使用小指（l, /, =, 三个按键全是一个小指），
+"键盘上有很多反人类键，例如dvorak键位下的 'f'，'', 'l', '/', '='，这些按键要么在快速
+"输入时需要大范围移动手指（f, ），要么频繁使用小指（l, /, =, 三个按键全是一个小指），
 "映射时应尽量避免使这些按键
 
 """"""""""""""""""""""""""""""
@@ -84,6 +85,8 @@ nnoremap <leader>- $
 nnoremap <leader>d ^
 xnoremap <leader>- $
 xnoremap <leader>d ^
+nnoremap d<leader>- d$
+nnoremap d<leader>d d^
 
 nnoremap <space><space> <Esc>/\(\(\[TODO\:\)\\|\(<+\)\).*\(\(\]\)\\|\(+>\)\)<CR>:nohlsearch<CR>"_cgn
 
@@ -137,14 +140,16 @@ omap <leader><leader>. <Plug>(easymotion-s)
 omap <leader>. <Plug>(easymotion-sn)
 
 nnoremap <leader>; :TlistToggle<CR>
-nnoremap <leader>q :NERDTreeToggle<CR>
+nnoremap <leader>q :CocCommand explorer --preset right<CR>
 nnoremap <leader>j :GundoToggle<CR>
 
 nmap . <Plug>(choosewin)
+nnoremap '' .
 nnoremap > .
 nnoremap < ,
 xnoremap > .
 xnoremap < ,
+xnoremap '' .
 
 function! CopyAppend()
 	if g:with_x11 == 1
@@ -370,8 +375,8 @@ let g:VM_maps["Run Normal"]                  = '\z'
 let g:VM_maps["Run Last Normal"]             = '\Z'
 let g:VM_maps["Run Visual"]                  = '\v'
 let g:VM_maps["Run Last Visual"]             = '\V'
-let g:VM_maps["Run Ex"]                      = '\x'
-let g:VM_maps["Run Last Ex"]                 = '\X'
+let g:VM_maps["Run Ex"]                      = '\'
+let g:VM_maps["Run Last Ex"]                 = '\'
 let g:VM_maps["Run Macro"]                   = '\@'
 let g:VM_maps["Align Char"]                  = '\<'
 let g:VM_maps["Align Regex"]                 = '\>'
@@ -1061,6 +1066,665 @@ nmap <leader>pw <Plug>(PickerStag)
 nmap <leader>po <Plug>(PickerBufferTag)
 nmap <leader>ph <Plug>(PickerHelp)
 
+xmap <tab>a<CR> 1n
+xmap <tab>o<CR> 2n
+xmap <tab>e<CR> 3n
+xmap <tab>u<CR> 4n
+xmap <tab>i<CR> 5n
+xmap <tab>d<CR> 6n
+xmap <tab>h<CR> 7n
+xmap <tab>t<CR> 8n
+xmap <tab>n<CR> 9n
+
+xmap <tab>as<CR> 10n
+xmap <tab>aa<CR> 11n
+xmap <tab>ao<CR> 12n
+xmap <tab>ae<CR> 13n
+xmap <tab>au<CR> 14n
+xmap <tab>ai<CR> 15n
+xmap <tab>ad<CR> 16n
+xmap <tab>ah<CR> 17n
+xmap <tab>at<CR> 18n
+xmap <tab>an<CR> 19n
+
+xmap <tab>os<CR> 20n
+xmap <tab>oa<CR> 21n
+xmap <tab>oo<CR> 22n
+xmap <tab>oe<CR> 23n
+xmap <tab>ou<CR> 24n
+xmap <tab>oi<CR> 25n
+xmap <tab>od<CR> 26n
+xmap <tab>oh<CR> 27n
+xmap <tab>ot<CR> 28n
+xmap <tab>on<CR> 29n
+
+xmap <tab>es<CR> 30n
+xmap <tab>ea<CR> 31n
+xmap <tab>eo<CR> 32n
+xmap <tab>ee<CR> 33n
+xmap <tab>eu<CR> 34n
+xmap <tab>ei<CR> 35n
+xmap <tab>ed<CR> 36n
+xmap <tab>eh<CR> 37n
+xmap <tab>et<CR> 38n
+xmap <tab>en<CR> 39n
+
+xmap <tab>us<CR> 40n
+xmap <tab>ua<CR> 41n
+xmap <tab>uo<CR> 42n
+xmap <tab>ue<CR> 43n
+xmap <tab>uu<CR> 44n
+xmap <tab>ui<CR> 45n
+xmap <tab>ud<CR> 46n
+xmap <tab>uh<CR> 47n
+xmap <tab>ut<CR> 48n
+xmap <tab>un<CR> 49n
+
+xmap <tab>is<CR> 50n
+xmap <tab>ia<CR> 51n
+xmap <tab>io<CR> 52n
+xmap <tab>ie<CR> 53n
+xmap <tab>iu<CR> 54n
+xmap <tab>ii<CR> 55n
+xmap <tab>id<CR> 56n
+xmap <tab>ih<CR> 57n
+xmap <tab>it<CR> 58n
+xmap <tab>in<CR> 59n
+
+xmap <tab>ds<CR> 60n
+xmap <tab>da<CR> 61n
+xmap <tab>do<CR> 62n
+xmap <tab>de<CR> 63n
+xmap <tab>du<CR> 64n
+xmap <tab>di<CR> 65n
+xmap <tab>dd<CR> 66n
+xmap <tab>dh<CR> 67n
+xmap <tab>dt<CR> 68n
+xmap <tab>dn<CR> 69n
+
+xmap <tab>hs<CR> 70n
+xmap <tab>ha<CR> 71n
+xmap <tab>ho<CR> 72n
+xmap <tab>he<CR> 73n
+xmap <tab>hu<CR> 74n
+xmap <tab>hi<CR> 75n
+xmap <tab>hd<CR> 76n
+xmap <tab>hh<CR> 77n
+xmap <tab>ht<CR> 78n
+xmap <tab>hn<CR> 79n
+
+xmap <tab>ts<CR> 80n
+xmap <tab>ta<CR> 81n
+xmap <tab>to<CR> 82n
+xmap <tab>te<CR> 83n
+xmap <tab>tu<CR> 84n
+xmap <tab>ti<CR> 85n
+xmap <tab>td<CR> 86n
+xmap <tab>th<CR> 87n
+xmap <tab>tt<CR> 88n
+xmap <tab>tn<CR> 89n
+
+xmap <tab>ns<CR> 90n
+xmap <tab>na<CR> 91n
+xmap <tab>no<CR> 92n
+xmap <tab>ne<CR> 93n
+xmap <tab>nu<CR> 94n
+xmap <tab>ni<CR> 95n
+xmap <tab>nd<CR> 96n
+xmap <tab>nh<CR> 97n
+xmap <tab>nt<CR> 98n
+xmap <tab>nn<CR> 99n
+
+xmap <tab>asa<CR> 101n
+xmap <tab>aso<CR> 102n
+xmap <tab>ase<CR> 103n
+xmap <tab>asu<CR> 104n
+xmap <tab>asi<CR> 105n
+xmap <tab>asd<CR> 106n
+xmap <tab>ash<CR> 107n
+xmap <tab>ast<CR> 108n
+xmap <tab>asn<CR> 109n
+
+xmap <tab>aas<CR> 110n
+xmap <tab>aaa<CR> 111n
+xmap <tab>aao<CR> 112n
+xmap <tab>aae<CR> 113n
+xmap <tab>aau<CR> 114n
+xmap <tab>aai<CR> 115n
+xmap <tab>aad<CR> 116n
+xmap <tab>aah<CR> 117n
+xmap <tab>aat<CR> 118n
+xmap <tab>aan<CR> 119n
+
+xmap <tab>aos<CR> 120n
+xmap <tab>aoa<CR> 121n
+xmap <tab>aoo<CR> 122n
+xmap <tab>aoe<CR> 123n
+xmap <tab>aou<CR> 124n
+xmap <tab>aoi<CR> 125n
+xmap <tab>aod<CR> 126n
+xmap <tab>aoh<CR> 127n
+xmap <tab>aot<CR> 128n
+xmap <tab>aon<CR> 129n
+
+xmap <tab>aes<CR> 130n
+xmap <tab>aea<CR> 131n
+xmap <tab>aeo<CR> 132n
+xmap <tab>aee<CR> 133n
+xmap <tab>aeu<CR> 134n
+xmap <tab>aei<CR> 135n
+xmap <tab>aed<CR> 136n
+xmap <tab>aeh<CR> 137n
+xmap <tab>aet<CR> 138n
+xmap <tab>aen<CR> 139n
+
+xmap <tab>aus<CR> 140n
+xmap <tab>aua<CR> 141n
+xmap <tab>auo<CR> 142n
+xmap <tab>aue<CR> 143n
+xmap <tab>auu<CR> 144n
+xmap <tab>aui<CR> 145n
+xmap <tab>aud<CR> 146n
+xmap <tab>auh<CR> 147n
+xmap <tab>aut<CR> 148n
+xmap <tab>aun<CR> 149n
+
+xmap <tab>ais<CR> 150n
+xmap <tab>aia<CR> 151n
+xmap <tab>aio<CR> 152n
+xmap <tab>aie<CR> 153n
+xmap <tab>aiu<CR> 154n
+xmap <tab>aii<CR> 155n
+xmap <tab>aid<CR> 156n
+xmap <tab>aih<CR> 157n
+xmap <tab>ait<CR> 158n
+xmap <tab>ain<CR> 159n
+
+xmap <tab>ads<CR> 160n
+xmap <tab>ada<CR> 161n
+xmap <tab>ado<CR> 162n
+xmap <tab>ade<CR> 163n
+xmap <tab>adu<CR> 164n
+xmap <tab>adi<CR> 165n
+xmap <tab>add<CR> 166n
+xmap <tab>adh<CR> 167n
+xmap <tab>adt<CR> 168n
+xmap <tab>adn<CR> 169n
+
+xmap <tab>ahs<CR> 170n
+xmap <tab>aha<CR> 171n
+xmap <tab>aho<CR> 172n
+xmap <tab>ahe<CR> 173n
+xmap <tab>ahu<CR> 174n
+xmap <tab>ahi<CR> 175n
+xmap <tab>ahd<CR> 176n
+xmap <tab>ahh<CR> 177n
+xmap <tab>aht<CR> 178n
+xmap <tab>ahn<CR> 179n
+
+xmap <tab>ats<CR> 180n
+xmap <tab>ata<CR> 181n
+xmap <tab>ato<CR> 182n
+xmap <tab>ate<CR> 183n
+xmap <tab>atu<CR> 184n
+xmap <tab>ati<CR> 185n
+xmap <tab>atd<CR> 186n
+xmap <tab>ath<CR> 187n
+xmap <tab>att<CR> 188n
+xmap <tab>atn<CR> 189n
+
+xmap <tab>ans<CR> 190n
+xmap <tab>ana<CR> 191n
+xmap <tab>ano<CR> 192n
+xmap <tab>ane<CR> 193n
+xmap <tab>anu<CR> 194n
+xmap <tab>ani<CR> 195n
+xmap <tab>and<CR> 196n
+xmap <tab>anh<CR> 197n
+xmap <tab>ant<CR> 198n
+xmap <tab>ann<CR> 199n
+
+xmap <tab>asa<CR> 201n
+xmap <tab>aso<CR> 202n
+xmap <tab>ase<CR> 203n
+xmap <tab>asu<CR> 204n
+xmap <tab>asi<CR> 205n
+xmap <tab>asd<CR> 206n
+xmap <tab>ash<CR> 207n
+xmap <tab>ast<CR> 208n
+xmap <tab>asn<CR> 209n
+
+xmap <tab>aas<CR> 210n
+xmap <tab>aaa<CR> 211n
+xmap <tab>aao<CR> 212n
+xmap <tab>aae<CR> 213n
+xmap <tab>aau<CR> 214n
+xmap <tab>aai<CR> 215n
+xmap <tab>aad<CR> 216n
+xmap <tab>aah<CR> 217n
+xmap <tab>aat<CR> 218n
+xmap <tab>aan<CR> 219n
+
+xmap <tab>aos<CR> 220n
+xmap <tab>aoa<CR> 221n
+xmap <tab>aoo<CR> 222n
+xmap <tab>aoe<CR> 223n
+xmap <tab>aou<CR> 224n
+xmap <tab>aoi<CR> 225n
+xmap <tab>aod<CR> 226n
+xmap <tab>aoh<CR> 227n
+xmap <tab>aot<CR> 228n
+xmap <tab>aon<CR> 229n
+
+xmap <tab>aes<CR> 230n
+xmap <tab>aea<CR> 231n
+xmap <tab>aeo<CR> 232n
+xmap <tab>aee<CR> 233n
+xmap <tab>aeu<CR> 234n
+xmap <tab>aei<CR> 235n
+xmap <tab>aed<CR> 236n
+xmap <tab>aeh<CR> 237n
+xmap <tab>aet<CR> 238n
+xmap <tab>aen<CR> 139n
+
+xmap <tab>aus<CR> 240n
+xmap <tab>aua<CR> 241n
+xmap <tab>auo<CR> 242n
+xmap <tab>aue<CR> 243n
+xmap <tab>auu<CR> 244n
+xmap <tab>aui<CR> 245n
+xmap <tab>aud<CR> 246n
+xmap <tab>auh<CR> 247n
+xmap <tab>aut<CR> 248n
+xmap <tab>aun<CR> 249n
+
+xmap <tab>ais<CR> 250n
+xmap <tab>aia<CR> 251n
+xmap <tab>aio<CR> 252n
+xmap <tab>aie<CR> 253n
+xmap <tab>aiu<CR> 254n
+xmap <tab>aii<CR> 255n
+xmap <tab>aid<CR> 256n
+xmap <tab>aih<CR> 257n
+xmap <tab>ait<CR> 258n
+xmap <tab>ain<CR> 259n
+
+xmap <tab>ads<CR> 260n
+xmap <tab>ada<CR> 261n
+xmap <tab>ado<CR> 262n
+xmap <tab>ade<CR> 263n
+xmap <tab>adu<CR> 264n
+xmap <tab>adi<CR> 265n
+xmap <tab>add<CR> 266n
+xmap <tab>adh<CR> 267n
+xmap <tab>adt<CR> 268n
+xmap <tab>adn<CR> 269n
+
+xmap <tab>ahs<CR> 270n
+xmap <tab>aha<CR> 271n
+xmap <tab>aho<CR> 272n
+xmap <tab>ahe<CR> 273n
+xmap <tab>ahu<CR> 274n
+xmap <tab>ahi<CR> 275n
+xmap <tab>ahd<CR> 276n
+xmap <tab>ahh<CR> 277n
+xmap <tab>aht<CR> 278n
+xmap <tab>ahn<CR> 279n
+
+xmap <tab>ats<CR> 280n
+xmap <tab>ata<CR> 281n
+xmap <tab>ato<CR> 282n
+xmap <tab>ate<CR> 283n
+xmap <tab>atu<CR> 284n
+xmap <tab>ati<CR> 285n
+xmap <tab>atd<CR> 286n
+xmap <tab>ath<CR> 287n
+xmap <tab>att<CR> 288n
+xmap <tab>atn<CR> 289n
+
+xmap <tab>ans<CR> 290n
+xmap <tab>ana<CR> 291n
+xmap <tab>ano<CR> 292n
+xmap <tab>ane<CR> 293n
+xmap <tab>anu<CR> 294n
+xmap <tab>ani<CR> 295n
+xmap <tab>and<CR> 296n
+xmap <tab>anh<CR> 297n
+xmap <tab>ant<CR> 298n
+xmap <tab>ann<CR> 299n
+
+
+
+
+
+
+
+xmap <tab><tab>a<CR> 1t
+xmap <tab><tab>o<CR> 2t
+xmap <tab><tab>e<CR> 3t
+xmap <tab><tab>u<CR> 4t
+xmap <tab><tab>i<CR> 5t
+xmap <tab><tab>d<CR> 6t
+xmap <tab><tab>h<CR> 7t
+xmap <tab><tab>t<CR> 8t
+xmap <tab><tab>n<CR> 9t
+
+xmap <tab><tab>as<CR> 10t
+xmap <tab><tab>aa<CR> 11t
+xmap <tab><tab>ao<CR> 12t
+xmap <tab><tab>ae<CR> 13t
+xmap <tab><tab>au<CR> 14t
+xmap <tab><tab>ai<CR> 15t
+xmap <tab><tab>ad<CR> 16t
+xmap <tab><tab>ah<CR> 17t
+xmap <tab><tab>at<CR> 18t
+xmap <tab><tab>an<CR> 19t
+
+xmap <tab><tab>os<CR> 20t
+xmap <tab><tab>oa<CR> 21t
+xmap <tab><tab>oo<CR> 22t
+xmap <tab><tab>oe<CR> 23t
+xmap <tab><tab>ou<CR> 24t
+xmap <tab><tab>oi<CR> 25t
+xmap <tab><tab>od<CR> 26t
+xmap <tab><tab>oh<CR> 27t
+xmap <tab><tab>ot<CR> 28t
+xmap <tab><tab>on<CR> 29t
+
+xmap <tab><tab>es<CR> 30t
+xmap <tab><tab>ea<CR> 31t
+xmap <tab><tab>eo<CR> 32t
+xmap <tab><tab>ee<CR> 33t
+xmap <tab><tab>eu<CR> 34t
+xmap <tab><tab>ei<CR> 35t
+xmap <tab><tab>ed<CR> 36t
+xmap <tab><tab>eh<CR> 37t
+xmap <tab><tab>et<CR> 38t
+xmap <tab><tab>en<CR> 39t
+
+xmap <tab><tab>us<CR> 40t
+xmap <tab><tab>ua<CR> 41t
+xmap <tab><tab>uo<CR> 42t
+xmap <tab><tab>ue<CR> 43t
+xmap <tab><tab>uu<CR> 44t
+xmap <tab><tab>ui<CR> 45t
+xmap <tab><tab>ud<CR> 46t
+xmap <tab><tab>uh<CR> 47t
+xmap <tab><tab>ut<CR> 48t
+xmap <tab><tab>un<CR> 49t
+
+xmap <tab><tab>is<CR> 50t
+xmap <tab><tab>ia<CR> 51t
+xmap <tab><tab>io<CR> 52t
+xmap <tab><tab>ie<CR> 53t
+xmap <tab><tab>iu<CR> 54t
+xmap <tab><tab>ii<CR> 55t
+xmap <tab><tab>id<CR> 56t
+xmap <tab><tab>ih<CR> 57t
+xmap <tab><tab>it<CR> 58t
+xmap <tab><tab>in<CR> 59t
+
+xmap <tab><tab>ds<CR> 60t
+xmap <tab><tab>da<CR> 61t
+xmap <tab><tab>do<CR> 62t
+xmap <tab><tab>de<CR> 63t
+xmap <tab><tab>du<CR> 64t
+xmap <tab><tab>di<CR> 65t
+xmap <tab><tab>dd<CR> 66t
+xmap <tab><tab>dh<CR> 67t
+xmap <tab><tab>dt<CR> 68t
+xmap <tab><tab>dn<CR> 69t
+
+xmap <tab><tab>hs<CR> 70t
+xmap <tab><tab>ha<CR> 71t
+xmap <tab><tab>ho<CR> 72t
+xmap <tab><tab>he<CR> 73t
+xmap <tab><tab>hu<CR> 74t
+xmap <tab><tab>hi<CR> 75t
+xmap <tab><tab>hd<CR> 76t
+xmap <tab><tab>hh<CR> 77t
+xmap <tab><tab>ht<CR> 78t
+xmap <tab><tab>hn<CR> 79t
+
+xmap <tab><tab>ts<CR> 80t
+xmap <tab><tab>ta<CR> 81t
+xmap <tab><tab>to<CR> 82t
+xmap <tab><tab>te<CR> 83t
+xmap <tab><tab>tu<CR> 84t
+xmap <tab><tab>ti<CR> 85t
+xmap <tab><tab>td<CR> 86t
+xmap <tab><tab>th<CR> 87t
+xmap <tab><tab>tt<CR> 88t
+xmap <tab><tab>tn<CR> 89t
+
+xmap <tab><tab>ns<CR> 90t
+xmap <tab><tab>na<CR> 91t
+xmap <tab><tab>no<CR> 92t
+xmap <tab><tab>ne<CR> 93t
+xmap <tab><tab>nu<CR> 94t
+xmap <tab><tab>ni<CR> 95t
+xmap <tab><tab>nd<CR> 96t
+xmap <tab><tab>nh<CR> 97t
+xmap <tab><tab>nt<CR> 98t
+xmap <tab><tab>nn<CR> 99t
+
+xmap <tab><tab>asa<CR> 101t
+xmap <tab><tab>aso<CR> 102t
+xmap <tab><tab>ase<CR> 103t
+xmap <tab><tab>asu<CR> 104t
+xmap <tab><tab>asi<CR> 105t
+xmap <tab><tab>asd<CR> 106t
+xmap <tab><tab>ash<CR> 107t
+xmap <tab><tab>ast<CR> 108t
+xmap <tab><tab>asn<CR> 109t
+
+xmap <tab><tab>aas<CR> 110t
+xmap <tab><tab>aaa<CR> 111t
+xmap <tab><tab>aao<CR> 112t
+xmap <tab><tab>aae<CR> 113t
+xmap <tab><tab>aau<CR> 114t
+xmap <tab><tab>aai<CR> 115t
+xmap <tab><tab>aad<CR> 116t
+xmap <tab><tab>aah<CR> 117t
+xmap <tab><tab>aat<CR> 118t
+xmap <tab><tab>aan<CR> 119t
+
+xmap <tab><tab>aos<CR> 120t
+xmap <tab><tab>aoa<CR> 121t
+xmap <tab><tab>aoo<CR> 122t
+xmap <tab><tab>aoe<CR> 123t
+xmap <tab><tab>aou<CR> 124t
+xmap <tab><tab>aoi<CR> 125t
+xmap <tab><tab>aod<CR> 126t
+xmap <tab><tab>aoh<CR> 127t
+xmap <tab><tab>aot<CR> 128t
+xmap <tab><tab>aon<CR> 129t
+
+xmap <tab><tab>aes<CR> 130t
+xmap <tab><tab>aea<CR> 131t
+xmap <tab><tab>aeo<CR> 132t
+xmap <tab><tab>aee<CR> 133t
+xmap <tab><tab>aeu<CR> 134t
+xmap <tab><tab>aei<CR> 135t
+xmap <tab><tab>aed<CR> 136t
+xmap <tab><tab>aeh<CR> 137t
+xmap <tab><tab>aet<CR> 138t
+xmap <tab><tab>aen<CR> 139t
+
+xmap <tab><tab>aus<CR> 140t
+xmap <tab><tab>aua<CR> 141t
+xmap <tab><tab>auo<CR> 142t
+xmap <tab><tab>aue<CR> 143t
+xmap <tab><tab>auu<CR> 144t
+xmap <tab><tab>aui<CR> 145t
+xmap <tab><tab>aud<CR> 146t
+xmap <tab><tab>auh<CR> 147t
+xmap <tab><tab>aut<CR> 148t
+xmap <tab><tab>aun<CR> 149t
+
+xmap <tab><tab>ais<CR> 150t
+xmap <tab><tab>aia<CR> 151t
+xmap <tab><tab>aio<CR> 152t
+xmap <tab><tab>aie<CR> 153t
+xmap <tab><tab>aiu<CR> 154t
+xmap <tab><tab>aii<CR> 155t
+xmap <tab><tab>aid<CR> 156t
+xmap <tab><tab>aih<CR> 157t
+xmap <tab><tab>ait<CR> 158t
+xmap <tab><tab>ain<CR> 159t
+
+xmap <tab><tab>ads<CR> 160t
+xmap <tab><tab>ada<CR> 161t
+xmap <tab><tab>ado<CR> 162t
+xmap <tab><tab>ade<CR> 163t
+xmap <tab><tab>adu<CR> 164t
+xmap <tab><tab>adi<CR> 165t
+xmap <tab><tab>add<CR> 166t
+xmap <tab><tab>adh<CR> 167t
+xmap <tab><tab>adt<CR> 168t
+xmap <tab><tab>adn<CR> 169t
+
+xmap <tab><tab>ahs<CR> 170t
+xmap <tab><tab>aha<CR> 171t
+xmap <tab><tab>aho<CR> 172t
+xmap <tab><tab>ahe<CR> 173t
+xmap <tab><tab>ahu<CR> 174t
+xmap <tab><tab>ahi<CR> 175t
+xmap <tab><tab>ahd<CR> 176t
+xmap <tab><tab>ahh<CR> 177t
+xmap <tab><tab>aht<CR> 178t
+xmap <tab><tab>ahn<CR> 179t
+
+xmap <tab><tab>ats<CR> 180t
+xmap <tab><tab>ata<CR> 181t
+xmap <tab><tab>ato<CR> 182t
+xmap <tab><tab>ate<CR> 183t
+xmap <tab><tab>atu<CR> 184t
+xmap <tab><tab>ati<CR> 185t
+xmap <tab><tab>atd<CR> 186t
+xmap <tab><tab>ath<CR> 187t
+xmap <tab><tab>att<CR> 188t
+xmap <tab><tab>atn<CR> 189t
+
+xmap <tab><tab>ans<CR> 190t
+xmap <tab><tab>ana<CR> 191t
+xmap <tab><tab>ano<CR> 192t
+xmap <tab><tab>ane<CR> 193t
+xmap <tab><tab>anu<CR> 194t
+xmap <tab><tab>ani<CR> 195t
+xmap <tab><tab>and<CR> 196t
+xmap <tab><tab>anh<CR> 197t
+xmap <tab><tab>ant<CR> 198t
+xmap <tab><tab>ann<CR> 199t
+
+xmap <tab><tab>asa<CR> 201t
+xmap <tab><tab>aso<CR> 202t
+xmap <tab><tab>ase<CR> 203t
+xmap <tab><tab>asu<CR> 204t
+xmap <tab><tab>asi<CR> 205t
+xmap <tab><tab>asd<CR> 206t
+xmap <tab><tab>ash<CR> 207t
+xmap <tab><tab>ast<CR> 208t
+xmap <tab><tab>asn<CR> 209t
+
+xmap <tab><tab>aas<CR> 210t
+xmap <tab><tab>aaa<CR> 211t
+xmap <tab><tab>aao<CR> 212t
+xmap <tab><tab>aae<CR> 213t
+xmap <tab><tab>aau<CR> 214t
+xmap <tab><tab>aai<CR> 215t
+xmap <tab><tab>aad<CR> 216t
+xmap <tab><tab>aah<CR> 217t
+xmap <tab><tab>aat<CR> 218t
+xmap <tab><tab>aan<CR> 219t
+
+xmap <tab><tab>aos<CR> 220t
+xmap <tab><tab>aoa<CR> 221t
+xmap <tab><tab>aoo<CR> 222t
+xmap <tab><tab>aoe<CR> 223t
+xmap <tab><tab>aou<CR> 224t
+xmap <tab><tab>aoi<CR> 225t
+xmap <tab><tab>aod<CR> 226t
+xmap <tab><tab>aoh<CR> 227t
+xmap <tab><tab>aot<CR> 228t
+xmap <tab><tab>aon<CR> 229t
+
+xmap <tab><tab>aes<CR> 230t
+xmap <tab><tab>aea<CR> 231t
+xmap <tab><tab>aeo<CR> 232t
+xmap <tab><tab>aee<CR> 233t
+xmap <tab><tab>aeu<CR> 234t
+xmap <tab><tab>aei<CR> 235t
+xmap <tab><tab>aed<CR> 236t
+xmap <tab><tab>aeh<CR> 237t
+xmap <tab><tab>aet<CR> 238t
+xmap <tab><tab>aen<CR> 139t
+
+xmap <tab><tab>aus<CR> 240t
+xmap <tab><tab>aua<CR> 241t
+xmap <tab><tab>auo<CR> 242t
+xmap <tab><tab>aue<CR> 243t
+xmap <tab><tab>auu<CR> 244t
+xmap <tab><tab>aui<CR> 245t
+xmap <tab><tab>aud<CR> 246t
+xmap <tab><tab>auh<CR> 247t
+xmap <tab><tab>aut<CR> 248t
+xmap <tab><tab>aun<CR> 249t
+
+xmap <tab><tab>ais<CR> 250t
+xmap <tab><tab>aia<CR> 251t
+xmap <tab><tab>aio<CR> 252t
+xmap <tab><tab>aie<CR> 253t
+xmap <tab><tab>aiu<CR> 254t
+xmap <tab><tab>aii<CR> 255t
+xmap <tab><tab>aid<CR> 256t
+xmap <tab><tab>aih<CR> 257t
+xmap <tab><tab>ait<CR> 258t
+xmap <tab><tab>ain<CR> 259t
+
+xmap <tab><tab>ads<CR> 260t
+xmap <tab><tab>ada<CR> 261t
+xmap <tab><tab>ado<CR> 262t
+xmap <tab><tab>ade<CR> 263t
+xmap <tab><tab>adu<CR> 264t
+xmap <tab><tab>adi<CR> 265t
+xmap <tab><tab>add<CR> 266t
+xmap <tab><tab>adh<CR> 267t
+xmap <tab><tab>adt<CR> 268t
+xmap <tab><tab>adn<CR> 269t
+
+xmap <tab><tab>ahs<CR> 270t
+xmap <tab><tab>aha<CR> 271t
+xmap <tab><tab>aho<CR> 272t
+xmap <tab><tab>ahe<CR> 273t
+xmap <tab><tab>ahu<CR> 274t
+xmap <tab><tab>ahi<CR> 275t
+xmap <tab><tab>ahd<CR> 276t
+xmap <tab><tab>ahh<CR> 277t
+xmap <tab><tab>aht<CR> 278t
+xmap <tab><tab>ahn<CR> 279t
+
+xmap <tab><tab>ats<CR> 280t
+xmap <tab><tab>ata<CR> 281t
+xmap <tab><tab>ato<CR> 282t
+xmap <tab><tab>ate<CR> 283t
+xmap <tab><tab>atu<CR> 284t
+xmap <tab><tab>ati<CR> 285t
+xmap <tab><tab>atd<CR> 286t
+xmap <tab><tab>ath<CR> 287t
+xmap <tab><tab>att<CR> 288t
+xmap <tab><tab>atn<CR> 289t
+
+xmap <tab><tab>ans<CR> 290t
+xmap <tab><tab>ana<CR> 291t
+xmap <tab><tab>ano<CR> 292t
+xmap <tab><tab>ane<CR> 293t
+xmap <tab><tab>anu<CR> 294t
+xmap <tab><tab>ani<CR> 295t
+xmap <tab><tab>and<CR> 296t
+xmap <tab><tab>anh<CR> 297t
+xmap <tab><tab>ant<CR> 298t
+xmap <tab><tab>ann<CR> 299t
 """"""""""""""""""""""""""""""
 " make 
 """"""""""""""""""""""""""""""

@@ -76,93 +76,13 @@ let g:VM_default_mappings = 0
 let g:VM_maps = {}
 
 """"""""""""""""""""""""""""""
-" NERDTree settings
-""""""""""""""""""""""""""""""
-let NERDTreeMapOpenInTab='<leader>s'
-let NERDTreeMapOpenInTabSilent='<leader>S'
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
-let NERDTreeShowLineNumbers=1
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"autocmd bufenter * if (winnr("$") == 1 && getwininfo(win_getid())[0]['quickfix']) | q | endif
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.swp']
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "*",
-    \ "Staged"    : "+",
-    \ "Untracked" : "-",
-    \ "Renamed"   : "~",
-    \ "Unmerged"  : "=",
-    \ "Deleted"   : "x",
-    \ "Dirty"     : "&",
-    \ "Clean"     : "%",
-    \ 'Ignored'   : "!",
-    \ "Unknown"   : "?"
-    \ }
-let NERDTreeMinimalUI = 1
-let g:NERDTreeWinSize = 50
-let g:NERDTreeWinPos = "right"
-
-
-""""""""""""""""""""""""""""""
 " ranger settings
 """"""""""""""""""""""""""""""
 let g:ranger_map_keys = 0
 
-
-""""""""""""""""""""""""""""""
-" vim-nerdtree-syntax-highlight settings
-""""""""""""""""""""""""""""""
-"Highlight full name (not only icons). You need to add this if you don't have vim-devicons and want highlight.
-"let g:NERDTreeHijackNetrw = 0
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-
-"Highlight full name (not only icons). You need to add this if you don't have vim-devicons and want highlight.
-let g:NERDTreeHighlightFolders = 1
-
-"highlights the folder name
-let g:NERDTreeHighlightFoldersFullName = 1
-
-"you can add these colors to your .vimrc to help customizing
-let s:brown = "905532"
-let s:aqua =  "3AFFDB"
-let s:blue = "689FB6"
-let s:darkBlue = "44788E"
-let s:purple = "834F79"
-let s:lightPurple = "834F79"
-let s:red = "AE403F"
-let s:beige = "F5C06F"
-let s:yellow = "F09F17"
-let s:orange = "D4843E"
-let s:darkOrange = "F16529"
-let s:pink = "CB6F6F"
-let s:salmon = "EE6E73"
-let s:green = "8FAA54"
-let s:Turquoise = "40E0D0"
-let s:lightGreen = "31B53E"
-let s:white = "FFFFFF"
-let s:rspec_red = "FE405F"
-let s:git_orange = "F54D27"
-let s:gray = "808A87"
-
-let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
-let g:NERDTreeExtensionHighlightColor['o'] = s:gray " sets the color of o files to blue
-let g:NERDTreeExtensionHighlightColor['h'] = s:blue " sets the color of h files to blue
-let g:NERDTreeExtensionHighlightColor['c'] = s:green " sets the color of c files to blue
-let g:NERDTreeExtensionHighlightColor['cpp'] = s:green " sets the color of cpp files to blue
-let g:NERDTreeExtensionHighlightColor['c++'] = s:green " sets the color of c++ files to blue
-
 """"""""""""""""""""""""""""""
 " vim-devicons settings
 """"""""""""""""""""""""""""""`
-"Can be enabled or disabled
-let g:webdevicons_enable_nerdtree = 1
-
-"whether or not to show the nerdtree brackets around flags
-let g:webdevicons_conceal_nerdtree_brackets = 1
-
 "adding to vim-airline's tabline
 let g:webdevicons_enable_airline_tabline = 1
 
@@ -321,3 +241,66 @@ let g:clockn_winblend = 100
 highlight ClockNormal guifg=#000000
 let g:clockn_to_top = 1
 let g:clockn_to_right = 1
+
+
+""""""""""""""""""""""""""""""
+" coc-explorer settings
+""""""""""""""""""""""""""""""
+let g:coc_explorer_global_presets = {
+\   'tab': {
+\     'position': 'tab',
+\     'quit-on-open': v:true,
+\   },
+\   'tab:$': {
+\     'position': 'tab:$',
+\     'quit-on-open': v:true,
+\   },
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingTop': {
+\     'position': 'floating',
+\     'floating-position': 'center-top',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingLeftside': {
+\     'position': 'floating',
+\     'floating-position': 'left-center',
+\     'floating-width': 40,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingRightside': {
+\     'position': 'floating',
+\     'floating-position': 'right-center',
+\     'floating-width': 40,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'buffer': {
+\     'sources': [{'name': 'buffer', 'expand': v:true}]
+\   },
+\   'right': {
+\     'position': 'right',
+\     'width': 40,
+\   },
+\   'left': {
+\     'position': 'left',
+\     'width': 40,
+\   },
+\ }
+
+
+""""""""""""""""""""""""""""""
+" coc-explorer settings
+""""""""""""""""""""""""""""""
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+let g:qs_hi_priority = 2
+let g:qs_max_chars=160
+let g:qs_delay = 40
