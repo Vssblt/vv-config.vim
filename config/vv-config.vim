@@ -46,7 +46,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_theme = 'alduin'
+let g:airline_theme = 'angr'
 let g:airline#extensions#keymap#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
@@ -83,7 +83,7 @@ let g:coc_global_extensions = [
 " other settings
 """"""""""""""""""""""""""""""
 execute ":colorscheme sonokai"
-highlight LineNr term=bold cterm=NONE ctermfg=red ctermbg=NONE gui=NONE guifg=red guibg=NONE
+highlight LineNr term=bold cterm=NONE ctermfg=darkgray ctermbg=NONE gui=NONE guifg=darkgray guibg=NONE
 highlight FloatermBorder ctermfg=green cterm=bold
 
 """"""""""""""""""""""""""""""

@@ -290,6 +290,21 @@ let g:coc_explorer_global_presets = {
 \     'position': 'left',
 \     'width': 40,
 \   },
+\   'top': {
+\     'position': 'top',
+\     'height': 40,
+\   },
+\   'bottom': {
+\     'position': 'bottom',
+\     'height': 40,
+\   },
+\   'current_window': {
+\     'position': 'current_window',
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'test': {
+\      'open-action-strategy': 'sourceWindow'
+\   },
 \ }
 
 
@@ -304,3 +319,11 @@ augroup END
 let g:qs_hi_priority = 2
 let g:qs_max_chars=160
 let g:qs_delay = 40
+
+""""""""""""""""""""""""""""""
+" common settings
+""""""""""""""""""""""""""""""
+autocmd VimEnter * :highlight EndOfBuffer ctermfg=bg
+
+
+let g:fcitx5_remote='/usr/bin/fcitx5-remote'

@@ -23,7 +23,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'yianwillis/vimcdoc'
     " vim chinese doc
 
-    " Plug 'vim-scripts/fcitx.vim'
+    Plug 'lilydjwg/fcitx.vim'
     
     Plug 'plasticboy/vim-markdown'
     " markdown highlight

@@ -47,6 +47,10 @@ nnoremap N J
 xnoremap T :Marks<CR>
 xnoremap S L
 xnoremap N J
+imap <c-n> <c-j>
+imap <c-t> <c-k>
+smap <c-n> <c-j>
+smap <c-t> <c-k>
 
 nnoremap - -
 nnoremap + +
@@ -394,6 +398,85 @@ let g:VM_maps["Toggle Multiline"]            = '\M'
 """ Customize pmenu colors
 hi Pmenu ctermfg=white ctermbg=black guibg=DarkGrey
 
+""""""""""""""""""""""""""""""
+" picker
+""""""""""""""""""""""""""""""
+
+nmap <leader>pe <Plug>(PickerEdit)
+nmap <leader>ps <Plug>(PickerSplit)
+nmap <leader>pt <Plug>(PickerTabedit)
+nmap <leader>pd <Plug>(PickerTabdrop)
+nmap <leader>pv <Plug>(PickerVsplit)
+nmap <leader>pb <Plug>(PickerBuffer)
+nmap <leader>p] <Plug>(PickerTag)
+nmap <leader>pw <Plug>(PickerStag)
+nmap <leader>po <Plug>(PickerBufferTag)
+nmap <leader>ph <Plug>(PickerHelp)
+
+""""""""""""""""""""""""""""""
+" make 
+""""""""""""""""""""""""""""""
+nnoremap <F4> :Make -j `nproc`<CR>
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <silent> <F2> :call ToggleList("Quickfix", 'c')<CR>
+
+function! g:Start_Termdebug(arg)
+	if v:shell_error == 0
+		execute "Termdebug " . a:arg
+	endif
+endfunction
+nnoremap <F6> :!make -j `nproc`<CR>:call g:Start_Termdebug("")<CR>
+
+
+"***********************************
+" vim-termdebug
+"***********************************
+
+function! TermDebug_run(program)
+  if (g:termdebug_started != 0)
+    call execute("Run")
+  else
+    call g:Start_Termdebug(a:program)
+  endif
+endfunc
+
+autocmd FileType c,cpp nnoremap <buffer> <CR> :ToggleBreak<CR>
+nnoremap <leader>c :Continue<CR>
+nnoremap <leader>r :Run<CR>
+
+if &diff != 0
+nnoremap dg :diffget<CR>
+xnoremap dg :diffget<CR>
+endif 
+
+
+
 """ custom
 nmap <tab>a<CR> 1n
 nmap <tab>o<CR> 2n
@@ -613,114 +696,114 @@ nmap <tab>anh<CR> 197n
 nmap <tab>ant<CR> 198n
 nmap <tab>ann<CR> 199n
 
-nmap <tab>asa<CR> 201n
-nmap <tab>aso<CR> 202n
-nmap <tab>ase<CR> 203n
-nmap <tab>asu<CR> 204n
-nmap <tab>asi<CR> 205n
-nmap <tab>asd<CR> 206n
-nmap <tab>ash<CR> 207n
-nmap <tab>ast<CR> 208n
-nmap <tab>asn<CR> 209n
+nmap <tab>osa<CR> 201n
+nmap <tab>oso<CR> 202n
+nmap <tab>ose<CR> 203n
+nmap <tab>osu<CR> 204n
+nmap <tab>osi<CR> 205n
+nmap <tab>osd<CR> 206n
+nmap <tab>osh<CR> 207n
+nmap <tab>ost<CR> 208n
+nmap <tab>osn<CR> 209n
 
-nmap <tab>aas<CR> 210n
-nmap <tab>aaa<CR> 211n
-nmap <tab>aao<CR> 212n
-nmap <tab>aae<CR> 213n
-nmap <tab>aau<CR> 214n
-nmap <tab>aai<CR> 215n
-nmap <tab>aad<CR> 216n
-nmap <tab>aah<CR> 217n
-nmap <tab>aat<CR> 218n
-nmap <tab>aan<CR> 219n
+nmap <tab>oas<CR> 210n
+nmap <tab>oaa<CR> 211n
+nmap <tab>oao<CR> 212n
+nmap <tab>oae<CR> 213n
+nmap <tab>oau<CR> 214n
+nmap <tab>oai<CR> 215n
+nmap <tab>oad<CR> 216n
+nmap <tab>oah<CR> 217n
+nmap <tab>oat<CR> 218n
+nmap <tab>oan<CR> 219n
 
-nmap <tab>aos<CR> 220n
-nmap <tab>aoa<CR> 221n
-nmap <tab>aoo<CR> 222n
-nmap <tab>aoe<CR> 223n
-nmap <tab>aou<CR> 224n
-nmap <tab>aoi<CR> 225n
-nmap <tab>aod<CR> 226n
-nmap <tab>aoh<CR> 227n
-nmap <tab>aot<CR> 228n
-nmap <tab>aon<CR> 229n
+nmap <tab>oos<CR> 220n
+nmap <tab>ooa<CR> 221n
+nmap <tab>ooo<CR> 222n
+nmap <tab>ooe<CR> 223n
+nmap <tab>oou<CR> 224n
+nmap <tab>ooi<CR> 225n
+nmap <tab>ood<CR> 226n
+nmap <tab>ooh<CR> 227n
+nmap <tab>oot<CR> 228n
+nmap <tab>oon<CR> 229n
 
-nmap <tab>aes<CR> 230n
-nmap <tab>aea<CR> 231n
-nmap <tab>aeo<CR> 232n
-nmap <tab>aee<CR> 233n
-nmap <tab>aeu<CR> 234n
-nmap <tab>aei<CR> 235n
-nmap <tab>aed<CR> 236n
-nmap <tab>aeh<CR> 237n
-nmap <tab>aet<CR> 238n
-nmap <tab>aen<CR> 139n
+nmap <tab>oes<CR> 230n
+nmap <tab>oea<CR> 231n
+nmap <tab>oeo<CR> 232n
+nmap <tab>oee<CR> 233n
+nmap <tab>oeu<CR> 234n
+nmap <tab>oei<CR> 235n
+nmap <tab>oed<CR> 236n
+nmap <tab>oeh<CR> 237n
+nmap <tab>oet<CR> 238n
+nmap <tab>oen<CR> 139n
 
-nmap <tab>aus<CR> 240n
-nmap <tab>aua<CR> 241n
-nmap <tab>auo<CR> 242n
-nmap <tab>aue<CR> 243n
-nmap <tab>auu<CR> 244n
-nmap <tab>aui<CR> 245n
-nmap <tab>aud<CR> 246n
-nmap <tab>auh<CR> 247n
-nmap <tab>aut<CR> 248n
-nmap <tab>aun<CR> 249n
+nmap <tab>ous<CR> 240n
+nmap <tab>oua<CR> 241n
+nmap <tab>ouo<CR> 242n
+nmap <tab>oue<CR> 243n
+nmap <tab>ouu<CR> 244n
+nmap <tab>oui<CR> 245n
+nmap <tab>oud<CR> 246n
+nmap <tab>ouh<CR> 247n
+nmap <tab>out<CR> 248n
+nmap <tab>oun<CR> 249n
 
-nmap <tab>ais<CR> 250n
-nmap <tab>aia<CR> 251n
-nmap <tab>aio<CR> 252n
-nmap <tab>aie<CR> 253n
-nmap <tab>aiu<CR> 254n
-nmap <tab>aii<CR> 255n
-nmap <tab>aid<CR> 256n
-nmap <tab>aih<CR> 257n
-nmap <tab>ait<CR> 258n
-nmap <tab>ain<CR> 259n
+nmap <tab>ois<CR> 250n
+nmap <tab>oia<CR> 251n
+nmap <tab>oio<CR> 252n
+nmap <tab>oie<CR> 253n
+nmap <tab>oiu<CR> 254n
+nmap <tab>oii<CR> 255n
+nmap <tab>oid<CR> 256n
+nmap <tab>oih<CR> 257n
+nmap <tab>oit<CR> 258n
+nmap <tab>oin<CR> 259n
 
-nmap <tab>ads<CR> 260n
-nmap <tab>ada<CR> 261n
-nmap <tab>ado<CR> 262n
-nmap <tab>ade<CR> 263n
-nmap <tab>adu<CR> 264n
-nmap <tab>adi<CR> 265n
-nmap <tab>add<CR> 266n
-nmap <tab>adh<CR> 267n
-nmap <tab>adt<CR> 268n
-nmap <tab>adn<CR> 269n
+nmap <tab>ods<CR> 260n
+nmap <tab>oda<CR> 261n
+nmap <tab>odo<CR> 262n
+nmap <tab>ode<CR> 263n
+nmap <tab>odu<CR> 264n
+nmap <tab>odi<CR> 265n
+nmap <tab>odd<CR> 266n
+nmap <tab>odh<CR> 267n
+nmap <tab>odt<CR> 268n
+nmap <tab>odn<CR> 269n
 
-nmap <tab>ahs<CR> 270n
-nmap <tab>aha<CR> 271n
-nmap <tab>aho<CR> 272n
-nmap <tab>ahe<CR> 273n
-nmap <tab>ahu<CR> 274n
-nmap <tab>ahi<CR> 275n
-nmap <tab>ahd<CR> 276n
-nmap <tab>ahh<CR> 277n
-nmap <tab>aht<CR> 278n
-nmap <tab>ahn<CR> 279n
+nmap <tab>ohs<CR> 270n
+nmap <tab>oha<CR> 271n
+nmap <tab>oho<CR> 272n
+nmap <tab>ohe<CR> 273n
+nmap <tab>ohu<CR> 274n
+nmap <tab>ohi<CR> 275n
+nmap <tab>ohd<CR> 276n
+nmap <tab>ohh<CR> 277n
+nmap <tab>oht<CR> 278n
+nmap <tab>ohn<CR> 279n
 
-nmap <tab>ats<CR> 280n
-nmap <tab>ata<CR> 281n
-nmap <tab>ato<CR> 282n
-nmap <tab>ate<CR> 283n
-nmap <tab>atu<CR> 284n
-nmap <tab>ati<CR> 285n
-nmap <tab>atd<CR> 286n
-nmap <tab>ath<CR> 287n
-nmap <tab>att<CR> 288n
-nmap <tab>atn<CR> 289n
+nmap <tab>ots<CR> 280n
+nmap <tab>ota<CR> 281n
+nmap <tab>oto<CR> 282n
+nmap <tab>ote<CR> 283n
+nmap <tab>otu<CR> 284n
+nmap <tab>oti<CR> 285n
+nmap <tab>otd<CR> 286n
+nmap <tab>oth<CR> 287n
+nmap <tab>ott<CR> 288n
+nmap <tab>otn<CR> 289n
 
-nmap <tab>ans<CR> 290n
-nmap <tab>ana<CR> 291n
-nmap <tab>ano<CR> 292n
-nmap <tab>ane<CR> 293n
-nmap <tab>anu<CR> 294n
-nmap <tab>ani<CR> 295n
-nmap <tab>and<CR> 296n
-nmap <tab>anh<CR> 297n
-nmap <tab>ant<CR> 298n
-nmap <tab>ann<CR> 299n
+nmap <tab>ons<CR> 290n
+nmap <tab>ona<CR> 291n
+nmap <tab>ono<CR> 292n
+nmap <tab>one<CR> 293n
+nmap <tab>onu<CR> 294n
+nmap <tab>oni<CR> 295n
+nmap <tab>ond<CR> 296n
+nmap <tab>onh<CR> 297n
+nmap <tab>ont<CR> 298n
+nmap <tab>onn<CR> 299n
 
 
 
@@ -946,125 +1029,114 @@ nmap <tab><tab>anh<CR> 197t
 nmap <tab><tab>ant<CR> 198t
 nmap <tab><tab>ann<CR> 199t
 
-nmap <tab><tab>asa<CR> 201t
-nmap <tab><tab>aso<CR> 202t
-nmap <tab><tab>ase<CR> 203t
-nmap <tab><tab>asu<CR> 204t
-nmap <tab><tab>asi<CR> 205t
-nmap <tab><tab>asd<CR> 206t
-nmap <tab><tab>ash<CR> 207t
-nmap <tab><tab>ast<CR> 208t
-nmap <tab><tab>asn<CR> 209t
+nmap <tab><tab>osa<CR> 201t
+nmap <tab><tab>oso<CR> 202t
+nmap <tab><tab>ose<CR> 203t
+nmap <tab><tab>osu<CR> 204t
+nmap <tab><tab>osi<CR> 205t
+nmap <tab><tab>osd<CR> 206t
+nmap <tab><tab>osh<CR> 207t
+nmap <tab><tab>ost<CR> 208t
+nmap <tab><tab>osn<CR> 209t
 
-nmap <tab><tab>aas<CR> 210t
-nmap <tab><tab>aaa<CR> 211t
-nmap <tab><tab>aao<CR> 212t
-nmap <tab><tab>aae<CR> 213t
-nmap <tab><tab>aau<CR> 214t
-nmap <tab><tab>aai<CR> 215t
-nmap <tab><tab>aad<CR> 216t
-nmap <tab><tab>aah<CR> 217t
-nmap <tab><tab>aat<CR> 218t
-nmap <tab><tab>aan<CR> 219t
+nmap <tab><tab>oas<CR> 210t
+nmap <tab><tab>oaa<CR> 211t
+nmap <tab><tab>oao<CR> 212t
+nmap <tab><tab>oae<CR> 213t
+nmap <tab><tab>oau<CR> 214t
+nmap <tab><tab>oai<CR> 215t
+nmap <tab><tab>oad<CR> 216t
+nmap <tab><tab>oah<CR> 217t
+nmap <tab><tab>oat<CR> 218t
+nmap <tab><tab>oan<CR> 219t
 
-nmap <tab><tab>aos<CR> 220t
-nmap <tab><tab>aoa<CR> 221t
-nmap <tab><tab>aoo<CR> 222t
-nmap <tab><tab>aoe<CR> 223t
-nmap <tab><tab>aou<CR> 224t
-nmap <tab><tab>aoi<CR> 225t
-nmap <tab><tab>aod<CR> 226t
-nmap <tab><tab>aoh<CR> 227t
-nmap <tab><tab>aot<CR> 228t
-nmap <tab><tab>aon<CR> 229t
+nmap <tab><tab>oos<CR> 220t
+nmap <tab><tab>ooa<CR> 221t
+nmap <tab><tab>ooo<CR> 222t
+nmap <tab><tab>ooe<CR> 223t
+nmap <tab><tab>oou<CR> 224t
+nmap <tab><tab>ooi<CR> 225t
+nmap <tab><tab>ood<CR> 226t
+nmap <tab><tab>ooh<CR> 227t
+nmap <tab><tab>oot<CR> 228t
+nmap <tab><tab>oon<CR> 229t
 
-nmap <tab><tab>aes<CR> 230t
-nmap <tab><tab>aea<CR> 231t
-nmap <tab><tab>aeo<CR> 232t
-nmap <tab><tab>aee<CR> 233t
-nmap <tab><tab>aeu<CR> 234t
-nmap <tab><tab>aei<CR> 235t
-nmap <tab><tab>aed<CR> 236t
-nmap <tab><tab>aeh<CR> 237t
-nmap <tab><tab>aet<CR> 238t
-nmap <tab><tab>aen<CR> 139t
+nmap <tab><tab>oes<CR> 230t
+nmap <tab><tab>oea<CR> 231t
+nmap <tab><tab>oeo<CR> 232t
+nmap <tab><tab>oee<CR> 233t
+nmap <tab><tab>oeu<CR> 234t
+nmap <tab><tab>oei<CR> 235t
+nmap <tab><tab>oed<CR> 236t
+nmap <tab><tab>oeh<CR> 237t
+nmap <tab><tab>oet<CR> 238t
+nmap <tab><tab>oen<CR> 139t
 
-nmap <tab><tab>aus<CR> 240t
-nmap <tab><tab>aua<CR> 241t
-nmap <tab><tab>auo<CR> 242t
-nmap <tab><tab>aue<CR> 243t
-nmap <tab><tab>auu<CR> 244t
-nmap <tab><tab>aui<CR> 245t
-nmap <tab><tab>aud<CR> 246t
-nmap <tab><tab>auh<CR> 247t
-nmap <tab><tab>aut<CR> 248t
-nmap <tab><tab>aun<CR> 249t
+nmap <tab><tab>ous<CR> 240t
+nmap <tab><tab>oua<CR> 241t
+nmap <tab><tab>ouo<CR> 242t
+nmap <tab><tab>oue<CR> 243t
+nmap <tab><tab>ouu<CR> 244t
+nmap <tab><tab>oui<CR> 245t
+nmap <tab><tab>oud<CR> 246t
+nmap <tab><tab>ouh<CR> 247t
+nmap <tab><tab>out<CR> 248t
+nmap <tab><tab>oun<CR> 249t
 
-nmap <tab><tab>ais<CR> 250t
-nmap <tab><tab>aia<CR> 251t
-nmap <tab><tab>aio<CR> 252t
-nmap <tab><tab>aie<CR> 253t
-nmap <tab><tab>aiu<CR> 254t
-nmap <tab><tab>aii<CR> 255t
-nmap <tab><tab>aid<CR> 256t
-nmap <tab><tab>aih<CR> 257t
-nmap <tab><tab>ait<CR> 258t
-nmap <tab><tab>ain<CR> 259t
+nmap <tab><tab>ois<CR> 250t
+nmap <tab><tab>oia<CR> 251t
+nmap <tab><tab>oio<CR> 252t
+nmap <tab><tab>oie<CR> 253t
+nmap <tab><tab>oiu<CR> 254t
+nmap <tab><tab>oii<CR> 255t
+nmap <tab><tab>oid<CR> 256t
+nmap <tab><tab>oih<CR> 257t
+nmap <tab><tab>oit<CR> 258t
+nmap <tab><tab>oin<CR> 259t
 
-nmap <tab><tab>ads<CR> 260t
-nmap <tab><tab>ada<CR> 261t
-nmap <tab><tab>ado<CR> 262t
-nmap <tab><tab>ade<CR> 263t
-nmap <tab><tab>adu<CR> 264t
-nmap <tab><tab>adi<CR> 265t
-nmap <tab><tab>add<CR> 266t
-nmap <tab><tab>adh<CR> 267t
-nmap <tab><tab>adt<CR> 268t
-nmap <tab><tab>adn<CR> 269t
+nmap <tab><tab>ods<CR> 260t
+nmap <tab><tab>oda<CR> 261t
+nmap <tab><tab>odo<CR> 262t
+nmap <tab><tab>ode<CR> 263t
+nmap <tab><tab>odu<CR> 264t
+nmap <tab><tab>odi<CR> 265t
+nmap <tab><tab>odd<CR> 266t
+nmap <tab><tab>odh<CR> 267t
+nmap <tab><tab>odt<CR> 268t
+nmap <tab><tab>odn<CR> 269t
 
-nmap <tab><tab>ahs<CR> 270t
-nmap <tab><tab>aha<CR> 271t
-nmap <tab><tab>aho<CR> 272t
-nmap <tab><tab>ahe<CR> 273t
-nmap <tab><tab>ahu<CR> 274t
-nmap <tab><tab>ahi<CR> 275t
-nmap <tab><tab>ahd<CR> 276t
-nmap <tab><tab>ahh<CR> 277t
-nmap <tab><tab>aht<CR> 278t
-nmap <tab><tab>ahn<CR> 279t
+nmap <tab><tab>ohs<CR> 270t
+nmap <tab><tab>oha<CR> 271t
+nmap <tab><tab>oho<CR> 272t
+nmap <tab><tab>ohe<CR> 273t
+nmap <tab><tab>ohu<CR> 274t
+nmap <tab><tab>ohi<CR> 275t
+nmap <tab><tab>ohd<CR> 276t
+nmap <tab><tab>ohh<CR> 277t
+nmap <tab><tab>oht<CR> 278t
+nmap <tab><tab>ohn<CR> 279t
 
-nmap <tab><tab>ats<CR> 280t
-nmap <tab><tab>ata<CR> 281t
-nmap <tab><tab>ato<CR> 282t
-nmap <tab><tab>ate<CR> 283t
-nmap <tab><tab>atu<CR> 284t
-nmap <tab><tab>ati<CR> 285t
-nmap <tab><tab>atd<CR> 286t
-nmap <tab><tab>ath<CR> 287t
-nmap <tab><tab>att<CR> 288t
-nmap <tab><tab>atn<CR> 289t
+nmap <tab><tab>ots<CR> 280t
+nmap <tab><tab>ota<CR> 281t
+nmap <tab><tab>oto<CR> 282t
+nmap <tab><tab>ote<CR> 283t
+nmap <tab><tab>otu<CR> 284t
+nmap <tab><tab>oti<CR> 285t
+nmap <tab><tab>otd<CR> 286t
+nmap <tab><tab>oth<CR> 287t
+nmap <tab><tab>ott<CR> 288t
+nmap <tab><tab>otn<CR> 289t
 
-nmap <tab><tab>ans<CR> 290t
-nmap <tab><tab>ana<CR> 291t
-nmap <tab><tab>ano<CR> 292t
-nmap <tab><tab>ane<CR> 293t
-nmap <tab><tab>anu<CR> 294t
-nmap <tab><tab>ani<CR> 295t
-nmap <tab><tab>and<CR> 296t
-nmap <tab><tab>anh<CR> 297t
-nmap <tab><tab>ant<CR> 298t
-nmap <tab><tab>ann<CR> 299t
-
-nmap <leader>pe <Plug>(PickerEdit)
-nmap <leader>ps <Plug>(PickerSplit)
-nmap <leader>pt <Plug>(PickerTabedit)
-nmap <leader>pd <Plug>(PickerTabdrop)
-nmap <leader>pv <Plug>(PickerVsplit)
-nmap <leader>pb <Plug>(PickerBuffer)
-nmap <leader>p] <Plug>(PickerTag)
-nmap <leader>pw <Plug>(PickerStag)
-nmap <leader>po <Plug>(PickerBufferTag)
-nmap <leader>ph <Plug>(PickerHelp)
+nmap <tab><tab>ons<CR> 290t
+nmap <tab><tab>ona<CR> 291t
+nmap <tab><tab>ono<CR> 292t
+nmap <tab><tab>one<CR> 293t
+nmap <tab><tab>onu<CR> 294t
+nmap <tab><tab>oni<CR> 295t
+nmap <tab><tab>ond<CR> 296t
+nmap <tab><tab>onh<CR> 297t
+nmap <tab><tab>ont<CR> 298t
+nmap <tab><tab>onn<CR> 299t
 
 xmap <tab>a<CR> 1n
 xmap <tab>o<CR> 2n
@@ -1294,104 +1366,104 @@ xmap <tab>ash<CR> 207n
 xmap <tab>ast<CR> 208n
 xmap <tab>asn<CR> 209n
 
-xmap <tab>aas<CR> 210n
-xmap <tab>aaa<CR> 211n
-xmap <tab>aao<CR> 212n
-xmap <tab>aae<CR> 213n
-xmap <tab>aau<CR> 214n
-xmap <tab>aai<CR> 215n
-xmap <tab>aad<CR> 216n
-xmap <tab>aah<CR> 217n
-xmap <tab>aat<CR> 218n
-xmap <tab>aan<CR> 219n
+xmap <tab>oas<CR> 210n
+xmap <tab>oaa<CR> 211n
+xmap <tab>oao<CR> 212n
+xmap <tab>oae<CR> 213n
+xmap <tab>oau<CR> 214n
+xmap <tab>oai<CR> 215n
+xmap <tab>oad<CR> 216n
+xmap <tab>oah<CR> 217n
+xmap <tab>oat<CR> 218n
+xmap <tab>oan<CR> 219n
 
-xmap <tab>aos<CR> 220n
-xmap <tab>aoa<CR> 221n
-xmap <tab>aoo<CR> 222n
-xmap <tab>aoe<CR> 223n
-xmap <tab>aou<CR> 224n
-xmap <tab>aoi<CR> 225n
-xmap <tab>aod<CR> 226n
-xmap <tab>aoh<CR> 227n
-xmap <tab>aot<CR> 228n
-xmap <tab>aon<CR> 229n
+xmap <tab>oos<CR> 220n
+xmap <tab>ooa<CR> 221n
+xmap <tab>ooo<CR> 222n
+xmap <tab>ooe<CR> 223n
+xmap <tab>oou<CR> 224n
+xmap <tab>ooi<CR> 225n
+xmap <tab>ood<CR> 226n
+xmap <tab>ooh<CR> 227n
+xmap <tab>oot<CR> 228n
+xmap <tab>oon<CR> 229n
 
-xmap <tab>aes<CR> 230n
-xmap <tab>aea<CR> 231n
-xmap <tab>aeo<CR> 232n
-xmap <tab>aee<CR> 233n
-xmap <tab>aeu<CR> 234n
-xmap <tab>aei<CR> 235n
-xmap <tab>aed<CR> 236n
-xmap <tab>aeh<CR> 237n
-xmap <tab>aet<CR> 238n
-xmap <tab>aen<CR> 139n
+xmap <tab>oes<CR> 230n
+xmap <tab>oea<CR> 231n
+xmap <tab>oeo<CR> 232n
+xmap <tab>oee<CR> 233n
+xmap <tab>oeu<CR> 234n
+xmap <tab>oei<CR> 235n
+xmap <tab>oed<CR> 236n
+xmap <tab>oeh<CR> 237n
+xmap <tab>oet<CR> 238n
+xmap <tab>oen<CR> 139n
 
-xmap <tab>aus<CR> 240n
-xmap <tab>aua<CR> 241n
-xmap <tab>auo<CR> 242n
-xmap <tab>aue<CR> 243n
-xmap <tab>auu<CR> 244n
-xmap <tab>aui<CR> 245n
-xmap <tab>aud<CR> 246n
-xmap <tab>auh<CR> 247n
-xmap <tab>aut<CR> 248n
-xmap <tab>aun<CR> 249n
+xmap <tab>ous<CR> 240n
+xmap <tab>oua<CR> 241n
+xmap <tab>ouo<CR> 242n
+xmap <tab>oue<CR> 243n
+xmap <tab>ouu<CR> 244n
+xmap <tab>oui<CR> 245n
+xmap <tab>oud<CR> 246n
+xmap <tab>ouh<CR> 247n
+xmap <tab>out<CR> 248n
+xmap <tab>oun<CR> 249n
 
-xmap <tab>ais<CR> 250n
-xmap <tab>aia<CR> 251n
-xmap <tab>aio<CR> 252n
-xmap <tab>aie<CR> 253n
-xmap <tab>aiu<CR> 254n
-xmap <tab>aii<CR> 255n
-xmap <tab>aid<CR> 256n
-xmap <tab>aih<CR> 257n
-xmap <tab>ait<CR> 258n
-xmap <tab>ain<CR> 259n
+xmap <tab>ois<CR> 250n
+xmap <tab>oia<CR> 251n
+xmap <tab>oio<CR> 252n
+xmap <tab>oie<CR> 253n
+xmap <tab>oiu<CR> 254n
+xmap <tab>oii<CR> 255n
+xmap <tab>oid<CR> 256n
+xmap <tab>oih<CR> 257n
+xmap <tab>oit<CR> 258n
+xmap <tab>oin<CR> 259n
 
-xmap <tab>ads<CR> 260n
-xmap <tab>ada<CR> 261n
-xmap <tab>ado<CR> 262n
-xmap <tab>ade<CR> 263n
-xmap <tab>adu<CR> 264n
-xmap <tab>adi<CR> 265n
-xmap <tab>add<CR> 266n
-xmap <tab>adh<CR> 267n
-xmap <tab>adt<CR> 268n
-xmap <tab>adn<CR> 269n
+xmap <tab>ods<CR> 260n
+xmap <tab>oda<CR> 261n
+xmap <tab>odo<CR> 262n
+xmap <tab>ode<CR> 263n
+xmap <tab>odu<CR> 264n
+xmap <tab>odi<CR> 265n
+xmap <tab>odd<CR> 266n
+xmap <tab>odh<CR> 267n
+xmap <tab>odt<CR> 268n
+xmap <tab>odn<CR> 269n
 
-xmap <tab>ahs<CR> 270n
-xmap <tab>aha<CR> 271n
-xmap <tab>aho<CR> 272n
-xmap <tab>ahe<CR> 273n
-xmap <tab>ahu<CR> 274n
-xmap <tab>ahi<CR> 275n
-xmap <tab>ahd<CR> 276n
-xmap <tab>ahh<CR> 277n
-xmap <tab>aht<CR> 278n
-xmap <tab>ahn<CR> 279n
+xmap <tab>ohs<CR> 270n
+xmap <tab>oha<CR> 271n
+xmap <tab>oho<CR> 272n
+xmap <tab>ohe<CR> 273n
+xmap <tab>ohu<CR> 274n
+xmap <tab>ohi<CR> 275n
+xmap <tab>ohd<CR> 276n
+xmap <tab>ohh<CR> 277n
+xmap <tab>oht<CR> 278n
+xmap <tab>ohn<CR> 279n
 
-xmap <tab>ats<CR> 280n
-xmap <tab>ata<CR> 281n
-xmap <tab>ato<CR> 282n
-xmap <tab>ate<CR> 283n
-xmap <tab>atu<CR> 284n
-xmap <tab>ati<CR> 285n
-xmap <tab>atd<CR> 286n
-xmap <tab>ath<CR> 287n
-xmap <tab>att<CR> 288n
-xmap <tab>atn<CR> 289n
+xmap <tab>ots<CR> 280n
+xmap <tab>ota<CR> 281n
+xmap <tab>oto<CR> 282n
+xmap <tab>ote<CR> 283n
+xmap <tab>otu<CR> 284n
+xmap <tab>oti<CR> 285n
+xmap <tab>otd<CR> 286n
+xmap <tab>oth<CR> 287n
+xmap <tab>ott<CR> 288n
+xmap <tab>otn<CR> 289n
 
-xmap <tab>ans<CR> 290n
-xmap <tab>ana<CR> 291n
-xmap <tab>ano<CR> 292n
-xmap <tab>ane<CR> 293n
-xmap <tab>anu<CR> 294n
-xmap <tab>ani<CR> 295n
-xmap <tab>and<CR> 296n
-xmap <tab>anh<CR> 297n
-xmap <tab>ant<CR> 298n
-xmap <tab>ann<CR> 299n
+xmap <tab>ons<CR> 290n
+xmap <tab>ona<CR> 291n
+xmap <tab>ono<CR> 292n
+xmap <tab>one<CR> 293n
+xmap <tab>onu<CR> 294n
+xmap <tab>oni<CR> 295n
+xmap <tab>ond<CR> 296n
+xmap <tab>onh<CR> 297n
+xmap <tab>ont<CR> 298n
+xmap <tab>onn<CR> 299n
 
 
 
@@ -1627,162 +1699,103 @@ xmap <tab><tab>ash<CR> 207t
 xmap <tab><tab>ast<CR> 208t
 xmap <tab><tab>asn<CR> 209t
 
-xmap <tab><tab>aas<CR> 210t
-xmap <tab><tab>aaa<CR> 211t
-xmap <tab><tab>aao<CR> 212t
-xmap <tab><tab>aae<CR> 213t
-xmap <tab><tab>aau<CR> 214t
-xmap <tab><tab>aai<CR> 215t
-xmap <tab><tab>aad<CR> 216t
-xmap <tab><tab>aah<CR> 217t
-xmap <tab><tab>aat<CR> 218t
-xmap <tab><tab>aan<CR> 219t
+xmap <tab><tab>oas<CR> 210t
+xmap <tab><tab>oaa<CR> 211t
+xmap <tab><tab>oao<CR> 212t
+xmap <tab><tab>oae<CR> 213t
+xmap <tab><tab>oau<CR> 214t
+xmap <tab><tab>oai<CR> 215t
+xmap <tab><tab>oad<CR> 216t
+xmap <tab><tab>oah<CR> 217t
+xmap <tab><tab>oat<CR> 218t
+xmap <tab><tab>oan<CR> 219t
 
-xmap <tab><tab>aos<CR> 220t
-xmap <tab><tab>aoa<CR> 221t
-xmap <tab><tab>aoo<CR> 222t
-xmap <tab><tab>aoe<CR> 223t
-xmap <tab><tab>aou<CR> 224t
-xmap <tab><tab>aoi<CR> 225t
-xmap <tab><tab>aod<CR> 226t
-xmap <tab><tab>aoh<CR> 227t
-xmap <tab><tab>aot<CR> 228t
-xmap <tab><tab>aon<CR> 229t
+xmap <tab><tab>oos<CR> 220t
+xmap <tab><tab>ooa<CR> 221t
+xmap <tab><tab>ooo<CR> 222t
+xmap <tab><tab>ooe<CR> 223t
+xmap <tab><tab>oou<CR> 224t
+xmap <tab><tab>ooi<CR> 225t
+xmap <tab><tab>ood<CR> 226t
+xmap <tab><tab>ooh<CR> 227t
+xmap <tab><tab>oot<CR> 228t
+xmap <tab><tab>oon<CR> 229t
 
-xmap <tab><tab>aes<CR> 230t
-xmap <tab><tab>aea<CR> 231t
-xmap <tab><tab>aeo<CR> 232t
-xmap <tab><tab>aee<CR> 233t
-xmap <tab><tab>aeu<CR> 234t
-xmap <tab><tab>aei<CR> 235t
-xmap <tab><tab>aed<CR> 236t
-xmap <tab><tab>aeh<CR> 237t
-xmap <tab><tab>aet<CR> 238t
-xmap <tab><tab>aen<CR> 139t
+xmap <tab><tab>oes<CR> 230t
+xmap <tab><tab>oea<CR> 231t
+xmap <tab><tab>oeo<CR> 232t
+xmap <tab><tab>oee<CR> 233t
+xmap <tab><tab>oeu<CR> 234t
+xmap <tab><tab>oei<CR> 235t
+xmap <tab><tab>oed<CR> 236t
+xmap <tab><tab>oeh<CR> 237t
+xmap <tab><tab>oet<CR> 238t
+xmap <tab><tab>oen<CR> 139t
 
-xmap <tab><tab>aus<CR> 240t
-xmap <tab><tab>aua<CR> 241t
-xmap <tab><tab>auo<CR> 242t
-xmap <tab><tab>aue<CR> 243t
-xmap <tab><tab>auu<CR> 244t
-xmap <tab><tab>aui<CR> 245t
-xmap <tab><tab>aud<CR> 246t
-xmap <tab><tab>auh<CR> 247t
-xmap <tab><tab>aut<CR> 248t
-xmap <tab><tab>aun<CR> 249t
+xmap <tab><tab>ous<CR> 240t
+xmap <tab><tab>oua<CR> 241t
+xmap <tab><tab>ouo<CR> 242t
+xmap <tab><tab>oue<CR> 243t
+xmap <tab><tab>ouu<CR> 244t
+xmap <tab><tab>oui<CR> 245t
+xmap <tab><tab>oud<CR> 246t
+xmap <tab><tab>ouh<CR> 247t
+xmap <tab><tab>out<CR> 248t
+xmap <tab><tab>oun<CR> 249t
 
-xmap <tab><tab>ais<CR> 250t
-xmap <tab><tab>aia<CR> 251t
-xmap <tab><tab>aio<CR> 252t
-xmap <tab><tab>aie<CR> 253t
-xmap <tab><tab>aiu<CR> 254t
-xmap <tab><tab>aii<CR> 255t
-xmap <tab><tab>aid<CR> 256t
-xmap <tab><tab>aih<CR> 257t
-xmap <tab><tab>ait<CR> 258t
-xmap <tab><tab>ain<CR> 259t
+xmap <tab><tab>ois<CR> 250t
+xmap <tab><tab>oia<CR> 251t
+xmap <tab><tab>oio<CR> 252t
+xmap <tab><tab>oie<CR> 253t
+xmap <tab><tab>oiu<CR> 254t
+xmap <tab><tab>oii<CR> 255t
+xmap <tab><tab>oid<CR> 256t
+xmap <tab><tab>oih<CR> 257t
+xmap <tab><tab>oit<CR> 258t
+xmap <tab><tab>oin<CR> 259t
 
-xmap <tab><tab>ads<CR> 260t
-xmap <tab><tab>ada<CR> 261t
-xmap <tab><tab>ado<CR> 262t
-xmap <tab><tab>ade<CR> 263t
-xmap <tab><tab>adu<CR> 264t
-xmap <tab><tab>adi<CR> 265t
-xmap <tab><tab>add<CR> 266t
-xmap <tab><tab>adh<CR> 267t
-xmap <tab><tab>adt<CR> 268t
-xmap <tab><tab>adn<CR> 269t
+xmap <tab><tab>ods<CR> 260t
+xmap <tab><tab>oda<CR> 261t
+xmap <tab><tab>odo<CR> 262t
+xmap <tab><tab>ode<CR> 263t
+xmap <tab><tab>odu<CR> 264t
+xmap <tab><tab>odi<CR> 265t
+xmap <tab><tab>odd<CR> 266t
+xmap <tab><tab>odh<CR> 267t
+xmap <tab><tab>odt<CR> 268t
+xmap <tab><tab>odn<CR> 269t
 
-xmap <tab><tab>ahs<CR> 270t
-xmap <tab><tab>aha<CR> 271t
-xmap <tab><tab>aho<CR> 272t
-xmap <tab><tab>ahe<CR> 273t
-xmap <tab><tab>ahu<CR> 274t
-xmap <tab><tab>ahi<CR> 275t
-xmap <tab><tab>ahd<CR> 276t
-xmap <tab><tab>ahh<CR> 277t
-xmap <tab><tab>aht<CR> 278t
-xmap <tab><tab>ahn<CR> 279t
+xmap <tab><tab>ohs<CR> 270t
+xmap <tab><tab>oha<CR> 271t
+xmap <tab><tab>oho<CR> 272t
+xmap <tab><tab>ohe<CR> 273t
+xmap <tab><tab>ohu<CR> 274t
+xmap <tab><tab>ohi<CR> 275t
+xmap <tab><tab>ohd<CR> 276t
+xmap <tab><tab>ohh<CR> 277t
+xmap <tab><tab>oht<CR> 278t
+xmap <tab><tab>ohn<CR> 279t
 
-xmap <tab><tab>ats<CR> 280t
-xmap <tab><tab>ata<CR> 281t
-xmap <tab><tab>ato<CR> 282t
-xmap <tab><tab>ate<CR> 283t
-xmap <tab><tab>atu<CR> 284t
-xmap <tab><tab>ati<CR> 285t
-xmap <tab><tab>atd<CR> 286t
-xmap <tab><tab>ath<CR> 287t
-xmap <tab><tab>att<CR> 288t
-xmap <tab><tab>atn<CR> 289t
+xmap <tab><tab>ots<CR> 280t
+xmap <tab><tab>ota<CR> 281t
+xmap <tab><tab>oto<CR> 282t
+xmap <tab><tab>ote<CR> 283t
+xmap <tab><tab>otu<CR> 284t
+xmap <tab><tab>oti<CR> 285t
+xmap <tab><tab>otd<CR> 286t
+xmap <tab><tab>oth<CR> 287t
+xmap <tab><tab>ott<CR> 288t
+xmap <tab><tab>otn<CR> 289t
 
-xmap <tab><tab>ans<CR> 290t
-xmap <tab><tab>ana<CR> 291t
-xmap <tab><tab>ano<CR> 292t
-xmap <tab><tab>ane<CR> 293t
-xmap <tab><tab>anu<CR> 294t
-xmap <tab><tab>ani<CR> 295t
-xmap <tab><tab>and<CR> 296t
-xmap <tab><tab>anh<CR> 297t
-xmap <tab><tab>ant<CR> 298t
-xmap <tab><tab>ann<CR> 299t
-""""""""""""""""""""""""""""""
-" make 
-""""""""""""""""""""""""""""""
-nnoremap <F4> :Make -j `nproc`<CR>
-function! GetBufferList()
-  redir =>buflist
-  silent! ls!
-  redir END
-  return buflist
-endfunction
-
-function! ToggleList(bufname, pfx)
-  let buflist = GetBufferList()
-  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
-    if bufwinnr(bufnum) != -1
-      exec(a:pfx.'close')
-      return
-    endif
-  endfor
-  if a:pfx == 'l' && len(getloclist(0)) == 0
-      echohl ErrorMsg
-      echo "Location List is Empty."
-      return
-  endif
-  let winnr = winnr()
-  exec(a:pfx.'open')
-  if winnr() != winnr
-    wincmd p
-  endif
-endfunction
-
-nmap <silent> <F2> :call ToggleList("Quickfix", 'c')<CR>
-
-function! g:Start_Termdebug(arg)
-	if v:shell_error == 0
-		execute "Termdebug " . a:arg
-	endif
-endfunction
-nnoremap <F6> :!make -j `nproc`<CR>:call g:Start_Termdebug("")<CR>
+xmap <tab><tab>ons<CR> 290t
+xmap <tab><tab>ona<CR> 291t
+xmap <tab><tab>ono<CR> 292t
+xmap <tab><tab>one<CR> 293t
+xmap <tab><tab>onu<CR> 294t
+xmap <tab><tab>oni<CR> 295t
+xmap <tab><tab>ond<CR> 296t
+xmap <tab><tab>onh<CR> 297t
+xmap <tab><tab>ont<CR> 298t
+xmap <tab><tab>onn<CR> 299t
 
 
-"***********************************
-" vim-termdebug
-"***********************************
-
-function! TermDebug_run(program)
-  if (g:termdebug_started != 0)
-    call execute("Run")
-  else
-    call g:Start_Termdebug(a:program)
-  endif
-endfunc
-
-nnoremap <CR> :ToggleBreak<CR>
-nnoremap <leader>c :Continue<CR>
-nnoremap <leader>r :Run<CR>
-
-if &diff != 0
-nnoremap dg :diffget<CR>
-xnoremap dg :diffget<CR>
-endif 
