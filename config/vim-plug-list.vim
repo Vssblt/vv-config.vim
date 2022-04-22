@@ -31,13 +31,13 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'suan/vim-instant-markdown'
     " this plugin will automatically open web browser when you editing markdown files.
 
-    Plug 'Vssblt/vim-cpp'
+    "Plug 'Vssblt/vim-cpp'
     " cpp syntax
 
     Plug 'mzlogin/vim-markdown-toc'  
     " this plugin open your browser when you open a markdown file
 
-    " Plug 'jackguo380/vim-lsp-cxx-highlight'
+     "Plug 'jackguo380/vim-lsp-cxx-highlight'
     " this plugin probely cause slow.
     
     Plug 'adi/vim-indent-rainbow'
@@ -273,6 +273,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'sainnhe/sonokai'
 		"colorscheme
+    Plug 'morhetz/gruvbox'
+		"colorscheme
 
     Plug 'srstevenson/vim-picker'
 
@@ -306,10 +308,8 @@ call plug#begin('~/.config/nvim/plugged')
     "
     Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
     Plug 'junegunn/fzf.vim' " needed for previews
-    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
     Plug 'antoinemadec/coc-fzf'
     Plug 'honza/vim-snippets'
     " custom auto complete.
     " 
-
 call plug#end()

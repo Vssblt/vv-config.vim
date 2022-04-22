@@ -61,10 +61,11 @@ nnoremap <silent> <leader>K :nohl<CR>:call UncolorAllWords()<cr>
 nnoremap <silent> l :call WordNavigation(1)<cr>
 nnoremap <silent> L :call WordNavigation(0)<cr>
 
-nnoremap j 12<c-y>
-nnoremap k 12<c-e>
-xnoremap j 12<c-y>
-xnoremap k 12<c-e>
+" The redraw command could make scrolling more smooth.
+nnoremap j <c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR>
+nnoremap k <c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR>
+xnoremap j <c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR>
+xnoremap k <c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR>
 
 nnoremap b c
 nnoremap r :bnext<CR>
@@ -144,7 +145,7 @@ omap <leader><leader>. <Plug>(easymotion-s)
 omap <leader>. <Plug>(easymotion-sn)
 
 nnoremap <leader>; :TlistToggle<CR>
-nnoremap <leader>q :CocCommand explorer --preset right<CR>
+nnoremap <leader>q :CocCommand explorer --preset left<CR>
 nnoremap <leader>j :GundoToggle<CR>
 
 nmap . <Plug>(choosewin)
@@ -297,8 +298,6 @@ nmap g<space> :<C-u>CocFzfList<CR>
 comm! -nargs=? -bang A CocCommand clangd.switchSourceHeader
 comm! -nargs=? -bang AS CocCommand clangd.switchSourceHeader split
 comm! -nargs=? -bang AV CocCommand clangd.switchSourceHeader vsplit
-"nmap bna <Plug>(coc-diagnostic-next)
-"nmap bpa <Plug>(coc-diagnostic-prev)
 
 """"""""""""""""""""""""""""""
 " vim-surround
@@ -1798,4 +1797,10 @@ xmap <tab><tab>onh<CR> 297t
 xmap <tab><tab>ont<CR> 298t
 xmap <tab><tab>onn<CR> 299t
 
-
+function NewtabTerminal()
+  tabnew
+  execute("terminal")
+endfunction
+comm! -nargs=? -bang Terminal call NewtabTerminal()
+comm! -nargs=? -bang T Terminal
+au TermClose * :q

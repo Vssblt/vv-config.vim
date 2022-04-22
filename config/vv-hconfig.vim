@@ -300,7 +300,9 @@ let g:coc_explorer_global_presets = {
 \   },
 \   'current_window': {
 \     'position': 'current_window',
-\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]',
+\     'width' : 40,
+\     'height' : 40
 \   },
 \   'test': {
 \      'open-action-strategy': 'sourceWindow'
@@ -327,3 +329,4 @@ autocmd VimEnter * :highlight EndOfBuffer ctermfg=bg
 
 
 let g:fcitx5_remote='/usr/bin/fcitx5-remote'
+let g:termdebug_useFloatingHover=1

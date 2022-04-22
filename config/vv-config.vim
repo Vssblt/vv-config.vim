@@ -77,6 +77,8 @@ let g:coc_global_extensions = [
     \ 'coc-html',
     \ 'coc-yank',
     \ 'coc-explorer', 
+    \ 'coc-ecdict',
+    \ 'coc-pairs',
   \ ]
 
 """"""""""""""""""""""""""""""
