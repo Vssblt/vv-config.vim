@@ -69,6 +69,10 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 " coc plugin settings
 " 依赖 clangd
 """"""""""""""""""""""""""""""
+
+" Support languages: java javascript cpp/c html css vim markdown python cmake qmake go php
+" Other: auto pairs, highlight, yank, explorer, snippets
+" Don't supported: c#
 let g:coc_global_extensions = [
     \ 'coc-clangd',
     \ 'coc-cmake',
@@ -79,6 +83,13 @@ let g:coc_global_extensions = [
     \ 'coc-explorer', 
     \ 'coc-ecdict',
     \ 'coc-pairs',
+    \ 'coc-tsserver',
+    \ 'coc-pyright',
+    \ 'coc-css',
+    \ 'coc-java',
+    \ 'coc-phpls',
+    \ 'coc-go',
+    \ 'coc-snippets',
   \ ]
 
 """"""""""""""""""""""""""""""

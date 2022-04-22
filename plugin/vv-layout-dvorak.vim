@@ -474,6 +474,24 @@ nnoremap dg :diffget<CR>
 xnoremap dg :diffget<CR>
 endif 
 
+"***********************************
+" coc-ecdict
+"***********************************
+comm! -nargs=? -bang WordDict  call CocActionAsync('doHover')
+
+"***********************************
+" common
+"***********************************
+
+function NewtabTerminal()
+  tabnew
+  execute("terminal")
+endfunction
+comm! -nargs=? -bang Terminal call NewtabTerminal()
+comm! -nargs=? -bang T Terminal
+au TermClose * :q
+
+
 
 
 """ custom
@@ -1797,10 +1815,3 @@ xmap <tab><tab>onh<CR> 297t
 xmap <tab><tab>ont<CR> 298t
 xmap <tab><tab>onn<CR> 299t
 
-function NewtabTerminal()
-  tabnew
-  execute("terminal")
-endfunction
-comm! -nargs=? -bang Terminal call NewtabTerminal()
-comm! -nargs=? -bang T Terminal
-au TermClose * :q
