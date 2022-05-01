@@ -70,12 +70,6 @@ let g:interestingWordsRandomiseColors = 1
 let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222', '1', '2', '3', '4', '6', '64', '99']
 
 """"""""""""""""""""""""""""""
-" vim-visual-multi settings
-""""""""""""""""""""""""""""""
-let g:VM_default_mappings = 0
-let g:VM_maps = {}
-
-""""""""""""""""""""""""""""""
 " ranger settings
 """"""""""""""""""""""""""""""
 let g:ranger_map_keys = 0

@@ -215,12 +215,18 @@ endfunc
 autocmd TermEnter * call TermEnter()
 func TermEnter()
   call rainbow#disable()
+  if g:qs_enable == 1
+    call quick_scope#Toggle()
+  endif
   startinsert
 endfunc
 
 autocmd TermLeave * call TermLeave()
 func TermLeave()
   call rainbow#enable()
+  if g:qs_enable == 0
+    call quick_scope#Toggle()
+  endif
 endfunc
 
 autocmd BufEnter * call BufEnter()
@@ -318,6 +324,7 @@ xmap gS  <Plug>VgSurround
 " vim-visual-multi
 """"""""""""""""""""""""""""""
 nmap <leader><c-a> <c-l><c-a>
+let g:VM_default_mappings = 0
 let g:VM_leader = ','
 let g:VM_maps = {}
 let g:VM_custom_remaps = {'s' : 'l', ',d' : 'k', ',-' : 'j', '<c-a>' : '<leader>A'}
