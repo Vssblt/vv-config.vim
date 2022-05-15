@@ -16,14 +16,14 @@
 
 tnoremap <C-h> <C-\><C-n>
 
-nnoremap <C-n> jjj
-nnoremap <C-t> kkk
-nnoremap <c-h> hhh
-nnoremap <c-s> lll
-xnoremap <c-h> hhh
-xnoremap <c-s> lll
-xnoremap <c-n> jjj
-xnoremap <c-t> kkk
+nnoremap <C-n> 3j
+nnoremap <C-t> 3k
+nnoremap <c-h> 3h
+nnoremap <c-s> 3l
+xnoremap <c-h> 3h
+xnoremap <c-s> 3l
+xnoremap <c-n> 3j
+xnoremap <c-t> 3k
 
 nnoremap h h
 nnoremap t k

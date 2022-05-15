@@ -90,6 +90,18 @@ let g:coc_global_extensions = [
     \ 'coc-phpls',
     \ 'coc-go',
     \ 'coc-snippets',
+    \ 'coc-marketplace',
+    \ 'coc-sh',
+    \ 'coc-word',
+    \ 'coc-yaml',
+    \ 'coc-xml',
+    \ 'coc-webpack',
+    \ 'coc-sql',
+    \ 'coc-docker',
+    \ 'coc-leetcode',
+    \ 'coc-json',
+    \ 'coc-clang-format-style-options',
+    \ 'coc-lua',
   \ ]
 
 """"""""""""""""""""""""""""""
