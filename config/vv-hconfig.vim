@@ -3,7 +3,7 @@
 """"""""""""""""""""""""""""""
 set lazyredraw
 set wildmenu
-set laststatus=2
+set laststatus=3
 set showtabline=2
 set nu
 set relativenumber
@@ -45,6 +45,8 @@ aug QFClose
   au!
   au WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
 aug END
+
+au BufEnter * call execute("setlocal winbar=" . expand('%:t'))
 
 let g:last_buffer = []
 
@@ -324,3 +326,5 @@ autocmd VimEnter * :highlight EndOfBuffer ctermfg=bg
 
 let g:fcitx5_remote='/usr/bin/fcitx5-remote'
 let g:termdebug_useFloatingHover=1
+
+

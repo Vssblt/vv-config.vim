@@ -62,10 +62,10 @@ nnoremap <silent> l :call WordNavigation(1)<cr>
 nnoremap <silent> L :call WordNavigation(0)<cr>
 
 " The redraw command could make scrolling more smooth.
-nnoremap j <c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR>
-nnoremap k <c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR>
-xnoremap j <c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR><c-y><c-y>:redraw<CR>
-xnoremap k <c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR><c-e><c-e>:redraw<CR>
+nnoremap j <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+nnoremap k <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+xnoremap j <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+xnoremap k <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
 
 nnoremap b c
 nnoremap r :bnext<CR>
