@@ -170,7 +170,7 @@ call Load_vvimrc(expand("%:p:h"))
 
 execute ":command! VConfig :e " g:plugindir.'/config/vv-config.vim'
 execute ":command! VHConfig :e " g:plugindir.'/config/vv-hconfig.vim'
-execute ":command! VPlugList :e " g:plugindir.'/config/vim-plug-list.vim'
+execute ":command! VPlugList :e " '~/.config/nvim/init.lua'
 execute ":command! VTConfig :e " g:plugindir.'/config/temp_config.vim'
 execute ":command! DvorakSettingsV :e " g:plugindir.'/plugin/vv-layout-dvorak.vim'
 execute ":command! QwertySettingsV :e " g:plugindir.'/plugin/vv-layout-qwerty.vim'
