@@ -325,3 +325,14 @@ let g:fcitx5_remote='/usr/bin/fcitx5-remote'
 let g:termdebug_useFloatingHover=1
 
 
+""""""""""""""""""""""""""""""
+" vim-lsp-cxx-highlight
+""""""""""""""""""""""""""""""
+au BufEnter * call HightlightCheck()
+function HightlightCheck()
+  if (line('$') > 2000)
+    execute('LspCxxHighlightDisable')
+  else
+    execute('LspCxxHighlight')
+  endif
+endfunction
