@@ -43,7 +43,7 @@ let g:choosewin_label = "aoeuidhtns"
 " airline settings
 """"""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_theme = 'angr'
@@ -55,6 +55,7 @@ let g:airline#extensions#tabline#buffer_idx_mode = 1
 """"""""""""""""""""""""""""""
 let g:floaterm_height = 0.9
 let g:floaterm_width = 0.9
+let g:floaterm_autoclose = 2
 
 execute ':source' g:plugindir."/config/vim-plug-list.vim"
 
@@ -79,10 +80,7 @@ let g:coc_global_extensions = [
     \ 'coc-highlight',
     \ 'coc-html',
     \ 'coc-yank',
-    \ 'coc-explorer', 
     \ 'coc-ecdict',
-    \ 'coc-pairs',
-    \ 'coc-tsserver',
     \ 'coc-pyright',
     \ 'coc-css',
     \ 'coc-java',
@@ -101,6 +99,9 @@ let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-clang-format-style-options',
     \ 'coc-lua',
+    \ 'coc-tsserver',
+    \ 'coc-vetur',
+    \ 'coc-explorer', 
   \ ]
 
 """"""""""""""""""""""""""""""
