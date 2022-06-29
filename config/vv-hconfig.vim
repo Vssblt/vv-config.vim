@@ -300,14 +300,11 @@ let g:coc_explorer_global_presets = {
 \     'width' : 40,
 \     'height' : 40
 \   },
-\   'test': {
-\      'open-action-strategy': 'sourceWindow'
-\   },
 \ }
 
 
 """"""""""""""""""""""""""""""
-" coc-explorer settings
+" quick-scope settings
 """"""""""""""""""""""""""""""
 augroup qs_colors
   autocmd!

@@ -62,10 +62,10 @@ nnoremap <silent> l :call WordNavigation(1)<cr>
 nnoremap <silent> L :call WordNavigation(0)<cr>
 
 " The redraw command could make scrolling more smooth.
-nnoremap j <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
-nnoremap k <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-xnoremap j <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
-xnoremap k <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+nnoremap j 8<c-y>
+nnoremap k 8<c-e>
+xnoremap j 8<c-y>
+xnoremap k 8<c-e>
 
 nnoremap b c
 nnoremap r :bnext<CR>
@@ -84,8 +84,6 @@ inoremap <ScrollWheelDown> <C-E><C-E><C-E><C-E>
 
 nnoremap <C-e> <C-i>
 
-nnoremap R :source $MYVIMRC<CR>
-
 nnoremap <leader>- $
 nnoremap <leader>d ^
 xnoremap <leader>- $
@@ -93,37 +91,37 @@ xnoremap <leader>d ^
 nnoremap d<leader>- d$
 nnoremap d<leader>d d^
 
-nnoremap <space><space> <Esc>/\(\(\[TODO\:\)\\|\(<+\)\).*\(\(\]\)\\|\(+>\)\)<CR>:nohlsearch<CR>"_cgn
+nnoremap <tab><tab> <Esc>/\(\(\[TODO\:\)\\|\(<+\)\).*\(\(\]\)\\|\(+>\)\)<CR>:nohlsearch<CR>"_cgn
 
 " toggle
-nnoremap <space>t za  
+nnoremap <tab>t za  
 
 " create
-nnoremap <space>c zf  
+nnoremap <tab>c zf  
 
 " delete
-nnoremap <space>d zd
+nnoremap <tab>d zd
 
 " next
-nnoremap <space>k zj
+nnoremap <tab>k zj
 
 " prev
-nnoremap <space>j zk
+nnoremap <tab>j zk
 
 " toggle
-xnoremap <space>t za  
+xnoremap <tab>t za  
 
 " create
-xnoremap <space>c zf  
+xnoremap <tab>c zf  
 
 " delete
-xnoremap <space>d zd
+xnoremap <tab>d zd
 
 " next
-xnoremap <space>k zj
+xnoremap <tab>k zj
 
 " prev
-xnoremap <space>j zk
+xnoremap <tab>j zk
 
 nmap <leader>uh <Plug>(easymotion-linebackward)
 nmap <leader>ut <Plug>(easymotion-k)
@@ -145,7 +143,7 @@ omap <leader><leader>. <Plug>(easymotion-s)
 omap <leader>. <Plug>(easymotion-sn)
 
 nnoremap <leader>; :TlistToggle<CR>
-nnoremap <leader>q :CocCommand explorer --preset left<CR>
+nnoremap <leader>q :CocCommand explorer --preset right<CR>
 nnoremap <leader>j :GundoToggle<CR>
 
 nmap . <Plug>(choosewin)
@@ -200,7 +198,8 @@ nnoremap <leader><leader>i :FloatermNew
 
 inoremap <C-BS> <C-W>
 inoremap  <C-W>
-
+onoremap <C-BS> <C-W>
+onoremap  <C-W>
 
 """"""""""""""""""""""""""""""
 " ranger
@@ -300,6 +299,7 @@ nmap g= <Plug>(coc-format-selected)
 xmap g= <Plug>(coc-format-selected)
 nmap ga= <Plug>(coc-format)
 nmap gr <Plug>(coc-rename)
+nmap gf <Plug>(coc-fix-current)
 nmap g<space> :<C-u>CocFzfList<CR>
 comm! -nargs=? -bang A CocCommand clangd.switchSourceHeader
 comm! -nargs=? -bang AS CocCommand clangd.switchSourceHeader split
@@ -327,7 +327,7 @@ nmap <leader><c-a> <c-l><c-a>
 let g:VM_default_mappings = 0
 let g:VM_leader = ','
 let g:VM_maps = {}
-let g:VM_custom_remaps = {'s' : 'l', ',d' : 'k', ',-' : 'j', '<c-a>' : '<leader>A'}
+let g:VM_custom_remaps = {'s' : 'l', ',d' : 'k', ',-' : 'j', '<c-a>' : '<leader>A', 'b':'c'}
 
 let g:VM_maps['Find Under']                  = '<c-l>'
 let g:VM_maps['Find Subword Under']          = '<c-l>'
@@ -423,6 +423,7 @@ nmap <leader>ph <Plug>(PickerHelp)
 " make 
 """"""""""""""""""""""""""""""
 nnoremap <F4> :Make -j `nproc`<CR>
+nnoremap <C-c> :AbortDispatch<CR>
 function! GetBufferList()
   redir =>buflist
   silent! ls!
@@ -472,7 +473,8 @@ function! TermDebug_run(program)
   endif
 endfunc
 
-autocmd FileType c,cpp nnoremap <buffer> <CR> :ToggleBreak<CR>
+autocmd FileType c,cpp noremap <buffer> <CR> :GdbStart gdb ./a.out<CR>:GdbCreateWatch info locals<CR>
+autocmd FileType c,cpp nnoremap <buffer> <CR> :GdbBreakpointToggle<CR>
 nnoremap <leader>c :Continue<CR>
 nnoremap <leader>r :Run<CR>
 
@@ -498,1327 +500,1332 @@ comm! -nargs=? -bang Terminal call NewtabTerminal()
 comm! -nargs=? -bang T Terminal
 au TermClose * :q
 
+"***********************************
+" coc-ecdict
+"***********************************
+let nvimgdb_config_override = {}
+let nvimgdb_disable_start_keymaps = 1
 
 
 
 """ custom
-nmap <tab>a<CR> 1n
-nmap <tab>o<CR> 2n
-nmap <tab>e<CR> 3n
-nmap <tab>u<CR> 4n
-nmap <tab>i<CR> 5n
-nmap <tab>d<CR> 6n
-nmap <tab>h<CR> 7n
-nmap <tab>t<CR> 8n
-nmap <tab>n<CR> 9n
-
-nmap <tab>as<CR> 10n
-nmap <tab>aa<CR> 11n
-nmap <tab>ao<CR> 12n
-nmap <tab>ae<CR> 13n
-nmap <tab>au<CR> 14n
-nmap <tab>ai<CR> 15n
-nmap <tab>ad<CR> 16n
-nmap <tab>ah<CR> 17n
-nmap <tab>at<CR> 18n
-nmap <tab>an<CR> 19n
-
-nmap <tab>os<CR> 20n
-nmap <tab>oa<CR> 21n
-nmap <tab>oo<CR> 22n
-nmap <tab>oe<CR> 23n
-nmap <tab>ou<CR> 24n
-nmap <tab>oi<CR> 25n
-nmap <tab>od<CR> 26n
-nmap <tab>oh<CR> 27n
-nmap <tab>ot<CR> 28n
-nmap <tab>on<CR> 29n
-
-nmap <tab>es<CR> 30n
-nmap <tab>ea<CR> 31n
-nmap <tab>eo<CR> 32n
-nmap <tab>ee<CR> 33n
-nmap <tab>eu<CR> 34n
-nmap <tab>ei<CR> 35n
-nmap <tab>ed<CR> 36n
-nmap <tab>eh<CR> 37n
-nmap <tab>et<CR> 38n
-nmap <tab>en<CR> 39n
-
-nmap <tab>us<CR> 40n
-nmap <tab>ua<CR> 41n
-nmap <tab>uo<CR> 42n
-nmap <tab>ue<CR> 43n
-nmap <tab>uu<CR> 44n
-nmap <tab>ui<CR> 45n
-nmap <tab>ud<CR> 46n
-nmap <tab>uh<CR> 47n
-nmap <tab>ut<CR> 48n
-nmap <tab>un<CR> 49n
-
-nmap <tab>is<CR> 50n
-nmap <tab>ia<CR> 51n
-nmap <tab>io<CR> 52n
-nmap <tab>ie<CR> 53n
-nmap <tab>iu<CR> 54n
-nmap <tab>ii<CR> 55n
-nmap <tab>id<CR> 56n
-nmap <tab>ih<CR> 57n
-nmap <tab>it<CR> 58n
-nmap <tab>in<CR> 59n
-
-nmap <tab>ds<CR> 60n
-nmap <tab>da<CR> 61n
-nmap <tab>do<CR> 62n
-nmap <tab>de<CR> 63n
-nmap <tab>du<CR> 64n
-nmap <tab>di<CR> 65n
-nmap <tab>dd<CR> 66n
-nmap <tab>dh<CR> 67n
-nmap <tab>dt<CR> 68n
-nmap <tab>dn<CR> 69n
-
-nmap <tab>hs<CR> 70n
-nmap <tab>ha<CR> 71n
-nmap <tab>ho<CR> 72n
-nmap <tab>he<CR> 73n
-nmap <tab>hu<CR> 74n
-nmap <tab>hi<CR> 75n
-nmap <tab>hd<CR> 76n
-nmap <tab>hh<CR> 77n
-nmap <tab>ht<CR> 78n
-nmap <tab>hn<CR> 79n
-
-nmap <tab>ts<CR> 80n
-nmap <tab>ta<CR> 81n
-nmap <tab>to<CR> 82n
-nmap <tab>te<CR> 83n
-nmap <tab>tu<CR> 84n
-nmap <tab>ti<CR> 85n
-nmap <tab>td<CR> 86n
-nmap <tab>th<CR> 87n
-nmap <tab>tt<CR> 88n
-nmap <tab>tn<CR> 89n
-
-nmap <tab>ns<CR> 90n
-nmap <tab>na<CR> 91n
-nmap <tab>no<CR> 92n
-nmap <tab>ne<CR> 93n
-nmap <tab>nu<CR> 94n
-nmap <tab>ni<CR> 95n
-nmap <tab>nd<CR> 96n
-nmap <tab>nh<CR> 97n
-nmap <tab>nt<CR> 98n
-nmap <tab>nn<CR> 99n
-
-nmap <tab>asa<CR> 101n
-nmap <tab>aso<CR> 102n
-nmap <tab>ase<CR> 103n
-nmap <tab>asu<CR> 104n
-nmap <tab>asi<CR> 105n
-nmap <tab>asd<CR> 106n
-nmap <tab>ash<CR> 107n
-nmap <tab>ast<CR> 108n
-nmap <tab>asn<CR> 109n
-
-nmap <tab>aas<CR> 110n
-nmap <tab>aaa<CR> 111n
-nmap <tab>aao<CR> 112n
-nmap <tab>aae<CR> 113n
-nmap <tab>aau<CR> 114n
-nmap <tab>aai<CR> 115n
-nmap <tab>aad<CR> 116n
-nmap <tab>aah<CR> 117n
-nmap <tab>aat<CR> 118n
-nmap <tab>aan<CR> 119n
-
-nmap <tab>aos<CR> 120n
-nmap <tab>aoa<CR> 121n
-nmap <tab>aoo<CR> 122n
-nmap <tab>aoe<CR> 123n
-nmap <tab>aou<CR> 124n
-nmap <tab>aoi<CR> 125n
-nmap <tab>aod<CR> 126n
-nmap <tab>aoh<CR> 127n
-nmap <tab>aot<CR> 128n
-nmap <tab>aon<CR> 129n
-
-nmap <tab>aes<CR> 130n
-nmap <tab>aea<CR> 131n
-nmap <tab>aeo<CR> 132n
-nmap <tab>aee<CR> 133n
-nmap <tab>aeu<CR> 134n
-nmap <tab>aei<CR> 135n
-nmap <tab>aed<CR> 136n
-nmap <tab>aeh<CR> 137n
-nmap <tab>aet<CR> 138n
-nmap <tab>aen<CR> 139n
-
-nmap <tab>aus<CR> 140n
-nmap <tab>aua<CR> 141n
-nmap <tab>auo<CR> 142n
-nmap <tab>aue<CR> 143n
-nmap <tab>auu<CR> 144n
-nmap <tab>aui<CR> 145n
-nmap <tab>aud<CR> 146n
-nmap <tab>auh<CR> 147n
-nmap <tab>aut<CR> 148n
-nmap <tab>aun<CR> 149n
-
-nmap <tab>ais<CR> 150n
-nmap <tab>aia<CR> 151n
-nmap <tab>aio<CR> 152n
-nmap <tab>aie<CR> 153n
-nmap <tab>aiu<CR> 154n
-nmap <tab>aii<CR> 155n
-nmap <tab>aid<CR> 156n
-nmap <tab>aih<CR> 157n
-nmap <tab>ait<CR> 158n
-nmap <tab>ain<CR> 159n
-
-nmap <tab>ads<CR> 160n
-nmap <tab>ada<CR> 161n
-nmap <tab>ado<CR> 162n
-nmap <tab>ade<CR> 163n
-nmap <tab>adu<CR> 164n
-nmap <tab>adi<CR> 165n
-nmap <tab>add<CR> 166n
-nmap <tab>adh<CR> 167n
-nmap <tab>adt<CR> 168n
-nmap <tab>adn<CR> 169n
-
-nmap <tab>ahs<CR> 170n
-nmap <tab>aha<CR> 171n
-nmap <tab>aho<CR> 172n
-nmap <tab>ahe<CR> 173n
-nmap <tab>ahu<CR> 174n
-nmap <tab>ahi<CR> 175n
-nmap <tab>ahd<CR> 176n
-nmap <tab>ahh<CR> 177n
-nmap <tab>aht<CR> 178n
-nmap <tab>ahn<CR> 179n
-
-nmap <tab>ats<CR> 180n
-nmap <tab>ata<CR> 181n
-nmap <tab>ato<CR> 182n
-nmap <tab>ate<CR> 183n
-nmap <tab>atu<CR> 184n
-nmap <tab>ati<CR> 185n
-nmap <tab>atd<CR> 186n
-nmap <tab>ath<CR> 187n
-nmap <tab>att<CR> 188n
-nmap <tab>atn<CR> 189n
-
-nmap <tab>ans<CR> 190n
-nmap <tab>ana<CR> 191n
-nmap <tab>ano<CR> 192n
-nmap <tab>ane<CR> 193n
-nmap <tab>anu<CR> 194n
-nmap <tab>ani<CR> 195n
-nmap <tab>and<CR> 196n
-nmap <tab>anh<CR> 197n
-nmap <tab>ant<CR> 198n
-nmap <tab>ann<CR> 199n
-
-nmap <tab>osa<CR> 201n
-nmap <tab>oso<CR> 202n
-nmap <tab>ose<CR> 203n
-nmap <tab>osu<CR> 204n
-nmap <tab>osi<CR> 205n
-nmap <tab>osd<CR> 206n
-nmap <tab>osh<CR> 207n
-nmap <tab>ost<CR> 208n
-nmap <tab>osn<CR> 209n
-
-nmap <tab>oas<CR> 210n
-nmap <tab>oaa<CR> 211n
-nmap <tab>oao<CR> 212n
-nmap <tab>oae<CR> 213n
-nmap <tab>oau<CR> 214n
-nmap <tab>oai<CR> 215n
-nmap <tab>oad<CR> 216n
-nmap <tab>oah<CR> 217n
-nmap <tab>oat<CR> 218n
-nmap <tab>oan<CR> 219n
-
-nmap <tab>oos<CR> 220n
-nmap <tab>ooa<CR> 221n
-nmap <tab>ooo<CR> 222n
-nmap <tab>ooe<CR> 223n
-nmap <tab>oou<CR> 224n
-nmap <tab>ooi<CR> 225n
-nmap <tab>ood<CR> 226n
-nmap <tab>ooh<CR> 227n
-nmap <tab>oot<CR> 228n
-nmap <tab>oon<CR> 229n
-
-nmap <tab>oes<CR> 230n
-nmap <tab>oea<CR> 231n
-nmap <tab>oeo<CR> 232n
-nmap <tab>oee<CR> 233n
-nmap <tab>oeu<CR> 234n
-nmap <tab>oei<CR> 235n
-nmap <tab>oed<CR> 236n
-nmap <tab>oeh<CR> 237n
-nmap <tab>oet<CR> 238n
-nmap <tab>oen<CR> 139n
-
-nmap <tab>ous<CR> 240n
-nmap <tab>oua<CR> 241n
-nmap <tab>ouo<CR> 242n
-nmap <tab>oue<CR> 243n
-nmap <tab>ouu<CR> 244n
-nmap <tab>oui<CR> 245n
-nmap <tab>oud<CR> 246n
-nmap <tab>ouh<CR> 247n
-nmap <tab>out<CR> 248n
-nmap <tab>oun<CR> 249n
-
-nmap <tab>ois<CR> 250n
-nmap <tab>oia<CR> 251n
-nmap <tab>oio<CR> 252n
-nmap <tab>oie<CR> 253n
-nmap <tab>oiu<CR> 254n
-nmap <tab>oii<CR> 255n
-nmap <tab>oid<CR> 256n
-nmap <tab>oih<CR> 257n
-nmap <tab>oit<CR> 258n
-nmap <tab>oin<CR> 259n
-
-nmap <tab>ods<CR> 260n
-nmap <tab>oda<CR> 261n
-nmap <tab>odo<CR> 262n
-nmap <tab>ode<CR> 263n
-nmap <tab>odu<CR> 264n
-nmap <tab>odi<CR> 265n
-nmap <tab>odd<CR> 266n
-nmap <tab>odh<CR> 267n
-nmap <tab>odt<CR> 268n
-nmap <tab>odn<CR> 269n
-
-nmap <tab>ohs<CR> 270n
-nmap <tab>oha<CR> 271n
-nmap <tab>oho<CR> 272n
-nmap <tab>ohe<CR> 273n
-nmap <tab>ohu<CR> 274n
-nmap <tab>ohi<CR> 275n
-nmap <tab>ohd<CR> 276n
-nmap <tab>ohh<CR> 277n
-nmap <tab>oht<CR> 278n
-nmap <tab>ohn<CR> 279n
-
-nmap <tab>ots<CR> 280n
-nmap <tab>ota<CR> 281n
-nmap <tab>oto<CR> 282n
-nmap <tab>ote<CR> 283n
-nmap <tab>otu<CR> 284n
-nmap <tab>oti<CR> 285n
-nmap <tab>otd<CR> 286n
-nmap <tab>oth<CR> 287n
-nmap <tab>ott<CR> 288n
-nmap <tab>otn<CR> 289n
-
-nmap <tab>ons<CR> 290n
-nmap <tab>ona<CR> 291n
-nmap <tab>ono<CR> 292n
-nmap <tab>one<CR> 293n
-nmap <tab>onu<CR> 294n
-nmap <tab>oni<CR> 295n
-nmap <tab>ond<CR> 296n
-nmap <tab>onh<CR> 297n
-nmap <tab>ont<CR> 298n
-nmap <tab>onn<CR> 299n
-
-
-
-
-
-
-
-nmap <tab><tab>a<CR> 1t
-nmap <tab><tab>o<CR> 2t
-nmap <tab><tab>e<CR> 3t
-nmap <tab><tab>u<CR> 4t
-nmap <tab><tab>i<CR> 5t
-nmap <tab><tab>d<CR> 6t
-nmap <tab><tab>h<CR> 7t
-nmap <tab><tab>t<CR> 8t
-nmap <tab><tab>n<CR> 9t
-
-nmap <tab><tab>as<CR> 10t
-nmap <tab><tab>aa<CR> 11t
-nmap <tab><tab>ao<CR> 12t
-nmap <tab><tab>ae<CR> 13t
-nmap <tab><tab>au<CR> 14t
-nmap <tab><tab>ai<CR> 15t
-nmap <tab><tab>ad<CR> 16t
-nmap <tab><tab>ah<CR> 17t
-nmap <tab><tab>at<CR> 18t
-nmap <tab><tab>an<CR> 19t
-
-nmap <tab><tab>os<CR> 20t
-nmap <tab><tab>oa<CR> 21t
-nmap <tab><tab>oo<CR> 22t
-nmap <tab><tab>oe<CR> 23t
-nmap <tab><tab>ou<CR> 24t
-nmap <tab><tab>oi<CR> 25t
-nmap <tab><tab>od<CR> 26t
-nmap <tab><tab>oh<CR> 27t
-nmap <tab><tab>ot<CR> 28t
-nmap <tab><tab>on<CR> 29t
-
-nmap <tab><tab>es<CR> 30t
-nmap <tab><tab>ea<CR> 31t
-nmap <tab><tab>eo<CR> 32t
-nmap <tab><tab>ee<CR> 33t
-nmap <tab><tab>eu<CR> 34t
-nmap <tab><tab>ei<CR> 35t
-nmap <tab><tab>ed<CR> 36t
-nmap <tab><tab>eh<CR> 37t
-nmap <tab><tab>et<CR> 38t
-nmap <tab><tab>en<CR> 39t
-
-nmap <tab><tab>us<CR> 40t
-nmap <tab><tab>ua<CR> 41t
-nmap <tab><tab>uo<CR> 42t
-nmap <tab><tab>ue<CR> 43t
-nmap <tab><tab>uu<CR> 44t
-nmap <tab><tab>ui<CR> 45t
-nmap <tab><tab>ud<CR> 46t
-nmap <tab><tab>uh<CR> 47t
-nmap <tab><tab>ut<CR> 48t
-nmap <tab><tab>un<CR> 49t
-
-nmap <tab><tab>is<CR> 50t
-nmap <tab><tab>ia<CR> 51t
-nmap <tab><tab>io<CR> 52t
-nmap <tab><tab>ie<CR> 53t
-nmap <tab><tab>iu<CR> 54t
-nmap <tab><tab>ii<CR> 55t
-nmap <tab><tab>id<CR> 56t
-nmap <tab><tab>ih<CR> 57t
-nmap <tab><tab>it<CR> 58t
-nmap <tab><tab>in<CR> 59t
-
-nmap <tab><tab>ds<CR> 60t
-nmap <tab><tab>da<CR> 61t
-nmap <tab><tab>do<CR> 62t
-nmap <tab><tab>de<CR> 63t
-nmap <tab><tab>du<CR> 64t
-nmap <tab><tab>di<CR> 65t
-nmap <tab><tab>dd<CR> 66t
-nmap <tab><tab>dh<CR> 67t
-nmap <tab><tab>dt<CR> 68t
-nmap <tab><tab>dn<CR> 69t
-
-nmap <tab><tab>hs<CR> 70t
-nmap <tab><tab>ha<CR> 71t
-nmap <tab><tab>ho<CR> 72t
-nmap <tab><tab>he<CR> 73t
-nmap <tab><tab>hu<CR> 74t
-nmap <tab><tab>hi<CR> 75t
-nmap <tab><tab>hd<CR> 76t
-nmap <tab><tab>hh<CR> 77t
-nmap <tab><tab>ht<CR> 78t
-nmap <tab><tab>hn<CR> 79t
-
-nmap <tab><tab>ts<CR> 80t
-nmap <tab><tab>ta<CR> 81t
-nmap <tab><tab>to<CR> 82t
-nmap <tab><tab>te<CR> 83t
-nmap <tab><tab>tu<CR> 84t
-nmap <tab><tab>ti<CR> 85t
-nmap <tab><tab>td<CR> 86t
-nmap <tab><tab>th<CR> 87t
-nmap <tab><tab>tt<CR> 88t
-nmap <tab><tab>tn<CR> 89t
-
-nmap <tab><tab>ns<CR> 90t
-nmap <tab><tab>na<CR> 91t
-nmap <tab><tab>no<CR> 92t
-nmap <tab><tab>ne<CR> 93t
-nmap <tab><tab>nu<CR> 94t
-nmap <tab><tab>ni<CR> 95t
-nmap <tab><tab>nd<CR> 96t
-nmap <tab><tab>nh<CR> 97t
-nmap <tab><tab>nt<CR> 98t
-nmap <tab><tab>nn<CR> 99t
-
-nmap <tab><tab>asa<CR> 101t
-nmap <tab><tab>aso<CR> 102t
-nmap <tab><tab>ase<CR> 103t
-nmap <tab><tab>asu<CR> 104t
-nmap <tab><tab>asi<CR> 105t
-nmap <tab><tab>asd<CR> 106t
-nmap <tab><tab>ash<CR> 107t
-nmap <tab><tab>ast<CR> 108t
-nmap <tab><tab>asn<CR> 109t
-
-nmap <tab><tab>aas<CR> 110t
-nmap <tab><tab>aaa<CR> 111t
-nmap <tab><tab>aao<CR> 112t
-nmap <tab><tab>aae<CR> 113t
-nmap <tab><tab>aau<CR> 114t
-nmap <tab><tab>aai<CR> 115t
-nmap <tab><tab>aad<CR> 116t
-nmap <tab><tab>aah<CR> 117t
-nmap <tab><tab>aat<CR> 118t
-nmap <tab><tab>aan<CR> 119t
-
-nmap <tab><tab>aos<CR> 120t
-nmap <tab><tab>aoa<CR> 121t
-nmap <tab><tab>aoo<CR> 122t
-nmap <tab><tab>aoe<CR> 123t
-nmap <tab><tab>aou<CR> 124t
-nmap <tab><tab>aoi<CR> 125t
-nmap <tab><tab>aod<CR> 126t
-nmap <tab><tab>aoh<CR> 127t
-nmap <tab><tab>aot<CR> 128t
-nmap <tab><tab>aon<CR> 129t
-
-nmap <tab><tab>aes<CR> 130t
-nmap <tab><tab>aea<CR> 131t
-nmap <tab><tab>aeo<CR> 132t
-nmap <tab><tab>aee<CR> 133t
-nmap <tab><tab>aeu<CR> 134t
-nmap <tab><tab>aei<CR> 135t
-nmap <tab><tab>aed<CR> 136t
-nmap <tab><tab>aeh<CR> 137t
-nmap <tab><tab>aet<CR> 138t
-nmap <tab><tab>aen<CR> 139t
-
-nmap <tab><tab>aus<CR> 140t
-nmap <tab><tab>aua<CR> 141t
-nmap <tab><tab>auo<CR> 142t
-nmap <tab><tab>aue<CR> 143t
-nmap <tab><tab>auu<CR> 144t
-nmap <tab><tab>aui<CR> 145t
-nmap <tab><tab>aud<CR> 146t
-nmap <tab><tab>auh<CR> 147t
-nmap <tab><tab>aut<CR> 148t
-nmap <tab><tab>aun<CR> 149t
-
-nmap <tab><tab>ais<CR> 150t
-nmap <tab><tab>aia<CR> 151t
-nmap <tab><tab>aio<CR> 152t
-nmap <tab><tab>aie<CR> 153t
-nmap <tab><tab>aiu<CR> 154t
-nmap <tab><tab>aii<CR> 155t
-nmap <tab><tab>aid<CR> 156t
-nmap <tab><tab>aih<CR> 157t
-nmap <tab><tab>ait<CR> 158t
-nmap <tab><tab>ain<CR> 159t
-
-nmap <tab><tab>ads<CR> 160t
-nmap <tab><tab>ada<CR> 161t
-nmap <tab><tab>ado<CR> 162t
-nmap <tab><tab>ade<CR> 163t
-nmap <tab><tab>adu<CR> 164t
-nmap <tab><tab>adi<CR> 165t
-nmap <tab><tab>add<CR> 166t
-nmap <tab><tab>adh<CR> 167t
-nmap <tab><tab>adt<CR> 168t
-nmap <tab><tab>adn<CR> 169t
-
-nmap <tab><tab>ahs<CR> 170t
-nmap <tab><tab>aha<CR> 171t
-nmap <tab><tab>aho<CR> 172t
-nmap <tab><tab>ahe<CR> 173t
-nmap <tab><tab>ahu<CR> 174t
-nmap <tab><tab>ahi<CR> 175t
-nmap <tab><tab>ahd<CR> 176t
-nmap <tab><tab>ahh<CR> 177t
-nmap <tab><tab>aht<CR> 178t
-nmap <tab><tab>ahn<CR> 179t
-
-nmap <tab><tab>ats<CR> 180t
-nmap <tab><tab>ata<CR> 181t
-nmap <tab><tab>ato<CR> 182t
-nmap <tab><tab>ate<CR> 183t
-nmap <tab><tab>atu<CR> 184t
-nmap <tab><tab>ati<CR> 185t
-nmap <tab><tab>atd<CR> 186t
-nmap <tab><tab>ath<CR> 187t
-nmap <tab><tab>att<CR> 188t
-nmap <tab><tab>atn<CR> 189t
-
-nmap <tab><tab>ans<CR> 190t
-nmap <tab><tab>ana<CR> 191t
-nmap <tab><tab>ano<CR> 192t
-nmap <tab><tab>ane<CR> 193t
-nmap <tab><tab>anu<CR> 194t
-nmap <tab><tab>ani<CR> 195t
-nmap <tab><tab>and<CR> 196t
-nmap <tab><tab>anh<CR> 197t
-nmap <tab><tab>ant<CR> 198t
-nmap <tab><tab>ann<CR> 199t
-
-nmap <tab><tab>osa<CR> 201t
-nmap <tab><tab>oso<CR> 202t
-nmap <tab><tab>ose<CR> 203t
-nmap <tab><tab>osu<CR> 204t
-nmap <tab><tab>osi<CR> 205t
-nmap <tab><tab>osd<CR> 206t
-nmap <tab><tab>osh<CR> 207t
-nmap <tab><tab>ost<CR> 208t
-nmap <tab><tab>osn<CR> 209t
-
-nmap <tab><tab>oas<CR> 210t
-nmap <tab><tab>oaa<CR> 211t
-nmap <tab><tab>oao<CR> 212t
-nmap <tab><tab>oae<CR> 213t
-nmap <tab><tab>oau<CR> 214t
-nmap <tab><tab>oai<CR> 215t
-nmap <tab><tab>oad<CR> 216t
-nmap <tab><tab>oah<CR> 217t
-nmap <tab><tab>oat<CR> 218t
-nmap <tab><tab>oan<CR> 219t
-
-nmap <tab><tab>oos<CR> 220t
-nmap <tab><tab>ooa<CR> 221t
-nmap <tab><tab>ooo<CR> 222t
-nmap <tab><tab>ooe<CR> 223t
-nmap <tab><tab>oou<CR> 224t
-nmap <tab><tab>ooi<CR> 225t
-nmap <tab><tab>ood<CR> 226t
-nmap <tab><tab>ooh<CR> 227t
-nmap <tab><tab>oot<CR> 228t
-nmap <tab><tab>oon<CR> 229t
-
-nmap <tab><tab>oes<CR> 230t
-nmap <tab><tab>oea<CR> 231t
-nmap <tab><tab>oeo<CR> 232t
-nmap <tab><tab>oee<CR> 233t
-nmap <tab><tab>oeu<CR> 234t
-nmap <tab><tab>oei<CR> 235t
-nmap <tab><tab>oed<CR> 236t
-nmap <tab><tab>oeh<CR> 237t
-nmap <tab><tab>oet<CR> 238t
-nmap <tab><tab>oen<CR> 139t
-
-nmap <tab><tab>ous<CR> 240t
-nmap <tab><tab>oua<CR> 241t
-nmap <tab><tab>ouo<CR> 242t
-nmap <tab><tab>oue<CR> 243t
-nmap <tab><tab>ouu<CR> 244t
-nmap <tab><tab>oui<CR> 245t
-nmap <tab><tab>oud<CR> 246t
-nmap <tab><tab>ouh<CR> 247t
-nmap <tab><tab>out<CR> 248t
-nmap <tab><tab>oun<CR> 249t
-
-nmap <tab><tab>ois<CR> 250t
-nmap <tab><tab>oia<CR> 251t
-nmap <tab><tab>oio<CR> 252t
-nmap <tab><tab>oie<CR> 253t
-nmap <tab><tab>oiu<CR> 254t
-nmap <tab><tab>oii<CR> 255t
-nmap <tab><tab>oid<CR> 256t
-nmap <tab><tab>oih<CR> 257t
-nmap <tab><tab>oit<CR> 258t
-nmap <tab><tab>oin<CR> 259t
-
-nmap <tab><tab>ods<CR> 260t
-nmap <tab><tab>oda<CR> 261t
-nmap <tab><tab>odo<CR> 262t
-nmap <tab><tab>ode<CR> 263t
-nmap <tab><tab>odu<CR> 264t
-nmap <tab><tab>odi<CR> 265t
-nmap <tab><tab>odd<CR> 266t
-nmap <tab><tab>odh<CR> 267t
-nmap <tab><tab>odt<CR> 268t
-nmap <tab><tab>odn<CR> 269t
-
-nmap <tab><tab>ohs<CR> 270t
-nmap <tab><tab>oha<CR> 271t
-nmap <tab><tab>oho<CR> 272t
-nmap <tab><tab>ohe<CR> 273t
-nmap <tab><tab>ohu<CR> 274t
-nmap <tab><tab>ohi<CR> 275t
-nmap <tab><tab>ohd<CR> 276t
-nmap <tab><tab>ohh<CR> 277t
-nmap <tab><tab>oht<CR> 278t
-nmap <tab><tab>ohn<CR> 279t
-
-nmap <tab><tab>ots<CR> 280t
-nmap <tab><tab>ota<CR> 281t
-nmap <tab><tab>oto<CR> 282t
-nmap <tab><tab>ote<CR> 283t
-nmap <tab><tab>otu<CR> 284t
-nmap <tab><tab>oti<CR> 285t
-nmap <tab><tab>otd<CR> 286t
-nmap <tab><tab>oth<CR> 287t
-nmap <tab><tab>ott<CR> 288t
-nmap <tab><tab>otn<CR> 289t
-
-nmap <tab><tab>ons<CR> 290t
-nmap <tab><tab>ona<CR> 291t
-nmap <tab><tab>ono<CR> 292t
-nmap <tab><tab>one<CR> 293t
-nmap <tab><tab>onu<CR> 294t
-nmap <tab><tab>oni<CR> 295t
-nmap <tab><tab>ond<CR> 296t
-nmap <tab><tab>onh<CR> 297t
-nmap <tab><tab>ont<CR> 298t
-nmap <tab><tab>onn<CR> 299t
-
-xmap <tab>a<CR> 1n
-xmap <tab>o<CR> 2n
-xmap <tab>e<CR> 3n
-xmap <tab>u<CR> 4n
-xmap <tab>i<CR> 5n
-xmap <tab>d<CR> 6n
-xmap <tab>h<CR> 7n
-xmap <tab>t<CR> 8n
-xmap <tab>n<CR> 9n
-
-xmap <tab>as<CR> 10n
-xmap <tab>aa<CR> 11n
-xmap <tab>ao<CR> 12n
-xmap <tab>ae<CR> 13n
-xmap <tab>au<CR> 14n
-xmap <tab>ai<CR> 15n
-xmap <tab>ad<CR> 16n
-xmap <tab>ah<CR> 17n
-xmap <tab>at<CR> 18n
-xmap <tab>an<CR> 19n
-
-xmap <tab>os<CR> 20n
-xmap <tab>oa<CR> 21n
-xmap <tab>oo<CR> 22n
-xmap <tab>oe<CR> 23n
-xmap <tab>ou<CR> 24n
-xmap <tab>oi<CR> 25n
-xmap <tab>od<CR> 26n
-xmap <tab>oh<CR> 27n
-xmap <tab>ot<CR> 28n
-xmap <tab>on<CR> 29n
-
-xmap <tab>es<CR> 30n
-xmap <tab>ea<CR> 31n
-xmap <tab>eo<CR> 32n
-xmap <tab>ee<CR> 33n
-xmap <tab>eu<CR> 34n
-xmap <tab>ei<CR> 35n
-xmap <tab>ed<CR> 36n
-xmap <tab>eh<CR> 37n
-xmap <tab>et<CR> 38n
-xmap <tab>en<CR> 39n
-
-xmap <tab>us<CR> 40n
-xmap <tab>ua<CR> 41n
-xmap <tab>uo<CR> 42n
-xmap <tab>ue<CR> 43n
-xmap <tab>uu<CR> 44n
-xmap <tab>ui<CR> 45n
-xmap <tab>ud<CR> 46n
-xmap <tab>uh<CR> 47n
-xmap <tab>ut<CR> 48n
-xmap <tab>un<CR> 49n
-
-xmap <tab>is<CR> 50n
-xmap <tab>ia<CR> 51n
-xmap <tab>io<CR> 52n
-xmap <tab>ie<CR> 53n
-xmap <tab>iu<CR> 54n
-xmap <tab>ii<CR> 55n
-xmap <tab>id<CR> 56n
-xmap <tab>ih<CR> 57n
-xmap <tab>it<CR> 58n
-xmap <tab>in<CR> 59n
-
-xmap <tab>ds<CR> 60n
-xmap <tab>da<CR> 61n
-xmap <tab>do<CR> 62n
-xmap <tab>de<CR> 63n
-xmap <tab>du<CR> 64n
-xmap <tab>di<CR> 65n
-xmap <tab>dd<CR> 66n
-xmap <tab>dh<CR> 67n
-xmap <tab>dt<CR> 68n
-xmap <tab>dn<CR> 69n
-
-xmap <tab>hs<CR> 70n
-xmap <tab>ha<CR> 71n
-xmap <tab>ho<CR> 72n
-xmap <tab>he<CR> 73n
-xmap <tab>hu<CR> 74n
-xmap <tab>hi<CR> 75n
-xmap <tab>hd<CR> 76n
-xmap <tab>hh<CR> 77n
-xmap <tab>ht<CR> 78n
-xmap <tab>hn<CR> 79n
-
-xmap <tab>ts<CR> 80n
-xmap <tab>ta<CR> 81n
-xmap <tab>to<CR> 82n
-xmap <tab>te<CR> 83n
-xmap <tab>tu<CR> 84n
-xmap <tab>ti<CR> 85n
-xmap <tab>td<CR> 86n
-xmap <tab>th<CR> 87n
-xmap <tab>tt<CR> 88n
-xmap <tab>tn<CR> 89n
-
-xmap <tab>ns<CR> 90n
-xmap <tab>na<CR> 91n
-xmap <tab>no<CR> 92n
-xmap <tab>ne<CR> 93n
-xmap <tab>nu<CR> 94n
-xmap <tab>ni<CR> 95n
-xmap <tab>nd<CR> 96n
-xmap <tab>nh<CR> 97n
-xmap <tab>nt<CR> 98n
-xmap <tab>nn<CR> 99n
-
-xmap <tab>asa<CR> 101n
-xmap <tab>aso<CR> 102n
-xmap <tab>ase<CR> 103n
-xmap <tab>asu<CR> 104n
-xmap <tab>asi<CR> 105n
-xmap <tab>asd<CR> 106n
-xmap <tab>ash<CR> 107n
-xmap <tab>ast<CR> 108n
-xmap <tab>asn<CR> 109n
-
-xmap <tab>aas<CR> 110n
-xmap <tab>aaa<CR> 111n
-xmap <tab>aao<CR> 112n
-xmap <tab>aae<CR> 113n
-xmap <tab>aau<CR> 114n
-xmap <tab>aai<CR> 115n
-xmap <tab>aad<CR> 116n
-xmap <tab>aah<CR> 117n
-xmap <tab>aat<CR> 118n
-xmap <tab>aan<CR> 119n
-
-xmap <tab>aos<CR> 120n
-xmap <tab>aoa<CR> 121n
-xmap <tab>aoo<CR> 122n
-xmap <tab>aoe<CR> 123n
-xmap <tab>aou<CR> 124n
-xmap <tab>aoi<CR> 125n
-xmap <tab>aod<CR> 126n
-xmap <tab>aoh<CR> 127n
-xmap <tab>aot<CR> 128n
-xmap <tab>aon<CR> 129n
-
-xmap <tab>aes<CR> 130n
-xmap <tab>aea<CR> 131n
-xmap <tab>aeo<CR> 132n
-xmap <tab>aee<CR> 133n
-xmap <tab>aeu<CR> 134n
-xmap <tab>aei<CR> 135n
-xmap <tab>aed<CR> 136n
-xmap <tab>aeh<CR> 137n
-xmap <tab>aet<CR> 138n
-xmap <tab>aen<CR> 139n
-
-xmap <tab>aus<CR> 140n
-xmap <tab>aua<CR> 141n
-xmap <tab>auo<CR> 142n
-xmap <tab>aue<CR> 143n
-xmap <tab>auu<CR> 144n
-xmap <tab>aui<CR> 145n
-xmap <tab>aud<CR> 146n
-xmap <tab>auh<CR> 147n
-xmap <tab>aut<CR> 148n
-xmap <tab>aun<CR> 149n
-
-xmap <tab>ais<CR> 150n
-xmap <tab>aia<CR> 151n
-xmap <tab>aio<CR> 152n
-xmap <tab>aie<CR> 153n
-xmap <tab>aiu<CR> 154n
-xmap <tab>aii<CR> 155n
-xmap <tab>aid<CR> 156n
-xmap <tab>aih<CR> 157n
-xmap <tab>ait<CR> 158n
-xmap <tab>ain<CR> 159n
-
-xmap <tab>ads<CR> 160n
-xmap <tab>ada<CR> 161n
-xmap <tab>ado<CR> 162n
-xmap <tab>ade<CR> 163n
-xmap <tab>adu<CR> 164n
-xmap <tab>adi<CR> 165n
-xmap <tab>add<CR> 166n
-xmap <tab>adh<CR> 167n
-xmap <tab>adt<CR> 168n
-xmap <tab>adn<CR> 169n
-
-xmap <tab>ahs<CR> 170n
-xmap <tab>aha<CR> 171n
-xmap <tab>aho<CR> 172n
-xmap <tab>ahe<CR> 173n
-xmap <tab>ahu<CR> 174n
-xmap <tab>ahi<CR> 175n
-xmap <tab>ahd<CR> 176n
-xmap <tab>ahh<CR> 177n
-xmap <tab>aht<CR> 178n
-xmap <tab>ahn<CR> 179n
-
-xmap <tab>ats<CR> 180n
-xmap <tab>ata<CR> 181n
-xmap <tab>ato<CR> 182n
-xmap <tab>ate<CR> 183n
-xmap <tab>atu<CR> 184n
-xmap <tab>ati<CR> 185n
-xmap <tab>atd<CR> 186n
-xmap <tab>ath<CR> 187n
-xmap <tab>att<CR> 188n
-xmap <tab>atn<CR> 189n
-
-xmap <tab>ans<CR> 190n
-xmap <tab>ana<CR> 191n
-xmap <tab>ano<CR> 192n
-xmap <tab>ane<CR> 193n
-xmap <tab>anu<CR> 194n
-xmap <tab>ani<CR> 195n
-xmap <tab>and<CR> 196n
-xmap <tab>anh<CR> 197n
-xmap <tab>ant<CR> 198n
-xmap <tab>ann<CR> 199n
-
-xmap <tab>asa<CR> 201n
-xmap <tab>aso<CR> 202n
-xmap <tab>ase<CR> 203n
-xmap <tab>asu<CR> 204n
-xmap <tab>asi<CR> 205n
-xmap <tab>asd<CR> 206n
-xmap <tab>ash<CR> 207n
-xmap <tab>ast<CR> 208n
-xmap <tab>asn<CR> 209n
-
-xmap <tab>oas<CR> 210n
-xmap <tab>oaa<CR> 211n
-xmap <tab>oao<CR> 212n
-xmap <tab>oae<CR> 213n
-xmap <tab>oau<CR> 214n
-xmap <tab>oai<CR> 215n
-xmap <tab>oad<CR> 216n
-xmap <tab>oah<CR> 217n
-xmap <tab>oat<CR> 218n
-xmap <tab>oan<CR> 219n
-
-xmap <tab>oos<CR> 220n
-xmap <tab>ooa<CR> 221n
-xmap <tab>ooo<CR> 222n
-xmap <tab>ooe<CR> 223n
-xmap <tab>oou<CR> 224n
-xmap <tab>ooi<CR> 225n
-xmap <tab>ood<CR> 226n
-xmap <tab>ooh<CR> 227n
-xmap <tab>oot<CR> 228n
-xmap <tab>oon<CR> 229n
-
-xmap <tab>oes<CR> 230n
-xmap <tab>oea<CR> 231n
-xmap <tab>oeo<CR> 232n
-xmap <tab>oee<CR> 233n
-xmap <tab>oeu<CR> 234n
-xmap <tab>oei<CR> 235n
-xmap <tab>oed<CR> 236n
-xmap <tab>oeh<CR> 237n
-xmap <tab>oet<CR> 238n
-xmap <tab>oen<CR> 139n
-
-xmap <tab>ous<CR> 240n
-xmap <tab>oua<CR> 241n
-xmap <tab>ouo<CR> 242n
-xmap <tab>oue<CR> 243n
-xmap <tab>ouu<CR> 244n
-xmap <tab>oui<CR> 245n
-xmap <tab>oud<CR> 246n
-xmap <tab>ouh<CR> 247n
-xmap <tab>out<CR> 248n
-xmap <tab>oun<CR> 249n
-
-xmap <tab>ois<CR> 250n
-xmap <tab>oia<CR> 251n
-xmap <tab>oio<CR> 252n
-xmap <tab>oie<CR> 253n
-xmap <tab>oiu<CR> 254n
-xmap <tab>oii<CR> 255n
-xmap <tab>oid<CR> 256n
-xmap <tab>oih<CR> 257n
-xmap <tab>oit<CR> 258n
-xmap <tab>oin<CR> 259n
-
-xmap <tab>ods<CR> 260n
-xmap <tab>oda<CR> 261n
-xmap <tab>odo<CR> 262n
-xmap <tab>ode<CR> 263n
-xmap <tab>odu<CR> 264n
-xmap <tab>odi<CR> 265n
-xmap <tab>odd<CR> 266n
-xmap <tab>odh<CR> 267n
-xmap <tab>odt<CR> 268n
-xmap <tab>odn<CR> 269n
-
-xmap <tab>ohs<CR> 270n
-xmap <tab>oha<CR> 271n
-xmap <tab>oho<CR> 272n
-xmap <tab>ohe<CR> 273n
-xmap <tab>ohu<CR> 274n
-xmap <tab>ohi<CR> 275n
-xmap <tab>ohd<CR> 276n
-xmap <tab>ohh<CR> 277n
-xmap <tab>oht<CR> 278n
-xmap <tab>ohn<CR> 279n
-
-xmap <tab>ots<CR> 280n
-xmap <tab>ota<CR> 281n
-xmap <tab>oto<CR> 282n
-xmap <tab>ote<CR> 283n
-xmap <tab>otu<CR> 284n
-xmap <tab>oti<CR> 285n
-xmap <tab>otd<CR> 286n
-xmap <tab>oth<CR> 287n
-xmap <tab>ott<CR> 288n
-xmap <tab>otn<CR> 289n
-
-xmap <tab>ons<CR> 290n
-xmap <tab>ona<CR> 291n
-xmap <tab>ono<CR> 292n
-xmap <tab>one<CR> 293n
-xmap <tab>onu<CR> 294n
-xmap <tab>oni<CR> 295n
-xmap <tab>ond<CR> 296n
-xmap <tab>onh<CR> 297n
-xmap <tab>ont<CR> 298n
-xmap <tab>onn<CR> 299n
-
-
-
-
-
-
-
-xmap <tab><tab>a<CR> 1t
-xmap <tab><tab>o<CR> 2t
-xmap <tab><tab>e<CR> 3t
-xmap <tab><tab>u<CR> 4t
-xmap <tab><tab>i<CR> 5t
-xmap <tab><tab>d<CR> 6t
-xmap <tab><tab>h<CR> 7t
-xmap <tab><tab>t<CR> 8t
-xmap <tab><tab>n<CR> 9t
-
-xmap <tab><tab>as<CR> 10t
-xmap <tab><tab>aa<CR> 11t
-xmap <tab><tab>ao<CR> 12t
-xmap <tab><tab>ae<CR> 13t
-xmap <tab><tab>au<CR> 14t
-xmap <tab><tab>ai<CR> 15t
-xmap <tab><tab>ad<CR> 16t
-xmap <tab><tab>ah<CR> 17t
-xmap <tab><tab>at<CR> 18t
-xmap <tab><tab>an<CR> 19t
-
-xmap <tab><tab>os<CR> 20t
-xmap <tab><tab>oa<CR> 21t
-xmap <tab><tab>oo<CR> 22t
-xmap <tab><tab>oe<CR> 23t
-xmap <tab><tab>ou<CR> 24t
-xmap <tab><tab>oi<CR> 25t
-xmap <tab><tab>od<CR> 26t
-xmap <tab><tab>oh<CR> 27t
-xmap <tab><tab>ot<CR> 28t
-xmap <tab><tab>on<CR> 29t
-
-xmap <tab><tab>es<CR> 30t
-xmap <tab><tab>ea<CR> 31t
-xmap <tab><tab>eo<CR> 32t
-xmap <tab><tab>ee<CR> 33t
-xmap <tab><tab>eu<CR> 34t
-xmap <tab><tab>ei<CR> 35t
-xmap <tab><tab>ed<CR> 36t
-xmap <tab><tab>eh<CR> 37t
-xmap <tab><tab>et<CR> 38t
-xmap <tab><tab>en<CR> 39t
-
-xmap <tab><tab>us<CR> 40t
-xmap <tab><tab>ua<CR> 41t
-xmap <tab><tab>uo<CR> 42t
-xmap <tab><tab>ue<CR> 43t
-xmap <tab><tab>uu<CR> 44t
-xmap <tab><tab>ui<CR> 45t
-xmap <tab><tab>ud<CR> 46t
-xmap <tab><tab>uh<CR> 47t
-xmap <tab><tab>ut<CR> 48t
-xmap <tab><tab>un<CR> 49t
-
-xmap <tab><tab>is<CR> 50t
-xmap <tab><tab>ia<CR> 51t
-xmap <tab><tab>io<CR> 52t
-xmap <tab><tab>ie<CR> 53t
-xmap <tab><tab>iu<CR> 54t
-xmap <tab><tab>ii<CR> 55t
-xmap <tab><tab>id<CR> 56t
-xmap <tab><tab>ih<CR> 57t
-xmap <tab><tab>it<CR> 58t
-xmap <tab><tab>in<CR> 59t
-
-xmap <tab><tab>ds<CR> 60t
-xmap <tab><tab>da<CR> 61t
-xmap <tab><tab>do<CR> 62t
-xmap <tab><tab>de<CR> 63t
-xmap <tab><tab>du<CR> 64t
-xmap <tab><tab>di<CR> 65t
-xmap <tab><tab>dd<CR> 66t
-xmap <tab><tab>dh<CR> 67t
-xmap <tab><tab>dt<CR> 68t
-xmap <tab><tab>dn<CR> 69t
-
-xmap <tab><tab>hs<CR> 70t
-xmap <tab><tab>ha<CR> 71t
-xmap <tab><tab>ho<CR> 72t
-xmap <tab><tab>he<CR> 73t
-xmap <tab><tab>hu<CR> 74t
-xmap <tab><tab>hi<CR> 75t
-xmap <tab><tab>hd<CR> 76t
-xmap <tab><tab>hh<CR> 77t
-xmap <tab><tab>ht<CR> 78t
-xmap <tab><tab>hn<CR> 79t
-
-xmap <tab><tab>ts<CR> 80t
-xmap <tab><tab>ta<CR> 81t
-xmap <tab><tab>to<CR> 82t
-xmap <tab><tab>te<CR> 83t
-xmap <tab><tab>tu<CR> 84t
-xmap <tab><tab>ti<CR> 85t
-xmap <tab><tab>td<CR> 86t
-xmap <tab><tab>th<CR> 87t
-xmap <tab><tab>tt<CR> 88t
-xmap <tab><tab>tn<CR> 89t
-
-xmap <tab><tab>ns<CR> 90t
-xmap <tab><tab>na<CR> 91t
-xmap <tab><tab>no<CR> 92t
-xmap <tab><tab>ne<CR> 93t
-xmap <tab><tab>nu<CR> 94t
-xmap <tab><tab>ni<CR> 95t
-xmap <tab><tab>nd<CR> 96t
-xmap <tab><tab>nh<CR> 97t
-xmap <tab><tab>nt<CR> 98t
-xmap <tab><tab>nn<CR> 99t
-
-xmap <tab><tab>asa<CR> 101t
-xmap <tab><tab>aso<CR> 102t
-xmap <tab><tab>ase<CR> 103t
-xmap <tab><tab>asu<CR> 104t
-xmap <tab><tab>asi<CR> 105t
-xmap <tab><tab>asd<CR> 106t
-xmap <tab><tab>ash<CR> 107t
-xmap <tab><tab>ast<CR> 108t
-xmap <tab><tab>asn<CR> 109t
-
-xmap <tab><tab>aas<CR> 110t
-xmap <tab><tab>aaa<CR> 111t
-xmap <tab><tab>aao<CR> 112t
-xmap <tab><tab>aae<CR> 113t
-xmap <tab><tab>aau<CR> 114t
-xmap <tab><tab>aai<CR> 115t
-xmap <tab><tab>aad<CR> 116t
-xmap <tab><tab>aah<CR> 117t
-xmap <tab><tab>aat<CR> 118t
-xmap <tab><tab>aan<CR> 119t
-
-xmap <tab><tab>aos<CR> 120t
-xmap <tab><tab>aoa<CR> 121t
-xmap <tab><tab>aoo<CR> 122t
-xmap <tab><tab>aoe<CR> 123t
-xmap <tab><tab>aou<CR> 124t
-xmap <tab><tab>aoi<CR> 125t
-xmap <tab><tab>aod<CR> 126t
-xmap <tab><tab>aoh<CR> 127t
-xmap <tab><tab>aot<CR> 128t
-xmap <tab><tab>aon<CR> 129t
-
-xmap <tab><tab>aes<CR> 130t
-xmap <tab><tab>aea<CR> 131t
-xmap <tab><tab>aeo<CR> 132t
-xmap <tab><tab>aee<CR> 133t
-xmap <tab><tab>aeu<CR> 134t
-xmap <tab><tab>aei<CR> 135t
-xmap <tab><tab>aed<CR> 136t
-xmap <tab><tab>aeh<CR> 137t
-xmap <tab><tab>aet<CR> 138t
-xmap <tab><tab>aen<CR> 139t
-
-xmap <tab><tab>aus<CR> 140t
-xmap <tab><tab>aua<CR> 141t
-xmap <tab><tab>auo<CR> 142t
-xmap <tab><tab>aue<CR> 143t
-xmap <tab><tab>auu<CR> 144t
-xmap <tab><tab>aui<CR> 145t
-xmap <tab><tab>aud<CR> 146t
-xmap <tab><tab>auh<CR> 147t
-xmap <tab><tab>aut<CR> 148t
-xmap <tab><tab>aun<CR> 149t
-
-xmap <tab><tab>ais<CR> 150t
-xmap <tab><tab>aia<CR> 151t
-xmap <tab><tab>aio<CR> 152t
-xmap <tab><tab>aie<CR> 153t
-xmap <tab><tab>aiu<CR> 154t
-xmap <tab><tab>aii<CR> 155t
-xmap <tab><tab>aid<CR> 156t
-xmap <tab><tab>aih<CR> 157t
-xmap <tab><tab>ait<CR> 158t
-xmap <tab><tab>ain<CR> 159t
-
-xmap <tab><tab>ads<CR> 160t
-xmap <tab><tab>ada<CR> 161t
-xmap <tab><tab>ado<CR> 162t
-xmap <tab><tab>ade<CR> 163t
-xmap <tab><tab>adu<CR> 164t
-xmap <tab><tab>adi<CR> 165t
-xmap <tab><tab>add<CR> 166t
-xmap <tab><tab>adh<CR> 167t
-xmap <tab><tab>adt<CR> 168t
-xmap <tab><tab>adn<CR> 169t
-
-xmap <tab><tab>ahs<CR> 170t
-xmap <tab><tab>aha<CR> 171t
-xmap <tab><tab>aho<CR> 172t
-xmap <tab><tab>ahe<CR> 173t
-xmap <tab><tab>ahu<CR> 174t
-xmap <tab><tab>ahi<CR> 175t
-xmap <tab><tab>ahd<CR> 176t
-xmap <tab><tab>ahh<CR> 177t
-xmap <tab><tab>aht<CR> 178t
-xmap <tab><tab>ahn<CR> 179t
-
-xmap <tab><tab>ats<CR> 180t
-xmap <tab><tab>ata<CR> 181t
-xmap <tab><tab>ato<CR> 182t
-xmap <tab><tab>ate<CR> 183t
-xmap <tab><tab>atu<CR> 184t
-xmap <tab><tab>ati<CR> 185t
-xmap <tab><tab>atd<CR> 186t
-xmap <tab><tab>ath<CR> 187t
-xmap <tab><tab>att<CR> 188t
-xmap <tab><tab>atn<CR> 189t
-
-xmap <tab><tab>ans<CR> 190t
-xmap <tab><tab>ana<CR> 191t
-xmap <tab><tab>ano<CR> 192t
-xmap <tab><tab>ane<CR> 193t
-xmap <tab><tab>anu<CR> 194t
-xmap <tab><tab>ani<CR> 195t
-xmap <tab><tab>and<CR> 196t
-xmap <tab><tab>anh<CR> 197t
-xmap <tab><tab>ant<CR> 198t
-xmap <tab><tab>ann<CR> 199t
-
-xmap <tab><tab>asa<CR> 201t
-xmap <tab><tab>aso<CR> 202t
-xmap <tab><tab>ase<CR> 203t
-xmap <tab><tab>asu<CR> 204t
-xmap <tab><tab>asi<CR> 205t
-xmap <tab><tab>asd<CR> 206t
-xmap <tab><tab>ash<CR> 207t
-xmap <tab><tab>ast<CR> 208t
-xmap <tab><tab>asn<CR> 209t
-
-xmap <tab><tab>oas<CR> 210t
-xmap <tab><tab>oaa<CR> 211t
-xmap <tab><tab>oao<CR> 212t
-xmap <tab><tab>oae<CR> 213t
-xmap <tab><tab>oau<CR> 214t
-xmap <tab><tab>oai<CR> 215t
-xmap <tab><tab>oad<CR> 216t
-xmap <tab><tab>oah<CR> 217t
-xmap <tab><tab>oat<CR> 218t
-xmap <tab><tab>oan<CR> 219t
-
-xmap <tab><tab>oos<CR> 220t
-xmap <tab><tab>ooa<CR> 221t
-xmap <tab><tab>ooo<CR> 222t
-xmap <tab><tab>ooe<CR> 223t
-xmap <tab><tab>oou<CR> 224t
-xmap <tab><tab>ooi<CR> 225t
-xmap <tab><tab>ood<CR> 226t
-xmap <tab><tab>ooh<CR> 227t
-xmap <tab><tab>oot<CR> 228t
-xmap <tab><tab>oon<CR> 229t
-
-xmap <tab><tab>oes<CR> 230t
-xmap <tab><tab>oea<CR> 231t
-xmap <tab><tab>oeo<CR> 232t
-xmap <tab><tab>oee<CR> 233t
-xmap <tab><tab>oeu<CR> 234t
-xmap <tab><tab>oei<CR> 235t
-xmap <tab><tab>oed<CR> 236t
-xmap <tab><tab>oeh<CR> 237t
-xmap <tab><tab>oet<CR> 238t
-xmap <tab><tab>oen<CR> 139t
-
-xmap <tab><tab>ous<CR> 240t
-xmap <tab><tab>oua<CR> 241t
-xmap <tab><tab>ouo<CR> 242t
-xmap <tab><tab>oue<CR> 243t
-xmap <tab><tab>ouu<CR> 244t
-xmap <tab><tab>oui<CR> 245t
-xmap <tab><tab>oud<CR> 246t
-xmap <tab><tab>ouh<CR> 247t
-xmap <tab><tab>out<CR> 248t
-xmap <tab><tab>oun<CR> 249t
-
-xmap <tab><tab>ois<CR> 250t
-xmap <tab><tab>oia<CR> 251t
-xmap <tab><tab>oio<CR> 252t
-xmap <tab><tab>oie<CR> 253t
-xmap <tab><tab>oiu<CR> 254t
-xmap <tab><tab>oii<CR> 255t
-xmap <tab><tab>oid<CR> 256t
-xmap <tab><tab>oih<CR> 257t
-xmap <tab><tab>oit<CR> 258t
-xmap <tab><tab>oin<CR> 259t
-
-xmap <tab><tab>ods<CR> 260t
-xmap <tab><tab>oda<CR> 261t
-xmap <tab><tab>odo<CR> 262t
-xmap <tab><tab>ode<CR> 263t
-xmap <tab><tab>odu<CR> 264t
-xmap <tab><tab>odi<CR> 265t
-xmap <tab><tab>odd<CR> 266t
-xmap <tab><tab>odh<CR> 267t
-xmap <tab><tab>odt<CR> 268t
-xmap <tab><tab>odn<CR> 269t
-
-xmap <tab><tab>ohs<CR> 270t
-xmap <tab><tab>oha<CR> 271t
-xmap <tab><tab>oho<CR> 272t
-xmap <tab><tab>ohe<CR> 273t
-xmap <tab><tab>ohu<CR> 274t
-xmap <tab><tab>ohi<CR> 275t
-xmap <tab><tab>ohd<CR> 276t
-xmap <tab><tab>ohh<CR> 277t
-xmap <tab><tab>oht<CR> 278t
-xmap <tab><tab>ohn<CR> 279t
-
-xmap <tab><tab>ots<CR> 280t
-xmap <tab><tab>ota<CR> 281t
-xmap <tab><tab>oto<CR> 282t
-xmap <tab><tab>ote<CR> 283t
-xmap <tab><tab>otu<CR> 284t
-xmap <tab><tab>oti<CR> 285t
-xmap <tab><tab>otd<CR> 286t
-xmap <tab><tab>oth<CR> 287t
-xmap <tab><tab>ott<CR> 288t
-xmap <tab><tab>otn<CR> 289t
-
-xmap <tab><tab>ons<CR> 290t
-xmap <tab><tab>ona<CR> 291t
-xmap <tab><tab>ono<CR> 292t
-xmap <tab><tab>one<CR> 293t
-xmap <tab><tab>onu<CR> 294t
-xmap <tab><tab>oni<CR> 295t
-xmap <tab><tab>ond<CR> 296t
-xmap <tab><tab>onh<CR> 297t
-xmap <tab><tab>ont<CR> 298t
-xmap <tab><tab>onn<CR> 299t
+nmap <space>a<space> 1n
+nmap <space>o<space> 2n
+nmap <space>e<space> 3n
+nmap <space>u<space> 4n
+nmap <space>i<space> 5n
+nmap <space>d<space> 6n
+nmap <space>h<space> 7n
+nmap <space>t<space> 8n
+nmap <space>n<space> 9n
+
+nmap <space>as<space> 10n
+nmap <space>aa<space> 11n
+nmap <space>ao<space> 12n
+nmap <space>ae<space> 13n
+nmap <space>au<space> 14n
+nmap <space>ai<space> 15n
+nmap <space>ad<space> 16n
+nmap <space>ah<space> 17n
+nmap <space>at<space> 18n
+nmap <space>an<space> 19n
+
+nmap <space>os<space> 20n
+nmap <space>oa<space> 21n
+nmap <space>oo<space> 22n
+nmap <space>oe<space> 23n
+nmap <space>ou<space> 24n
+nmap <space>oi<space> 25n
+nmap <space>od<space> 26n
+nmap <space>oh<space> 27n
+nmap <space>ot<space> 28n
+nmap <space>on<space> 29n
+
+nmap <space>es<space> 30n
+nmap <space>ea<space> 31n
+nmap <space>eo<space> 32n
+nmap <space>ee<space> 33n
+nmap <space>eu<space> 34n
+nmap <space>ei<space> 35n
+nmap <space>ed<space> 36n
+nmap <space>eh<space> 37n
+nmap <space>et<space> 38n
+nmap <space>en<space> 39n
+
+nmap <space>us<space> 40n
+nmap <space>ua<space> 41n
+nmap <space>uo<space> 42n
+nmap <space>ue<space> 43n
+nmap <space>uu<space> 44n
+nmap <space>ui<space> 45n
+nmap <space>ud<space> 46n
+nmap <space>uh<space> 47n
+nmap <space>ut<space> 48n
+nmap <space>un<space> 49n
+
+nmap <space>is<space> 50n
+nmap <space>ia<space> 51n
+nmap <space>io<space> 52n
+nmap <space>ie<space> 53n
+nmap <space>iu<space> 54n
+nmap <space>ii<space> 55n
+nmap <space>id<space> 56n
+nmap <space>ih<space> 57n
+nmap <space>it<space> 58n
+nmap <space>in<space> 59n
+
+nmap <space>ds<space> 60n
+nmap <space>da<space> 61n
+nmap <space>do<space> 62n
+nmap <space>de<space> 63n
+nmap <space>du<space> 64n
+nmap <space>di<space> 65n
+nmap <space>dd<space> 66n
+nmap <space>dh<space> 67n
+nmap <space>dt<space> 68n
+nmap <space>dn<space> 69n
+
+nmap <space>hs<space> 70n
+nmap <space>ha<space> 71n
+nmap <space>ho<space> 72n
+nmap <space>he<space> 73n
+nmap <space>hu<space> 74n
+nmap <space>hi<space> 75n
+nmap <space>hd<space> 76n
+nmap <space>hh<space> 77n
+nmap <space>ht<space> 78n
+nmap <space>hn<space> 79n
+
+nmap <space>ts<space> 80n
+nmap <space>ta<space> 81n
+nmap <space>to<space> 82n
+nmap <space>te<space> 83n
+nmap <space>tu<space> 84n
+nmap <space>ti<space> 85n
+nmap <space>td<space> 86n
+nmap <space>th<space> 87n
+nmap <space>tt<space> 88n
+nmap <space>tn<space> 89n
+
+nmap <space>ns<space> 90n
+nmap <space>na<space> 91n
+nmap <space>no<space> 92n
+nmap <space>ne<space> 93n
+nmap <space>nu<space> 94n
+nmap <space>ni<space> 95n
+nmap <space>nd<space> 96n
+nmap <space>nh<space> 97n
+nmap <space>nt<space> 98n
+nmap <space>nn<space> 99n
+
+nmap <space>asa<space> 101n
+nmap <space>aso<space> 102n
+nmap <space>ase<space> 103n
+nmap <space>asu<space> 104n
+nmap <space>asi<space> 105n
+nmap <space>asd<space> 106n
+nmap <space>ash<space> 107n
+nmap <space>ast<space> 108n
+nmap <space>asn<space> 109n
+
+nmap <space>aas<space> 110n
+nmap <space>aaa<space> 111n
+nmap <space>aao<space> 112n
+nmap <space>aae<space> 113n
+nmap <space>aau<space> 114n
+nmap <space>aai<space> 115n
+nmap <space>aad<space> 116n
+nmap <space>aah<space> 117n
+nmap <space>aat<space> 118n
+nmap <space>aan<space> 119n
+
+nmap <space>aos<space> 120n
+nmap <space>aoa<space> 121n
+nmap <space>aoo<space> 122n
+nmap <space>aoe<space> 123n
+nmap <space>aou<space> 124n
+nmap <space>aoi<space> 125n
+nmap <space>aod<space> 126n
+nmap <space>aoh<space> 127n
+nmap <space>aot<space> 128n
+nmap <space>aon<space> 129n
+
+nmap <space>aes<space> 130n
+nmap <space>aea<space> 131n
+nmap <space>aeo<space> 132n
+nmap <space>aee<space> 133n
+nmap <space>aeu<space> 134n
+nmap <space>aei<space> 135n
+nmap <space>aed<space> 136n
+nmap <space>aeh<space> 137n
+nmap <space>aet<space> 138n
+nmap <space>aen<space> 139n
+
+nmap <space>aus<space> 140n
+nmap <space>aua<space> 141n
+nmap <space>auo<space> 142n
+nmap <space>aue<space> 143n
+nmap <space>auu<space> 144n
+nmap <space>aui<space> 145n
+nmap <space>aud<space> 146n
+nmap <space>auh<space> 147n
+nmap <space>aut<space> 148n
+nmap <space>aun<space> 149n
+
+nmap <space>ais<space> 150n
+nmap <space>aia<space> 151n
+nmap <space>aio<space> 152n
+nmap <space>aie<space> 153n
+nmap <space>aiu<space> 154n
+nmap <space>aii<space> 155n
+nmap <space>aid<space> 156n
+nmap <space>aih<space> 157n
+nmap <space>ait<space> 158n
+nmap <space>ain<space> 159n
+
+nmap <space>ads<space> 160n
+nmap <space>ada<space> 161n
+nmap <space>ado<space> 162n
+nmap <space>ade<space> 163n
+nmap <space>adu<space> 164n
+nmap <space>adi<space> 165n
+nmap <space>add<space> 166n
+nmap <space>adh<space> 167n
+nmap <space>adt<space> 168n
+nmap <space>adn<space> 169n
+
+nmap <space>ahs<space> 170n
+nmap <space>aha<space> 171n
+nmap <space>aho<space> 172n
+nmap <space>ahe<space> 173n
+nmap <space>ahu<space> 174n
+nmap <space>ahi<space> 175n
+nmap <space>ahd<space> 176n
+nmap <space>ahh<space> 177n
+nmap <space>aht<space> 178n
+nmap <space>ahn<space> 179n
+
+nmap <space>ats<space> 180n
+nmap <space>ata<space> 181n
+nmap <space>ato<space> 182n
+nmap <space>ate<space> 183n
+nmap <space>atu<space> 184n
+nmap <space>ati<space> 185n
+nmap <space>atd<space> 186n
+nmap <space>ath<space> 187n
+nmap <space>att<space> 188n
+nmap <space>atn<space> 189n
+
+nmap <space>ans<space> 190n
+nmap <space>ana<space> 191n
+nmap <space>ano<space> 192n
+nmap <space>ane<space> 193n
+nmap <space>anu<space> 194n
+nmap <space>ani<space> 195n
+nmap <space>and<space> 196n
+nmap <space>anh<space> 197n
+nmap <space>ant<space> 198n
+nmap <space>ann<space> 199n
+
+nmap <space>osa<space> 201n
+nmap <space>oso<space> 202n
+nmap <space>ose<space> 203n
+nmap <space>osu<space> 204n
+nmap <space>osi<space> 205n
+nmap <space>osd<space> 206n
+nmap <space>osh<space> 207n
+nmap <space>ost<space> 208n
+nmap <space>osn<space> 209n
+
+nmap <space>oas<space> 210n
+nmap <space>oaa<space> 211n
+nmap <space>oao<space> 212n
+nmap <space>oae<space> 213n
+nmap <space>oau<space> 214n
+nmap <space>oai<space> 215n
+nmap <space>oad<space> 216n
+nmap <space>oah<space> 217n
+nmap <space>oat<space> 218n
+nmap <space>oan<space> 219n
+
+nmap <space>oos<space> 220n
+nmap <space>ooa<space> 221n
+nmap <space>ooo<space> 222n
+nmap <space>ooe<space> 223n
+nmap <space>oou<space> 224n
+nmap <space>ooi<space> 225n
+nmap <space>ood<space> 226n
+nmap <space>ooh<space> 227n
+nmap <space>oot<space> 228n
+nmap <space>oon<space> 229n
+
+nmap <space>oes<space> 230n
+nmap <space>oea<space> 231n
+nmap <space>oeo<space> 232n
+nmap <space>oee<space> 233n
+nmap <space>oeu<space> 234n
+nmap <space>oei<space> 235n
+nmap <space>oed<space> 236n
+nmap <space>oeh<space> 237n
+nmap <space>oet<space> 238n
+nmap <space>oen<space> 139n
+
+nmap <space>ous<space> 240n
+nmap <space>oua<space> 241n
+nmap <space>ouo<space> 242n
+nmap <space>oue<space> 243n
+nmap <space>ouu<space> 244n
+nmap <space>oui<space> 245n
+nmap <space>oud<space> 246n
+nmap <space>ouh<space> 247n
+nmap <space>out<space> 248n
+nmap <space>oun<space> 249n
+
+nmap <space>ois<space> 250n
+nmap <space>oia<space> 251n
+nmap <space>oio<space> 252n
+nmap <space>oie<space> 253n
+nmap <space>oiu<space> 254n
+nmap <space>oii<space> 255n
+nmap <space>oid<space> 256n
+nmap <space>oih<space> 257n
+nmap <space>oit<space> 258n
+nmap <space>oin<space> 259n
+
+nmap <space>ods<space> 260n
+nmap <space>oda<space> 261n
+nmap <space>odo<space> 262n
+nmap <space>ode<space> 263n
+nmap <space>odu<space> 264n
+nmap <space>odi<space> 265n
+nmap <space>odd<space> 266n
+nmap <space>odh<space> 267n
+nmap <space>odt<space> 268n
+nmap <space>odn<space> 269n
+
+nmap <space>ohs<space> 270n
+nmap <space>oha<space> 271n
+nmap <space>oho<space> 272n
+nmap <space>ohe<space> 273n
+nmap <space>ohu<space> 274n
+nmap <space>ohi<space> 275n
+nmap <space>ohd<space> 276n
+nmap <space>ohh<space> 277n
+nmap <space>oht<space> 278n
+nmap <space>ohn<space> 279n
+
+nmap <space>ots<space> 280n
+nmap <space>ota<space> 281n
+nmap <space>oto<space> 282n
+nmap <space>ote<space> 283n
+nmap <space>otu<space> 284n
+nmap <space>oti<space> 285n
+nmap <space>otd<space> 286n
+nmap <space>oth<space> 287n
+nmap <space>ott<space> 288n
+nmap <space>otn<space> 289n
+
+nmap <space>ons<space> 290n
+nmap <space>ona<space> 291n
+nmap <space>ono<space> 292n
+nmap <space>one<space> 293n
+nmap <space>onu<space> 294n
+nmap <space>oni<space> 295n
+nmap <space>ond<space> 296n
+nmap <space>onh<space> 297n
+nmap <space>ont<space> 298n
+nmap <space>onn<space> 299n
+
+
+
+
+
+
+
+nmap <space><space>a<space> 1t
+nmap <space><space>o<space> 2t
+nmap <space><space>e<space> 3t
+nmap <space><space>u<space> 4t
+nmap <space><space>i<space> 5t
+nmap <space><space>d<space> 6t
+nmap <space><space>h<space> 7t
+nmap <space><space>t<space> 8t
+nmap <space><space>n<space> 9t
+
+nmap <space><space>as<space> 10t
+nmap <space><space>aa<space> 11t
+nmap <space><space>ao<space> 12t
+nmap <space><space>ae<space> 13t
+nmap <space><space>au<space> 14t
+nmap <space><space>ai<space> 15t
+nmap <space><space>ad<space> 16t
+nmap <space><space>ah<space> 17t
+nmap <space><space>at<space> 18t
+nmap <space><space>an<space> 19t
+
+nmap <space><space>os<space> 20t
+nmap <space><space>oa<space> 21t
+nmap <space><space>oo<space> 22t
+nmap <space><space>oe<space> 23t
+nmap <space><space>ou<space> 24t
+nmap <space><space>oi<space> 25t
+nmap <space><space>od<space> 26t
+nmap <space><space>oh<space> 27t
+nmap <space><space>ot<space> 28t
+nmap <space><space>on<space> 29t
+
+nmap <space><space>es<space> 30t
+nmap <space><space>ea<space> 31t
+nmap <space><space>eo<space> 32t
+nmap <space><space>ee<space> 33t
+nmap <space><space>eu<space> 34t
+nmap <space><space>ei<space> 35t
+nmap <space><space>ed<space> 36t
+nmap <space><space>eh<space> 37t
+nmap <space><space>et<space> 38t
+nmap <space><space>en<space> 39t
+
+nmap <space><space>us<space> 40t
+nmap <space><space>ua<space> 41t
+nmap <space><space>uo<space> 42t
+nmap <space><space>ue<space> 43t
+nmap <space><space>uu<space> 44t
+nmap <space><space>ui<space> 45t
+nmap <space><space>ud<space> 46t
+nmap <space><space>uh<space> 47t
+nmap <space><space>ut<space> 48t
+nmap <space><space>un<space> 49t
+
+nmap <space><space>is<space> 50t
+nmap <space><space>ia<space> 51t
+nmap <space><space>io<space> 52t
+nmap <space><space>ie<space> 53t
+nmap <space><space>iu<space> 54t
+nmap <space><space>ii<space> 55t
+nmap <space><space>id<space> 56t
+nmap <space><space>ih<space> 57t
+nmap <space><space>it<space> 58t
+nmap <space><space>in<space> 59t
+
+nmap <space><space>ds<space> 60t
+nmap <space><space>da<space> 61t
+nmap <space><space>do<space> 62t
+nmap <space><space>de<space> 63t
+nmap <space><space>du<space> 64t
+nmap <space><space>di<space> 65t
+nmap <space><space>dd<space> 66t
+nmap <space><space>dh<space> 67t
+nmap <space><space>dt<space> 68t
+nmap <space><space>dn<space> 69t
+
+nmap <space><space>hs<space> 70t
+nmap <space><space>ha<space> 71t
+nmap <space><space>ho<space> 72t
+nmap <space><space>he<space> 73t
+nmap <space><space>hu<space> 74t
+nmap <space><space>hi<space> 75t
+nmap <space><space>hd<space> 76t
+nmap <space><space>hh<space> 77t
+nmap <space><space>ht<space> 78t
+nmap <space><space>hn<space> 79t
+
+nmap <space><space>ts<space> 80t
+nmap <space><space>ta<space> 81t
+nmap <space><space>to<space> 82t
+nmap <space><space>te<space> 83t
+nmap <space><space>tu<space> 84t
+nmap <space><space>ti<space> 85t
+nmap <space><space>td<space> 86t
+nmap <space><space>th<space> 87t
+nmap <space><space>tt<space> 88t
+nmap <space><space>tn<space> 89t
+
+nmap <space><space>ns<space> 90t
+nmap <space><space>na<space> 91t
+nmap <space><space>no<space> 92t
+nmap <space><space>ne<space> 93t
+nmap <space><space>nu<space> 94t
+nmap <space><space>ni<space> 95t
+nmap <space><space>nd<space> 96t
+nmap <space><space>nh<space> 97t
+nmap <space><space>nt<space> 98t
+nmap <space><space>nn<space> 99t
+
+nmap <space><space>asa<space> 101t
+nmap <space><space>aso<space> 102t
+nmap <space><space>ase<space> 103t
+nmap <space><space>asu<space> 104t
+nmap <space><space>asi<space> 105t
+nmap <space><space>asd<space> 106t
+nmap <space><space>ash<space> 107t
+nmap <space><space>ast<space> 108t
+nmap <space><space>asn<space> 109t
+
+nmap <space><space>aas<space> 110t
+nmap <space><space>aaa<space> 111t
+nmap <space><space>aao<space> 112t
+nmap <space><space>aae<space> 113t
+nmap <space><space>aau<space> 114t
+nmap <space><space>aai<space> 115t
+nmap <space><space>aad<space> 116t
+nmap <space><space>aah<space> 117t
+nmap <space><space>aat<space> 118t
+nmap <space><space>aan<space> 119t
+
+nmap <space><space>aos<space> 120t
+nmap <space><space>aoa<space> 121t
+nmap <space><space>aoo<space> 122t
+nmap <space><space>aoe<space> 123t
+nmap <space><space>aou<space> 124t
+nmap <space><space>aoi<space> 125t
+nmap <space><space>aod<space> 126t
+nmap <space><space>aoh<space> 127t
+nmap <space><space>aot<space> 128t
+nmap <space><space>aon<space> 129t
+
+nmap <space><space>aes<space> 130t
+nmap <space><space>aea<space> 131t
+nmap <space><space>aeo<space> 132t
+nmap <space><space>aee<space> 133t
+nmap <space><space>aeu<space> 134t
+nmap <space><space>aei<space> 135t
+nmap <space><space>aed<space> 136t
+nmap <space><space>aeh<space> 137t
+nmap <space><space>aet<space> 138t
+nmap <space><space>aen<space> 139t
+
+nmap <space><space>aus<space> 140t
+nmap <space><space>aua<space> 141t
+nmap <space><space>auo<space> 142t
+nmap <space><space>aue<space> 143t
+nmap <space><space>auu<space> 144t
+nmap <space><space>aui<space> 145t
+nmap <space><space>aud<space> 146t
+nmap <space><space>auh<space> 147t
+nmap <space><space>aut<space> 148t
+nmap <space><space>aun<space> 149t
+
+nmap <space><space>ais<space> 150t
+nmap <space><space>aia<space> 151t
+nmap <space><space>aio<space> 152t
+nmap <space><space>aie<space> 153t
+nmap <space><space>aiu<space> 154t
+nmap <space><space>aii<space> 155t
+nmap <space><space>aid<space> 156t
+nmap <space><space>aih<space> 157t
+nmap <space><space>ait<space> 158t
+nmap <space><space>ain<space> 159t
+
+nmap <space><space>ads<space> 160t
+nmap <space><space>ada<space> 161t
+nmap <space><space>ado<space> 162t
+nmap <space><space>ade<space> 163t
+nmap <space><space>adu<space> 164t
+nmap <space><space>adi<space> 165t
+nmap <space><space>add<space> 166t
+nmap <space><space>adh<space> 167t
+nmap <space><space>adt<space> 168t
+nmap <space><space>adn<space> 169t
+
+nmap <space><space>ahs<space> 170t
+nmap <space><space>aha<space> 171t
+nmap <space><space>aho<space> 172t
+nmap <space><space>ahe<space> 173t
+nmap <space><space>ahu<space> 174t
+nmap <space><space>ahi<space> 175t
+nmap <space><space>ahd<space> 176t
+nmap <space><space>ahh<space> 177t
+nmap <space><space>aht<space> 178t
+nmap <space><space>ahn<space> 179t
+
+nmap <space><space>ats<space> 180t
+nmap <space><space>ata<space> 181t
+nmap <space><space>ato<space> 182t
+nmap <space><space>ate<space> 183t
+nmap <space><space>atu<space> 184t
+nmap <space><space>ati<space> 185t
+nmap <space><space>atd<space> 186t
+nmap <space><space>ath<space> 187t
+nmap <space><space>att<space> 188t
+nmap <space><space>atn<space> 189t
+
+nmap <space><space>ans<space> 190t
+nmap <space><space>ana<space> 191t
+nmap <space><space>ano<space> 192t
+nmap <space><space>ane<space> 193t
+nmap <space><space>anu<space> 194t
+nmap <space><space>ani<space> 195t
+nmap <space><space>and<space> 196t
+nmap <space><space>anh<space> 197t
+nmap <space><space>ant<space> 198t
+nmap <space><space>ann<space> 199t
+
+nmap <space><space>osa<space> 201t
+nmap <space><space>oso<space> 202t
+nmap <space><space>ose<space> 203t
+nmap <space><space>osu<space> 204t
+nmap <space><space>osi<space> 205t
+nmap <space><space>osd<space> 206t
+nmap <space><space>osh<space> 207t
+nmap <space><space>ost<space> 208t
+nmap <space><space>osn<space> 209t
+
+nmap <space><space>oas<space> 210t
+nmap <space><space>oaa<space> 211t
+nmap <space><space>oao<space> 212t
+nmap <space><space>oae<space> 213t
+nmap <space><space>oau<space> 214t
+nmap <space><space>oai<space> 215t
+nmap <space><space>oad<space> 216t
+nmap <space><space>oah<space> 217t
+nmap <space><space>oat<space> 218t
+nmap <space><space>oan<space> 219t
+
+nmap <space><space>oos<space> 220t
+nmap <space><space>ooa<space> 221t
+nmap <space><space>ooo<space> 222t
+nmap <space><space>ooe<space> 223t
+nmap <space><space>oou<space> 224t
+nmap <space><space>ooi<space> 225t
+nmap <space><space>ood<space> 226t
+nmap <space><space>ooh<space> 227t
+nmap <space><space>oot<space> 228t
+nmap <space><space>oon<space> 229t
+
+nmap <space><space>oes<space> 230t
+nmap <space><space>oea<space> 231t
+nmap <space><space>oeo<space> 232t
+nmap <space><space>oee<space> 233t
+nmap <space><space>oeu<space> 234t
+nmap <space><space>oei<space> 235t
+nmap <space><space>oed<space> 236t
+nmap <space><space>oeh<space> 237t
+nmap <space><space>oet<space> 238t
+nmap <space><space>oen<space> 139t
+
+nmap <space><space>ous<space> 240t
+nmap <space><space>oua<space> 241t
+nmap <space><space>ouo<space> 242t
+nmap <space><space>oue<space> 243t
+nmap <space><space>ouu<space> 244t
+nmap <space><space>oui<space> 245t
+nmap <space><space>oud<space> 246t
+nmap <space><space>ouh<space> 247t
+nmap <space><space>out<space> 248t
+nmap <space><space>oun<space> 249t
+
+nmap <space><space>ois<space> 250t
+nmap <space><space>oia<space> 251t
+nmap <space><space>oio<space> 252t
+nmap <space><space>oie<space> 253t
+nmap <space><space>oiu<space> 254t
+nmap <space><space>oii<space> 255t
+nmap <space><space>oid<space> 256t
+nmap <space><space>oih<space> 257t
+nmap <space><space>oit<space> 258t
+nmap <space><space>oin<space> 259t
+
+nmap <space><space>ods<space> 260t
+nmap <space><space>oda<space> 261t
+nmap <space><space>odo<space> 262t
+nmap <space><space>ode<space> 263t
+nmap <space><space>odu<space> 264t
+nmap <space><space>odi<space> 265t
+nmap <space><space>odd<space> 266t
+nmap <space><space>odh<space> 267t
+nmap <space><space>odt<space> 268t
+nmap <space><space>odn<space> 269t
+
+nmap <space><space>ohs<space> 270t
+nmap <space><space>oha<space> 271t
+nmap <space><space>oho<space> 272t
+nmap <space><space>ohe<space> 273t
+nmap <space><space>ohu<space> 274t
+nmap <space><space>ohi<space> 275t
+nmap <space><space>ohd<space> 276t
+nmap <space><space>ohh<space> 277t
+nmap <space><space>oht<space> 278t
+nmap <space><space>ohn<space> 279t
+
+nmap <space><space>ots<space> 280t
+nmap <space><space>ota<space> 281t
+nmap <space><space>oto<space> 282t
+nmap <space><space>ote<space> 283t
+nmap <space><space>otu<space> 284t
+nmap <space><space>oti<space> 285t
+nmap <space><space>otd<space> 286t
+nmap <space><space>oth<space> 287t
+nmap <space><space>ott<space> 288t
+nmap <space><space>otn<space> 289t
+
+nmap <space><space>ons<space> 290t
+nmap <space><space>ona<space> 291t
+nmap <space><space>ono<space> 292t
+nmap <space><space>one<space> 293t
+nmap <space><space>onu<space> 294t
+nmap <space><space>oni<space> 295t
+nmap <space><space>ond<space> 296t
+nmap <space><space>onh<space> 297t
+nmap <space><space>ont<space> 298t
+nmap <space><space>onn<space> 299t
+
+xmap <space>a<space> 1n
+xmap <space>o<space> 2n
+xmap <space>e<space> 3n
+xmap <space>u<space> 4n
+xmap <space>i<space> 5n
+xmap <space>d<space> 6n
+xmap <space>h<space> 7n
+xmap <space>t<space> 8n
+xmap <space>n<space> 9n
+
+xmap <space>as<space> 10n
+xmap <space>aa<space> 11n
+xmap <space>ao<space> 12n
+xmap <space>ae<space> 13n
+xmap <space>au<space> 14n
+xmap <space>ai<space> 15n
+xmap <space>ad<space> 16n
+xmap <space>ah<space> 17n
+xmap <space>at<space> 18n
+xmap <space>an<space> 19n
+
+xmap <space>os<space> 20n
+xmap <space>oa<space> 21n
+xmap <space>oo<space> 22n
+xmap <space>oe<space> 23n
+xmap <space>ou<space> 24n
+xmap <space>oi<space> 25n
+xmap <space>od<space> 26n
+xmap <space>oh<space> 27n
+xmap <space>ot<space> 28n
+xmap <space>on<space> 29n
+
+xmap <space>es<space> 30n
+xmap <space>ea<space> 31n
+xmap <space>eo<space> 32n
+xmap <space>ee<space> 33n
+xmap <space>eu<space> 34n
+xmap <space>ei<space> 35n
+xmap <space>ed<space> 36n
+xmap <space>eh<space> 37n
+xmap <space>et<space> 38n
+xmap <space>en<space> 39n
+
+xmap <space>us<space> 40n
+xmap <space>ua<space> 41n
+xmap <space>uo<space> 42n
+xmap <space>ue<space> 43n
+xmap <space>uu<space> 44n
+xmap <space>ui<space> 45n
+xmap <space>ud<space> 46n
+xmap <space>uh<space> 47n
+xmap <space>ut<space> 48n
+xmap <space>un<space> 49n
+
+xmap <space>is<space> 50n
+xmap <space>ia<space> 51n
+xmap <space>io<space> 52n
+xmap <space>ie<space> 53n
+xmap <space>iu<space> 54n
+xmap <space>ii<space> 55n
+xmap <space>id<space> 56n
+xmap <space>ih<space> 57n
+xmap <space>it<space> 58n
+xmap <space>in<space> 59n
+
+xmap <space>ds<space> 60n
+xmap <space>da<space> 61n
+xmap <space>do<space> 62n
+xmap <space>de<space> 63n
+xmap <space>du<space> 64n
+xmap <space>di<space> 65n
+xmap <space>dd<space> 66n
+xmap <space>dh<space> 67n
+xmap <space>dt<space> 68n
+xmap <space>dn<space> 69n
+
+xmap <space>hs<space> 70n
+xmap <space>ha<space> 71n
+xmap <space>ho<space> 72n
+xmap <space>he<space> 73n
+xmap <space>hu<space> 74n
+xmap <space>hi<space> 75n
+xmap <space>hd<space> 76n
+xmap <space>hh<space> 77n
+xmap <space>ht<space> 78n
+xmap <space>hn<space> 79n
+
+xmap <space>ts<space> 80n
+xmap <space>ta<space> 81n
+xmap <space>to<space> 82n
+xmap <space>te<space> 83n
+xmap <space>tu<space> 84n
+xmap <space>ti<space> 85n
+xmap <space>td<space> 86n
+xmap <space>th<space> 87n
+xmap <space>tt<space> 88n
+xmap <space>tn<space> 89n
+
+xmap <space>ns<space> 90n
+xmap <space>na<space> 91n
+xmap <space>no<space> 92n
+xmap <space>ne<space> 93n
+xmap <space>nu<space> 94n
+xmap <space>ni<space> 95n
+xmap <space>nd<space> 96n
+xmap <space>nh<space> 97n
+xmap <space>nt<space> 98n
+xmap <space>nn<space> 99n
+
+xmap <space>asa<space> 101n
+xmap <space>aso<space> 102n
+xmap <space>ase<space> 103n
+xmap <space>asu<space> 104n
+xmap <space>asi<space> 105n
+xmap <space>asd<space> 106n
+xmap <space>ash<space> 107n
+xmap <space>ast<space> 108n
+xmap <space>asn<space> 109n
+
+xmap <space>aas<space> 110n
+xmap <space>aaa<space> 111n
+xmap <space>aao<space> 112n
+xmap <space>aae<space> 113n
+xmap <space>aau<space> 114n
+xmap <space>aai<space> 115n
+xmap <space>aad<space> 116n
+xmap <space>aah<space> 117n
+xmap <space>aat<space> 118n
+xmap <space>aan<space> 119n
+
+xmap <space>aos<space> 120n
+xmap <space>aoa<space> 121n
+xmap <space>aoo<space> 122n
+xmap <space>aoe<space> 123n
+xmap <space>aou<space> 124n
+xmap <space>aoi<space> 125n
+xmap <space>aod<space> 126n
+xmap <space>aoh<space> 127n
+xmap <space>aot<space> 128n
+xmap <space>aon<space> 129n
+
+xmap <space>aes<space> 130n
+xmap <space>aea<space> 131n
+xmap <space>aeo<space> 132n
+xmap <space>aee<space> 133n
+xmap <space>aeu<space> 134n
+xmap <space>aei<space> 135n
+xmap <space>aed<space> 136n
+xmap <space>aeh<space> 137n
+xmap <space>aet<space> 138n
+xmap <space>aen<space> 139n
+
+xmap <space>aus<space> 140n
+xmap <space>aua<space> 141n
+xmap <space>auo<space> 142n
+xmap <space>aue<space> 143n
+xmap <space>auu<space> 144n
+xmap <space>aui<space> 145n
+xmap <space>aud<space> 146n
+xmap <space>auh<space> 147n
+xmap <space>aut<space> 148n
+xmap <space>aun<space> 149n
+
+xmap <space>ais<space> 150n
+xmap <space>aia<space> 151n
+xmap <space>aio<space> 152n
+xmap <space>aie<space> 153n
+xmap <space>aiu<space> 154n
+xmap <space>aii<space> 155n
+xmap <space>aid<space> 156n
+xmap <space>aih<space> 157n
+xmap <space>ait<space> 158n
+xmap <space>ain<space> 159n
+
+xmap <space>ads<space> 160n
+xmap <space>ada<space> 161n
+xmap <space>ado<space> 162n
+xmap <space>ade<space> 163n
+xmap <space>adu<space> 164n
+xmap <space>adi<space> 165n
+xmap <space>add<space> 166n
+xmap <space>adh<space> 167n
+xmap <space>adt<space> 168n
+xmap <space>adn<space> 169n
+
+xmap <space>ahs<space> 170n
+xmap <space>aha<space> 171n
+xmap <space>aho<space> 172n
+xmap <space>ahe<space> 173n
+xmap <space>ahu<space> 174n
+xmap <space>ahi<space> 175n
+xmap <space>ahd<space> 176n
+xmap <space>ahh<space> 177n
+xmap <space>aht<space> 178n
+xmap <space>ahn<space> 179n
+
+xmap <space>ats<space> 180n
+xmap <space>ata<space> 181n
+xmap <space>ato<space> 182n
+xmap <space>ate<space> 183n
+xmap <space>atu<space> 184n
+xmap <space>ati<space> 185n
+xmap <space>atd<space> 186n
+xmap <space>ath<space> 187n
+xmap <space>att<space> 188n
+xmap <space>atn<space> 189n
+
+xmap <space>ans<space> 190n
+xmap <space>ana<space> 191n
+xmap <space>ano<space> 192n
+xmap <space>ane<space> 193n
+xmap <space>anu<space> 194n
+xmap <space>ani<space> 195n
+xmap <space>and<space> 196n
+xmap <space>anh<space> 197n
+xmap <space>ant<space> 198n
+xmap <space>ann<space> 199n
+
+xmap <space>asa<space> 201n
+xmap <space>aso<space> 202n
+xmap <space>ase<space> 203n
+xmap <space>asu<space> 204n
+xmap <space>asi<space> 205n
+xmap <space>asd<space> 206n
+xmap <space>ash<space> 207n
+xmap <space>ast<space> 208n
+xmap <space>asn<space> 209n
+
+xmap <space>oas<space> 210n
+xmap <space>oaa<space> 211n
+xmap <space>oao<space> 212n
+xmap <space>oae<space> 213n
+xmap <space>oau<space> 214n
+xmap <space>oai<space> 215n
+xmap <space>oad<space> 216n
+xmap <space>oah<space> 217n
+xmap <space>oat<space> 218n
+xmap <space>oan<space> 219n
+
+xmap <space>oos<space> 220n
+xmap <space>ooa<space> 221n
+xmap <space>ooo<space> 222n
+xmap <space>ooe<space> 223n
+xmap <space>oou<space> 224n
+xmap <space>ooi<space> 225n
+xmap <space>ood<space> 226n
+xmap <space>ooh<space> 227n
+xmap <space>oot<space> 228n
+xmap <space>oon<space> 229n
+
+xmap <space>oes<space> 230n
+xmap <space>oea<space> 231n
+xmap <space>oeo<space> 232n
+xmap <space>oee<space> 233n
+xmap <space>oeu<space> 234n
+xmap <space>oei<space> 235n
+xmap <space>oed<space> 236n
+xmap <space>oeh<space> 237n
+xmap <space>oet<space> 238n
+xmap <space>oen<space> 139n
+
+xmap <space>ous<space> 240n
+xmap <space>oua<space> 241n
+xmap <space>ouo<space> 242n
+xmap <space>oue<space> 243n
+xmap <space>ouu<space> 244n
+xmap <space>oui<space> 245n
+xmap <space>oud<space> 246n
+xmap <space>ouh<space> 247n
+xmap <space>out<space> 248n
+xmap <space>oun<space> 249n
+
+xmap <space>ois<space> 250n
+xmap <space>oia<space> 251n
+xmap <space>oio<space> 252n
+xmap <space>oie<space> 253n
+xmap <space>oiu<space> 254n
+xmap <space>oii<space> 255n
+xmap <space>oid<space> 256n
+xmap <space>oih<space> 257n
+xmap <space>oit<space> 258n
+xmap <space>oin<space> 259n
+
+xmap <space>ods<space> 260n
+xmap <space>oda<space> 261n
+xmap <space>odo<space> 262n
+xmap <space>ode<space> 263n
+xmap <space>odu<space> 264n
+xmap <space>odi<space> 265n
+xmap <space>odd<space> 266n
+xmap <space>odh<space> 267n
+xmap <space>odt<space> 268n
+xmap <space>odn<space> 269n
+
+xmap <space>ohs<space> 270n
+xmap <space>oha<space> 271n
+xmap <space>oho<space> 272n
+xmap <space>ohe<space> 273n
+xmap <space>ohu<space> 274n
+xmap <space>ohi<space> 275n
+xmap <space>ohd<space> 276n
+xmap <space>ohh<space> 277n
+xmap <space>oht<space> 278n
+xmap <space>ohn<space> 279n
+
+xmap <space>ots<space> 280n
+xmap <space>ota<space> 281n
+xmap <space>oto<space> 282n
+xmap <space>ote<space> 283n
+xmap <space>otu<space> 284n
+xmap <space>oti<space> 285n
+xmap <space>otd<space> 286n
+xmap <space>oth<space> 287n
+xmap <space>ott<space> 288n
+xmap <space>otn<space> 289n
+
+xmap <space>ons<space> 290n
+xmap <space>ona<space> 291n
+xmap <space>ono<space> 292n
+xmap <space>one<space> 293n
+xmap <space>onu<space> 294n
+xmap <space>oni<space> 295n
+xmap <space>ond<space> 296n
+xmap <space>onh<space> 297n
+xmap <space>ont<space> 298n
+xmap <space>onn<space> 299n
+
+
+
+
+
+
+
+xmap <space><space>a<space> 1t
+xmap <space><space>o<space> 2t
+xmap <space><space>e<space> 3t
+xmap <space><space>u<space> 4t
+xmap <space><space>i<space> 5t
+xmap <space><space>d<space> 6t
+xmap <space><space>h<space> 7t
+xmap <space><space>t<space> 8t
+xmap <space><space>n<space> 9t
+
+xmap <space><space>as<space> 10t
+xmap <space><space>aa<space> 11t
+xmap <space><space>ao<space> 12t
+xmap <space><space>ae<space> 13t
+xmap <space><space>au<space> 14t
+xmap <space><space>ai<space> 15t
+xmap <space><space>ad<space> 16t
+xmap <space><space>ah<space> 17t
+xmap <space><space>at<space> 18t
+xmap <space><space>an<space> 19t
+
+xmap <space><space>os<space> 20t
+xmap <space><space>oa<space> 21t
+xmap <space><space>oo<space> 22t
+xmap <space><space>oe<space> 23t
+xmap <space><space>ou<space> 24t
+xmap <space><space>oi<space> 25t
+xmap <space><space>od<space> 26t
+xmap <space><space>oh<space> 27t
+xmap <space><space>ot<space> 28t
+xmap <space><space>on<space> 29t
+
+xmap <space><space>es<space> 30t
+xmap <space><space>ea<space> 31t
+xmap <space><space>eo<space> 32t
+xmap <space><space>ee<space> 33t
+xmap <space><space>eu<space> 34t
+xmap <space><space>ei<space> 35t
+xmap <space><space>ed<space> 36t
+xmap <space><space>eh<space> 37t
+xmap <space><space>et<space> 38t
+xmap <space><space>en<space> 39t
+
+xmap <space><space>us<space> 40t
+xmap <space><space>ua<space> 41t
+xmap <space><space>uo<space> 42t
+xmap <space><space>ue<space> 43t
+xmap <space><space>uu<space> 44t
+xmap <space><space>ui<space> 45t
+xmap <space><space>ud<space> 46t
+xmap <space><space>uh<space> 47t
+xmap <space><space>ut<space> 48t
+xmap <space><space>un<space> 49t
+
+xmap <space><space>is<space> 50t
+xmap <space><space>ia<space> 51t
+xmap <space><space>io<space> 52t
+xmap <space><space>ie<space> 53t
+xmap <space><space>iu<space> 54t
+xmap <space><space>ii<space> 55t
+xmap <space><space>id<space> 56t
+xmap <space><space>ih<space> 57t
+xmap <space><space>it<space> 58t
+xmap <space><space>in<space> 59t
+
+xmap <space><space>ds<space> 60t
+xmap <space><space>da<space> 61t
+xmap <space><space>do<space> 62t
+xmap <space><space>de<space> 63t
+xmap <space><space>du<space> 64t
+xmap <space><space>di<space> 65t
+xmap <space><space>dd<space> 66t
+xmap <space><space>dh<space> 67t
+xmap <space><space>dt<space> 68t
+xmap <space><space>dn<space> 69t
+
+xmap <space><space>hs<space> 70t
+xmap <space><space>ha<space> 71t
+xmap <space><space>ho<space> 72t
+xmap <space><space>he<space> 73t
+xmap <space><space>hu<space> 74t
+xmap <space><space>hi<space> 75t
+xmap <space><space>hd<space> 76t
+xmap <space><space>hh<space> 77t
+xmap <space><space>ht<space> 78t
+xmap <space><space>hn<space> 79t
+
+xmap <space><space>ts<space> 80t
+xmap <space><space>ta<space> 81t
+xmap <space><space>to<space> 82t
+xmap <space><space>te<space> 83t
+xmap <space><space>tu<space> 84t
+xmap <space><space>ti<space> 85t
+xmap <space><space>td<space> 86t
+xmap <space><space>th<space> 87t
+xmap <space><space>tt<space> 88t
+xmap <space><space>tn<space> 89t
+
+xmap <space><space>ns<space> 90t
+xmap <space><space>na<space> 91t
+xmap <space><space>no<space> 92t
+xmap <space><space>ne<space> 93t
+xmap <space><space>nu<space> 94t
+xmap <space><space>ni<space> 95t
+xmap <space><space>nd<space> 96t
+xmap <space><space>nh<space> 97t
+xmap <space><space>nt<space> 98t
+xmap <space><space>nn<space> 99t
+
+xmap <space><space>asa<space> 101t
+xmap <space><space>aso<space> 102t
+xmap <space><space>ase<space> 103t
+xmap <space><space>asu<space> 104t
+xmap <space><space>asi<space> 105t
+xmap <space><space>asd<space> 106t
+xmap <space><space>ash<space> 107t
+xmap <space><space>ast<space> 108t
+xmap <space><space>asn<space> 109t
+
+xmap <space><space>aas<space> 110t
+xmap <space><space>aaa<space> 111t
+xmap <space><space>aao<space> 112t
+xmap <space><space>aae<space> 113t
+xmap <space><space>aau<space> 114t
+xmap <space><space>aai<space> 115t
+xmap <space><space>aad<space> 116t
+xmap <space><space>aah<space> 117t
+xmap <space><space>aat<space> 118t
+xmap <space><space>aan<space> 119t
+
+xmap <space><space>aos<space> 120t
+xmap <space><space>aoa<space> 121t
+xmap <space><space>aoo<space> 122t
+xmap <space><space>aoe<space> 123t
+xmap <space><space>aou<space> 124t
+xmap <space><space>aoi<space> 125t
+xmap <space><space>aod<space> 126t
+xmap <space><space>aoh<space> 127t
+xmap <space><space>aot<space> 128t
+xmap <space><space>aon<space> 129t
+
+xmap <space><space>aes<space> 130t
+xmap <space><space>aea<space> 131t
+xmap <space><space>aeo<space> 132t
+xmap <space><space>aee<space> 133t
+xmap <space><space>aeu<space> 134t
+xmap <space><space>aei<space> 135t
+xmap <space><space>aed<space> 136t
+xmap <space><space>aeh<space> 137t
+xmap <space><space>aet<space> 138t
+xmap <space><space>aen<space> 139t
+
+xmap <space><space>aus<space> 140t
+xmap <space><space>aua<space> 141t
+xmap <space><space>auo<space> 142t
+xmap <space><space>aue<space> 143t
+xmap <space><space>auu<space> 144t
+xmap <space><space>aui<space> 145t
+xmap <space><space>aud<space> 146t
+xmap <space><space>auh<space> 147t
+xmap <space><space>aut<space> 148t
+xmap <space><space>aun<space> 149t
+
+xmap <space><space>ais<space> 150t
+xmap <space><space>aia<space> 151t
+xmap <space><space>aio<space> 152t
+xmap <space><space>aie<space> 153t
+xmap <space><space>aiu<space> 154t
+xmap <space><space>aii<space> 155t
+xmap <space><space>aid<space> 156t
+xmap <space><space>aih<space> 157t
+xmap <space><space>ait<space> 158t
+xmap <space><space>ain<space> 159t
+
+xmap <space><space>ads<space> 160t
+xmap <space><space>ada<space> 161t
+xmap <space><space>ado<space> 162t
+xmap <space><space>ade<space> 163t
+xmap <space><space>adu<space> 164t
+xmap <space><space>adi<space> 165t
+xmap <space><space>add<space> 166t
+xmap <space><space>adh<space> 167t
+xmap <space><space>adt<space> 168t
+xmap <space><space>adn<space> 169t
+
+xmap <space><space>ahs<space> 170t
+xmap <space><space>aha<space> 171t
+xmap <space><space>aho<space> 172t
+xmap <space><space>ahe<space> 173t
+xmap <space><space>ahu<space> 174t
+xmap <space><space>ahi<space> 175t
+xmap <space><space>ahd<space> 176t
+xmap <space><space>ahh<space> 177t
+xmap <space><space>aht<space> 178t
+xmap <space><space>ahn<space> 179t
+
+xmap <space><space>ats<space> 180t
+xmap <space><space>ata<space> 181t
+xmap <space><space>ato<space> 182t
+xmap <space><space>ate<space> 183t
+xmap <space><space>atu<space> 184t
+xmap <space><space>ati<space> 185t
+xmap <space><space>atd<space> 186t
+xmap <space><space>ath<space> 187t
+xmap <space><space>att<space> 188t
+xmap <space><space>atn<space> 189t
+
+xmap <space><space>ans<space> 190t
+xmap <space><space>ana<space> 191t
+xmap <space><space>ano<space> 192t
+xmap <space><space>ane<space> 193t
+xmap <space><space>anu<space> 194t
+xmap <space><space>ani<space> 195t
+xmap <space><space>and<space> 196t
+xmap <space><space>anh<space> 197t
+xmap <space><space>ant<space> 198t
+xmap <space><space>ann<space> 199t
+
+xmap <space><space>asa<space> 201t
+xmap <space><space>aso<space> 202t
+xmap <space><space>ase<space> 203t
+xmap <space><space>asu<space> 204t
+xmap <space><space>asi<space> 205t
+xmap <space><space>asd<space> 206t
+xmap <space><space>ash<space> 207t
+xmap <space><space>ast<space> 208t
+xmap <space><space>asn<space> 209t
+
+xmap <space><space>oas<space> 210t
+xmap <space><space>oaa<space> 211t
+xmap <space><space>oao<space> 212t
+xmap <space><space>oae<space> 213t
+xmap <space><space>oau<space> 214t
+xmap <space><space>oai<space> 215t
+xmap <space><space>oad<space> 216t
+xmap <space><space>oah<space> 217t
+xmap <space><space>oat<space> 218t
+xmap <space><space>oan<space> 219t
+
+xmap <space><space>oos<space> 220t
+xmap <space><space>ooa<space> 221t
+xmap <space><space>ooo<space> 222t
+xmap <space><space>ooe<space> 223t
+xmap <space><space>oou<space> 224t
+xmap <space><space>ooi<space> 225t
+xmap <space><space>ood<space> 226t
+xmap <space><space>ooh<space> 227t
+xmap <space><space>oot<space> 228t
+xmap <space><space>oon<space> 229t
+
+xmap <space><space>oes<space> 230t
+xmap <space><space>oea<space> 231t
+xmap <space><space>oeo<space> 232t
+xmap <space><space>oee<space> 233t
+xmap <space><space>oeu<space> 234t
+xmap <space><space>oei<space> 235t
+xmap <space><space>oed<space> 236t
+xmap <space><space>oeh<space> 237t
+xmap <space><space>oet<space> 238t
+xmap <space><space>oen<space> 139t
+
+xmap <space><space>ous<space> 240t
+xmap <space><space>oua<space> 241t
+xmap <space><space>ouo<space> 242t
+xmap <space><space>oue<space> 243t
+xmap <space><space>ouu<space> 244t
+xmap <space><space>oui<space> 245t
+xmap <space><space>oud<space> 246t
+xmap <space><space>ouh<space> 247t
+xmap <space><space>out<space> 248t
+xmap <space><space>oun<space> 249t
+
+xmap <space><space>ois<space> 250t
+xmap <space><space>oia<space> 251t
+xmap <space><space>oio<space> 252t
+xmap <space><space>oie<space> 253t
+xmap <space><space>oiu<space> 254t
+xmap <space><space>oii<space> 255t
+xmap <space><space>oid<space> 256t
+xmap <space><space>oih<space> 257t
+xmap <space><space>oit<space> 258t
+xmap <space><space>oin<space> 259t
+
+xmap <space><space>ods<space> 260t
+xmap <space><space>oda<space> 261t
+xmap <space><space>odo<space> 262t
+xmap <space><space>ode<space> 263t
+xmap <space><space>odu<space> 264t
+xmap <space><space>odi<space> 265t
+xmap <space><space>odd<space> 266t
+xmap <space><space>odh<space> 267t
+xmap <space><space>odt<space> 268t
+xmap <space><space>odn<space> 269t
+
+xmap <space><space>ohs<space> 270t
+xmap <space><space>oha<space> 271t
+xmap <space><space>oho<space> 272t
+xmap <space><space>ohe<space> 273t
+xmap <space><space>ohu<space> 274t
+xmap <space><space>ohi<space> 275t
+xmap <space><space>ohd<space> 276t
+xmap <space><space>ohh<space> 277t
+xmap <space><space>oht<space> 278t
+xmap <space><space>ohn<space> 279t
+
+xmap <space><space>ots<space> 280t
+xmap <space><space>ota<space> 281t
+xmap <space><space>oto<space> 282t
+xmap <space><space>ote<space> 283t
+xmap <space><space>otu<space> 284t
+xmap <space><space>oti<space> 285t
+xmap <space><space>otd<space> 286t
+xmap <space><space>oth<space> 287t
+xmap <space><space>ott<space> 288t
+xmap <space><space>otn<space> 289t
+
+xmap <space><space>ons<space> 290t
+xmap <space><space>ona<space> 291t
+xmap <space><space>ono<space> 292t
+xmap <space><space>one<space> 293t
+xmap <space><space>onu<space> 294t
+xmap <space><space>oni<space> 295t
+xmap <space><space>ond<space> 296t
+xmap <space><space>onh<space> 297t
+xmap <space><space>ont<space> 298t
+xmap <space><space>onn<space> 299t
 
